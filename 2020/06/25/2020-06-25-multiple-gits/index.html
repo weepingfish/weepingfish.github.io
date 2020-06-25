@@ -17,16 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Category: tech | weepingfish</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="weepingfish">
-<meta property="og:url" content="weepingfish.github.io/categories/tech/index.html">
+  <title>Working with multiple GitHub accounts | weepingfish</title>
+  <meta name="description" content="Suppose we have 2 github IDs, working account userA and personal account userB. This blog is about how to setup a git repo to commit &amp; push with the correct identity. SSH setupsFor password-free g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Working with multiple GitHub accounts">
+<meta property="og:url" content="weepingfish.github.io/2020/06/25/2020-06-25-multiple-gits/index.html">
 <meta property="og:site_name" content="weepingfish">
+<meta property="og:description" content="Suppose we have 2 github IDs, working account userA and personal account userB. This blog is about how to setup a git repo to commit &amp; push with the correct identity. SSH setupsFor password-free g">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-25T18:01:42.742Z">
+<meta property="article:modified_time" content="2020-06-25T18:01:42.742Z">
 <meta property="article:author" content="weepingfish">
+<meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="weepingfish.github.io/categories/tech/index.html">
+  <link rel="canonical" href="weepingfish.github.io/2020/06/25/2020-06-25-multiple-gits/index.html">
   
     <link rel="alternate" href="/atom.xml" title="weepingfish" type="application/atom+xml">
   
@@ -279,61 +284,140 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-categories article-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">Category: tech</h1>
-      <p class="hidden-xs">Total 2 articles</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
-        <ul>
-          <li><a href="/categories">All</a></li>
-          
-          <li><a href="/categories/tech/">tech</a></li>
-          
-          <li><a href="/categories/life/">life</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="panel panel-default b-no">
-    <div class="panel-heading" role="tab">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapsetech" aria-expanded="true">
-              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
-              tech
-            </a>
-            <small class="text-muted">(Total 2 articles)</small>
-        </h4>
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-2020-06-25-multiple-gits" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Working with multiple GitHub accounts
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/06/25/2020-06-25-multiple-gits/" class="article-date">
+	  <time datetime="2020-06-25T18:01:42.742Z" itemprop="datePublished">2020-06-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/tech/">tech</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/git/" rel="tag">git</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/06/25/2020-06-25-multiple-gits/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
     </div>
-    <div id="collapsetech" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingtech">
-        <div class="panel-body">
-            <div class="collection">
-              
-                
-<a href="/2020/06/25/2020-06-25-multiple-gits/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-25T18:01:42.742Z" itemprop="datePublished">2020-06-25</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Working with multiple GitHub accounts
-</a>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog is about how to setup a git repo to commit &amp; push with the correct identity.</p>
+<h2 id="SSH-setups"><a href="#SSH-setups" class="headerlink" title="SSH setups"></a>SSH setups</h2><p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github.com, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
+<p>For multiple github accounts, you will need to generate the public/private key pairs separately:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
 
+<p>Then, add the generated public keys to github.com for the 2 users:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
 
-              
-                
-<a href="/2020/06/24/2020-06-24-hexo-blog/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-25T06:15:01.036Z" itemprop="datePublished">2020-06-24</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Building a Hexo Blog with GitHub Pages
-</a>
+<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
 
+<h2 id="Git-configs"><a href="#Git-configs" class="headerlink" title="Git configs"></a>Git configs</h2><p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
 
-              
-            </div>
-        </div>
+<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
+
+      
     </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>License: </strong> <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a> 
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="" target="_blank"><span class="text-dark"></span><small class="ml-1x">Sink or Swim!</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
 </div>
+
+
     </div>
   </article>
-   
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2020/06/25/2020-06/" title="2020年6月日记"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -388,6 +472,31 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: 'e98a417d1e18cdd38b85',
+    clientSecret: '55e60a70fa24501ee33c0794b895d6608e246cf1',
+    repo: 'weepingfish.github.io',
+    owner: 'weepingfish',
+    admin: ['weepingfish'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
 
 
 
