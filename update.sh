@@ -1,9 +1,10 @@
 #!/bin/sh
 
 while true; do
+    git fetch
     DIFF=$(git rev-list HEAD...origin/master --count)
 
-	if [ $DIFF > 0 ]; then
+	if [ $DIFF -gt 0 ]; then
 		echo "Need to pull"
         git pull
         hexo clean
