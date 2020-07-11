@@ -225,21 +225,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Typora Paper Night</title>
-    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
-    <content><![CDATA[<p>A dark theme for academic writing [theme css].</p>
-<p>支持中文。</p>
-<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711132959791.png" alt="image-20200711132959791"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2020夏</title>
     <url>/2020/07/11/2020-summer/</url>
     <content><![CDATA[<blockquote>
@@ -418,6 +403,21 @@
       <tags>
         <tag>diary</tag>
         <tag>procrastination</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Typora Paper Night</title>
+    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
+    <content><![CDATA[<p>A dark theme for academic writing [theme css].</p>
+<p>支持中文。</p>
+<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711132959791.png" alt="image-20200711132959791"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
       </tags>
   </entry>
 </search>
