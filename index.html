@@ -256,7 +256,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="weepingfish.github.io/2020/07/10/2020-06-28-how-are-you/">
+    <link itemprop="mainEntityOfPage" href="weepingfish.github.io/2020/07/10/2020-06-24-hexo-blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -270,7 +270,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/10/2020-06-28-how-are-you/" class="post-title-link" itemprop="url">最近怎样？</a>
+            <a href="/2020/07/10/2020-06-24-hexo-blog/" class="post-title-link" itemprop="url">Building a Hexo Blog with GitHub Pages</a>
         </h2>
 
         <div class="post-meta">
@@ -279,23 +279,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-07-10 21:12:46" itemprop="dateCreated datePublished" datetime="2020-07-10T21:12:46-07:00">2020-07-10</time>
+              <time title="Created: 2020-07-10 21:12:46 / Modified: 20:42:29" itemprop="dateCreated datePublished" datetime="2020-07-10T21:12:46-07:00">2020-07-10</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-06 23:21:14" itemprop="dateModified" datetime="2020-07-06T23:21:14-07:00">2020-07-06</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index"><span itemprop="name">life</span></a>
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
                 </span>
             </span>
 
@@ -310,26 +304,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p>近期对话。</p>
-</blockquote>
-<h2 id="实验室学长">实验室学长</h2>
-<p>“最近怎样？”</p>
-<p>“啊，我最近在忙xxx课题，输入###输出%%%，可以看作是yyy和zzz方向的结合。我最近刚开始在小数据上做一些实验，结果遇到一堆问题…主要是对zzz方向不太熟，最近几周都没什么进展。我下周打算开始和实习那边meet，看看实习还能不能抢救一下…”</p>
-<h2 id="父母">父母</h2>
-<p>“最近怎样？”</p>
-<p>“最近挺好的，学校里的人都挺友善的，附近很安全。食堂能拿饭，门口草坪一堆人铺个毯子晒太阳。我常常穿过一条街去星爸爸买咖啡，路边开满了鲜花，建筑物也很美。另外，我最近研制出来一种炒饭，饭+鸡蛋+葱花+西兰花/玉米粒/虾仁/蘑菇片，加糖和味极鲜一炒就行，10分钟以内出锅，香到不行……什么，你说科研嘛。嗨，没啥新鲜事，每天都差不多。实在没有老板肯要我的话还有硕士这条退路嘛（笑）。”</p>
-<h2 id="对象">对象</h2>
-<p>“在干嘛？”（好像没问过最近怎样）</p>
-<p>“代码写不出来，等死中 /<br>
-靠为什么我写的全是bug /<br>
-又被老板骂了一顿，人生无望 /<br>
-实验又不work，心态崩了 /<br>
-昨天没咋睡觉，现在整个人飘在天上 /<br>
-…”</p>
+          <h2 id="Install-Hexo">Install Hexo</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="built_in">export</span> PATH=~/.npm-global/lib/node_modules/hexo/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<h2 id="Create-root-Hexo-folder">Create root Hexo folder</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir hexo_dir</span><br><span class="line"><span class="built_in">cd</span> hexo_dir</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<h2 id="Configure-Git-Repo">Configure Git Repo</h2>
+<p>Create a github repo <code>&lt;username&gt;.github.io</code> and edit <code>_config.yml</code>:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">&lt;username&gt;.github.io</span></span><br></pre></td></tr></table></figure>
+<h2 id="Download-a-theme">Download a theme</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2 alternative themes that I find useful</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/cofess/hexo-theme-pure.git themes/pure</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yscoder/hexo-theme-indigo themes/indigo</span><br></pre></td></tr></table></figure>
+<p>Then edit the <code>theme</code> property in <code>_config.yml</code> and setup theme-specific properties in <code>themes/&lt;theme&gt;/_config.yml</code></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/07/10/2020-06-28-how-are-you/#more" rel="contents">
+              <a class="btn" href="/2020/07/10/2020-06-24-hexo-blog/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -528,7 +515,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="weepingfish.github.io/2020/07/10/2020-06-24-hexo-blog/">
+    <link itemprop="mainEntityOfPage" href="weepingfish.github.io/2020/07/10/2020-06-28-how-are-you/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -542,7 +529,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/10/2020-06-24-hexo-blog/" class="post-title-link" itemprop="url">Building a Hexo Blog with GitHub Pages</a>
+            <a href="/2020/07/10/2020-06-28-how-are-you/" class="post-title-link" itemprop="url">最近怎样？</a>
         </h2>
 
         <div class="post-meta">
@@ -551,17 +538,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-07-10 21:12:46 / Modified: 20:42:29" itemprop="dateCreated datePublished" datetime="2020-07-10T21:12:46-07:00">2020-07-10</time>
+              <time title="Created: 2020-07-10 21:12:46" itemprop="dateCreated datePublished" datetime="2020-07-10T21:12:46-07:00">2020-07-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-06 23:21:14" itemprop="dateModified" datetime="2020-07-06T23:21:14-07:00">2020-07-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
+                  <a href="/categories/life/" itemprop="url" rel="index"><span itemprop="name">life</span></a>
                 </span>
             </span>
 
@@ -576,19 +569,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Install-Hexo">Install Hexo</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="built_in">export</span> PATH=~/.npm-global/lib/node_modules/hexo/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
-<h2 id="Create-root-Hexo-folder">Create root Hexo folder</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir hexo_dir</span><br><span class="line"><span class="built_in">cd</span> hexo_dir</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-<h2 id="Configure-Git-Repo">Configure Git Repo</h2>
-<p>Create a github repo <code>&lt;username&gt;.github.io</code> and edit <code>_config.yml</code>:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">&lt;username&gt;.github.io</span></span><br></pre></td></tr></table></figure>
-<h2 id="Download-a-theme">Download a theme</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2 alternative themes that I find useful</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/cofess/hexo-theme-pure.git themes/pure</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yscoder/hexo-theme-indigo themes/indigo</span><br></pre></td></tr></table></figure>
-<p>Then edit the <code>theme</code> property in <code>_config.yml</code> and setup theme-specific properties in <code>themes/&lt;theme&gt;/_config.yml</code></p>
+          <blockquote>
+<p>近期对话。</p>
+</blockquote>
+<h2 id="实验室学长">实验室学长</h2>
+<p>“最近怎样？”</p>
+<p>“啊，我最近在忙xxx课题，输入###输出%%%，可以看作是yyy和zzz方向的结合。我最近刚开始在小数据上做一些实验，结果遇到一堆问题…主要是对zzz方向不太熟，最近几周都没什么进展。我下周打算开始和实习那边meet，看看实习还能不能抢救一下…”</p>
+<h2 id="父母">父母</h2>
+<p>“最近怎样？”</p>
+<p>“最近挺好的，学校里的人都挺友善的，附近很安全。食堂能拿饭，门口草坪一堆人铺个毯子晒太阳。我常常穿过一条街去星爸爸买咖啡，路边开满了鲜花，建筑物也很美。另外，我最近研制出来一种炒饭，饭+鸡蛋+葱花+西兰花/玉米粒/虾仁/蘑菇片，加糖和味极鲜一炒就行，10分钟以内出锅，香到不行……什么，你说科研嘛。嗨，没啥新鲜事，每天都差不多。实在没有老板肯要我的话还有硕士这条退路嘛（笑）。”</p>
+<h2 id="对象">对象</h2>
+<p>“在干嘛？”（好像没问过最近怎样）</p>
+<p>“代码写不出来，等死中 /<br>
+靠为什么我写的全是bug /<br>
+又被老板骂了一顿，人生无望 /<br>
+实验又不work，心态崩了 /<br>
+昨天没咋睡觉，现在整个人飘在天上 /<br>
+…”</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/07/10/2020-06-24-hexo-blog/#more" rel="contents">
+              <a class="btn" href="/2020/07/10/2020-06-28-how-are-you/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
