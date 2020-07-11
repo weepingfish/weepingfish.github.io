@@ -112,34 +112,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Inserting images into Hexo posts with Typora</title>
-    <url>/2020/07/10/2020-07-10-hexo-image/</url>
-    <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
-<h2 id="Typora">Typora</h2>
-<p>In Preferences:</p>
-<p><img src="/2020/07/10/2020-07-10-hexo-image/image-20200710205313639.png" alt="image-20200710205313639"></p>
-<p>File structure:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo&#x2F;</span><br><span class="line">  source&#x2F;</span><br><span class="line">    _posts&#x2F;</span><br><span class="line">      some-post.md</span><br><span class="line">      some-post&#x2F;</span><br><span class="line">        image.png</span><br></pre></td></tr></table></figure>
-<p>In <code>some-post.md</code>:</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt</span>](<span class="link">some-post/image.png</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="Hexo">Hexo</h2>
-<p>In <code>hexo/_config.yml</code></p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>In hexo root folder:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-asset-link</span><br></pre></td></tr></table></figure>
-<p>In <code>node_modules/hexo-asset-link/index.js</code> :</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// strip domain</span></span><br><span class="line">path_html = path_html.replace(path_html.split(<span class="string">"/"</span>)[<span class="number">0</span>], <span class="string">""</span>);</span><br><span class="line"><span class="comment">// image path in rendered HTML:</span></span><br><span class="line"><span class="comment">// /YYYY/MM/DD/some-post/image.png</span></span><br></pre></td></tr></table></figure>
-<p>This will generate absolute paths for the images in rendered HTML (instead of relative path), which is useful when contents of a post are also displayed from the homepage (which lies in a different folder).</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>typora</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo Auto Sync</title>
     <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
     <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
@@ -173,38 +145,31 @@
       </tags>
   </entry>
   <entry>
-    <title>Centering Google Search and Google Scholar</title>
-    <url>/2020/07/11/2020-07-11-google-search-centering/</url>
-    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
-<table>
-<thead>
-<tr>
-<th>Before</th>
-<th>After</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
-<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
-</tr>
-<tr>
-<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
-<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
-</tr>
-</tbody>
-</table>
-<p>Centering Google Scholar:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+    <title>Inserting images into Hexo posts with Typora</title>
+    <url>/2020/07/10/2020-07-10-hexo-image/</url>
+    <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
+<h2 id="Typora">Typora</h2>
+<p>In Preferences:</p>
+<p><img src="/2020/07/10/2020-07-10-hexo-image/image-20200710205313639.png" alt="image-20200710205313639"></p>
+<p>File structure:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo&#x2F;</span><br><span class="line">  source&#x2F;</span><br><span class="line">    _posts&#x2F;</span><br><span class="line">      some-post.md</span><br><span class="line">      some-post&#x2F;</span><br><span class="line">        image.png</span><br></pre></td></tr></table></figure>
+<p>In <code>some-post.md</code>:</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt</span>](<span class="link">some-post/image.png</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="Hexo">Hexo</h2>
+<p>In <code>hexo/_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>In hexo root folder:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-asset-link</span><br></pre></td></tr></table></figure>
+<p>In <code>node_modules/hexo-asset-link/index.js</code> :</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// strip domain</span></span><br><span class="line">path_html = path_html.replace(path_html.split(<span class="string">"/"</span>)[<span class="number">0</span>], <span class="string">""</span>);</span><br><span class="line"><span class="comment">// image path in rendered HTML:</span></span><br><span class="line"><span class="comment">// /YYYY/MM/DD/some-post/image.png</span></span><br></pre></td></tr></table></figure>
+<p>This will generate absolute paths for the images in rendered HTML (instead of relative path), which is useful when contents of a post are also displayed from the homepage (which lies in a different folder).</p>
 ]]></content>
       <categories>
         <category>tech</category>
       </categories>
       <tags>
-        <tag>tampermonkey</tag>
-        <tag>google</tag>
+        <tag>hexo</tag>
+        <tag>typora</tag>
       </tags>
   </entry>
   <entry>
@@ -262,9 +227,9 @@
 <li>23:30-1:00 本日meeting总结（+100）</li>
 </ul>
 <h2 id="7-9-Thu">7.9 (Thu)</h2>
-<p>8h total（+330），sleep：4-5am</p>
+<p>8h total（<strong>+330</strong>），sleep：4-5am</p>
 <ul>
-<li>12:30-13:00 检查了昨天手画轨迹的结果。2个waving的work的还行，其他的image render有问题（+10）</li>
+<li>12:30-13:00 检查了昨天手画轨迹的结果。2个waving的work的还行，其他的image render有问题（<strong>+10</strong>）</li>
 <li>13:00-14:00 午餐，给SSN office打电话，给Fedex打电话，等候international center的zoom meet</li>
 <li>15:00-16:00 练习intro talk</li>
 <li>16:00-16:30 intro talk</li>
@@ -276,22 +241,22 @@
 <li>21:00-21:30 休息</li>
 <li>21:30-24:00 检查是否可以使用一个affine transform映射真人姿态和模拟姿态（发现不行，+20），学习使用pix2pix</li>
 <li>24:00-1:00 休息</li>
-<li>1:00-2:00 用pix2pix训从colorstick到人的映射（+100，效果一般）</li>
-<li>2:00-3:00 思考如何对齐两个相机空间中的姿态，提出一个也许可行的解决方案（+100）</li>
-<li>6:00-9:00 周报（+100）</li>
+<li>1:00-2:00 用pix2pix训从colorstick到人的映射（<strong>+100</strong>，效果一般）</li>
+<li>2:00-3:00 思考如何对齐两个相机空间中的姿态，提出一个也许可行的解决方案（<strong>+100</strong>）</li>
+<li>6:00-9:00 周报（<strong>+100</strong>）</li>
 </ul>
 <h2 id="7-8-Wed">7.8 (Wed)</h2>
 <p>10.5h total（+200）, sleep: 2am</p>
 <ul>
-<li>22:30-1:30 补全intro talk PPT的配图并加入speaker notes（+100）</li>
-<li>20:30-22:00 采集5组手画轨迹并运行（还需检查质量）（+50）</li>
+<li>22:30-1:30 补全intro talk PPT的配图并加入speaker notes（<strong>+100</strong>）</li>
+<li>20:30-22:00 采集5组手画轨迹并运行（还需检查质量）（<strong>+50</strong>）</li>
 <li>19:00-20:30 饭后休息+洗澡</li>
 <li>18:20-19:00 晚饭（炒饭）</li>
 <li>17:00-18:20 建立打卡目标scrum log</li>
 <li>16:00-17:00 逛一亩三分地、豆瓣战拖组</li>
 <li>15:00-16:00 和朋友去星爸爸买咖啡</li>
 <li>9:30-14:30 补觉</li>
-<li>8:00-9:00 internship weekly meeting（+50）</li>
+<li>8:00-9:00 internship weekly meeting（<strong>+50</strong>）</li>
 <li>2:00-7:00 draft slides（效率太低，不算分）</li>
 </ul>
 <hr>
@@ -317,6 +282,41 @@
       <tags>
         <tag>diary</tag>
         <tag>procrastination</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Centering Google Search and Google Scholar</title>
+    <url>/2020/07/11/2020-07-11-google-search-centering/</url>
+    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
+<table>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
+<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
+</tr>
+<tr>
+<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
+<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
+</tr>
+</tbody>
+</table>
+<p>Centering Google Scholar:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>tampermonkey</tag>
+        <tag>google</tag>
       </tags>
   </entry>
   <entry>
