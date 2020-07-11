@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Working with multiple GitHub accounts</title>
+    <url>/2020/06/25/2020-06-25-multiple-gits/</url>
+    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
+<h2 id="SSH-setups">SSH setups</h2>
+<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
+<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
+<p>Then, add the generated public keys to github for each account:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
+<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
+<h2 id="Git-configs">Git configs</h2>
+<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
+<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Building a Hexo Blog with GitHub Pages</title>
     <url>/2020/06/24/2020-06-24-hexo-blog/</url>
     <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
@@ -34,32 +60,6 @@
       </categories>
       <tags>
         <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Working with multiple GitHub accounts</title>
-    <url>/2020/06/25/2020-06-25-multiple-gits/</url>
-    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
-<h2 id="SSH-setups">SSH setups</h2>
-<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
-<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
-<p>Then, add the generated public keys to github for each account:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
-<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
-<h2 id="Git-configs">Git configs</h2>
-<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
-<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -113,13 +113,13 @@
   </entry>
   <entry>
     <title>2020夏 | 战拖打卡</title>
-    <url>/2020/07/09/2020-summer-no-procrastination/</url>
+    <url>/2020/07/10/2020-summer-no-procrastination/</url>
     <content><![CDATA[<p><img src="/images/is_it_worth_the_time.png" alt="img"></p>
 <h2 id="Scrum-Log">Scrum Log</h2>
 <p>实验室</p>
 <ul>
 <li>手画轨迹实验（100）+50+10</li>
-<li>真人图像渲染器（150）</li>
+<li>真人图像渲染器（150）+100</li>
 <li><strong>周报</strong>（100）</li>
 <li>文档（200）</li>
 <li>起始点实验降噪（100）</li>
@@ -139,8 +139,8 @@
 <p>General</p>
 <ul>
 <li><strong>连续7天12:30am前睡觉</strong>（500）</li>
-<li>连续7天每天有效工作时长超过8h（200）+1</li>
-<li>连续7天每天productivity得分超过200（500）+1</li>
+<li>连续7天每天有效工作时长&gt;=8h（200）+1+1</li>
+<li>连续7天每天productivity得分超过200（500）+1+1</li>
 <li>连续7天日均读论文数&gt;=1（300）</li>
 <li>体重下降到125斤（200）</li>
 <li>体重下降到120斤（400）</li>
@@ -150,8 +150,9 @@
 <li>洗衣服（10）</li>
 </ul>
 <h2 id="7-9-Thu">7.9 (Thu)</h2>
+<p>8h total（+330），sleep：4-5am</p>
 <ul>
-<li>12:30-13:00 检查了昨天手画轨迹的结果。2个waving的work的还行，其他的image render有问题（10）</li>
+<li>12:30-13:00 检查了昨天手画轨迹的结果。2个waving的work的还行，其他的image render有问题（+10）</li>
 <li>13:00-14:00 午餐，给SSN office打电话，给Fedex打电话，等候international center的zoom meet</li>
 <li>15:00-16:00 练习intro talk</li>
 <li>16:00-16:30 intro talk</li>
@@ -159,20 +160,26 @@
 <li>17:00-18:30 晚饭，取weee</li>
 <li>18:30-19:30 添加博客搜索功能</li>
 <li>19:30-20:30 crop images and extract 2D keypoints with openpose</li>
-<li></li>
+<li>20:30-21:00 download and install pix2pix</li>
+<li>21:00-21:30 休息</li>
+<li>21:30-24:00 检查是否可以使用一个affine transform映射真人姿态和模拟姿态（发现不行，+20），学习使用pix2pix</li>
+<li>24:00-1:00 休息</li>
+<li>1:00-2:00 用pix2pix训从colorstick到人的映射（+100，效果一般）</li>
+<li>2:00-3:00 思考如何对齐两个相机空间中的姿态，提出一个也许可行的解决方案（+100）</li>
+<li>6:00-9:00 周报（+100）</li>
 </ul>
 <h2 id="7-8-Wed">7.8 (Wed)</h2>
-<p>10.5h total, sleep: 2am</p>
+<p>10.5h total（+200）, sleep: 2am</p>
 <ul>
-<li>22:30-1:30 补全intro talk PPT的配图并加入speaker notes（100）</li>
-<li>20:30-22:00 采集5组手画轨迹并运行（还需检查质量）（50)</li>
+<li>22:30-1:30 补全intro talk PPT的配图并加入speaker notes（+100）</li>
+<li>20:30-22:00 采集5组手画轨迹并运行（还需检查质量）（+50）</li>
 <li>19:00-20:30 饭后休息+洗澡</li>
 <li>18:20-19:00 晚饭（炒饭）</li>
 <li>17:00-18:20 建立打卡目标scrum log</li>
 <li>16:00-17:00 逛一亩三分地、豆瓣战拖组</li>
 <li>15:00-16:00 和朋友去星爸爸买咖啡</li>
 <li>9:30-14:30 补觉</li>
-<li>8:00-9:00 internship weekly meeting（50）</li>
+<li>8:00-9:00 internship weekly meeting（+50）</li>
 <li>2:00-7:00 draft slides（效率太低，不算分）</li>
 </ul>
 <h2 id="延迟愿望清单">延迟愿望清单</h2>
@@ -200,13 +207,17 @@
   </entry>
   <entry>
     <title>2020夏</title>
-    <url>/2020/07/09/2020-summer/</url>
+    <url>/2020/07/10/2020-summer/</url>
     <content><![CDATA[<blockquote>
 <p>流水账。</p>
 </blockquote>
+<h2 id="7-10">7.10</h2>
+<p>我又刷夜了。这周第三次了。</p>
+<p>Morning meetings are killing me.</p>
 <h2 id="7-9">7.9</h2>
 <p>谁能告诉我没有SSN怎么报税啊啊啊！！！</p>
 <p>Live is so hard as a F1 intl. student.</p>
+<p>7.10补：被拉入了一个无证报税群，据说由于第一年是IRS欠我们钱，所以即使延迟报税也不会有罚款。</p>
 <h2 id="7-8">7.8</h2>
 <p>The only useful thing I learned from our school is how to write a decent email/letter without a single sentence of concrete commitment.</p>
 <h2 id="7-6">7.6</h2>
