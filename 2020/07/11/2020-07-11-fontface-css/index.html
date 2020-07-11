@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"weepingfish.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then we can use font-family: &quot;Noto Serif CJK SC&quot; in CSS. 123456789101112131415161718192021222324252627">
+  <meta name="description" content="This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then we can use font-family: &quot;Noto Serif CJK SC&quot; in later CSS codes. 123456789101112131415161718192021">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS for Customized Fonts">
 <meta property="og:url" content="weepingfish.github.io/2020/07/11/2020-07-11-fontface-css/index.html">
 <meta property="og:site_name" content="weepingfish">
-<meta property="og:description" content="This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then we can use font-family: &quot;Noto Serif CJK SC&quot; in CSS. 123456789101112131415161718192021222324252627">
+<meta property="og:description" content="This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then we can use font-family: &quot;Noto Serif CJK SC&quot; in later CSS codes. 123456789101112131415161718192021">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-11T19:43:06.837Z">
-<meta property="article:modified_time" content="2020-07-11T19:43:06.837Z">
+<meta property="article:published_time" content="2020-07-11T19:43:35.198Z">
+<meta property="article:modified_time" content="2020-07-11T19:43:35.198Z">
 <meta property="article:author" content="weepingfish">
 <meta property="article:tag" content="typora">
-<meta property="article:tag" content="font">
 <meta property="article:tag" content="css">
+<meta property="article:tag" content="font">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="weepingfish.github.io/2020/07/11/2020-07-11-fontface-css/">
@@ -214,7 +214,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-07-11 12:43:06" itemprop="dateCreated datePublished" datetime="2020-07-11T12:43:06-07:00">2020-07-11</time>
+              <time title="Created: 2020-07-11 12:43:35" itemprop="dateCreated datePublished" datetime="2020-07-11T12:43:35-07:00">2020-07-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,7 +237,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then we can use <code>font-family: &quot;Noto Serif CJK SC&quot;</code> in CSS.</p>
+        <p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then we can use <code>font-family: &quot;Noto Serif CJK SC&quot;</code> in later CSS codes.</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
@@ -249,8 +249,8 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/typora/" rel="tag"># typora</a>
-              <a href="/tags/font/" rel="tag"># font</a>
               <a href="/tags/css/" rel="tag"># css</a>
+              <a href="/tags/font/" rel="tag"># font</a>
           </div>
 
         
