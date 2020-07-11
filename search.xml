@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Working with multiple GitHub accounts</title>
-    <url>/2020/06/25/2020-06-25-multiple-gits/</url>
-    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
-<h2 id="SSH-setups">SSH setups</h2>
-<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
-<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
-<p>Then, add the generated public keys to github for each account:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
-<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
-<h2 id="Git-configs">Git configs</h2>
-<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
-<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
+    <title>Building a Hexo Blog with GitHub Pages</title>
+    <url>/2020/06/24/2020-06-24-hexo-blog/</url>
+    <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="built_in">export</span> PATH=~/.npm-global/lib/node_modules/hexo/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<h2 id="Create-root-Hexo-folder">Create root Hexo folder</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir hexo_dir</span><br><span class="line"><span class="built_in">cd</span> hexo_dir</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<h2 id="Configure-Git-Repo">Configure Git Repo</h2>
+<p>Create a github repo <code>&lt;username&gt;.github.io</code> and edit <code>_config.yml</code>:</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">&lt;username&gt;.github.io</span></span><br></pre></td></tr></table></figure>
+<h2 id="Download-a-theme">Download a theme</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2 alternative themes that I find useful</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/cofess/hexo-theme-pure.git themes/pure</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yscoder/hexo-theme-indigo themes/indigo</span><br></pre></td></tr></table></figure>
+<p>Then edit the <code>theme</code> property in <code>_config.yml</code> and setup theme-specific properties in <code>themes/&lt;theme&gt;/_config.yml</code></p>
+<h2 id="Preview-Locally">Preview Locally</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo serve</span><br></pre></td></tr></table></figure>
+<h2 id="Publish">Publish</h2>
+<p>For GitHub Pages, we need to install <code>hexo-deployer-git</code> plugin and config the <code>deploy</code> property in <code>_config.yml</code>. Note that personal pages must be pushed to the <code>master</code> branch (not gh-pages!)</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<p>Then publish to GitHub:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="Comment">Comment</h2>
+<p>Most themes have built-in support for comment systems. I personally find <code>gitalk</code> to be the most easy-to-use one. You just need to <a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">apply for a new Git OAuth application</a> and fill in necessary info in <code>themes/&lt;theme&gt;/_config.yml</code>:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitalk: </span><br><span class="line">    owner: &lt;username&gt;  </span><br><span class="line">    admin: &lt;username&gt; </span><br><span class="line">    repo: &lt;username&gt;.github.io  </span><br><span class="line">    ClientID: &lt;ClientID&gt;</span><br><span class="line">    ClientSecret: &lt;ClientSecret&gt;</span><br></pre></td></tr></table></figure>
+<p>Note that the comment system should be working even in a local review.</p>
+<h2 id="Tags-Categories-About">Tags, Categories, About</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line">hexo new page categories</span><br><span class="line">hexo new page about</span><br></pre></td></tr></table></figure>
+<p>In the created <code>.md</code> files, edit the <code>type</code> attribute:</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Tags</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020</span><span class="number">-06</span><span class="number">-24</span> <span class="number">23</span><span class="string">:10:07</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">tags</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>tech</category>
       </categories>
       <tags>
-        <tag>git</tag>
+        <tag>web</tag>
       </tags>
   </entry>
   <entry>
@@ -61,39 +71,29 @@
       </tags>
   </entry>
   <entry>
-    <title>Building a Hexo Blog with GitHub Pages</title>
-    <url>/2020/06/24/2020-06-24-hexo-blog/</url>
-    <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="built_in">export</span> PATH=~/.npm-global/lib/node_modules/hexo/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
-<h2 id="Create-root-Hexo-folder">Create root Hexo folder</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir hexo_dir</span><br><span class="line"><span class="built_in">cd</span> hexo_dir</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-<h2 id="Configure-Git-Repo">Configure Git Repo</h2>
-<p>Create a github repo <code>&lt;username&gt;.github.io</code> and edit <code>_config.yml</code>:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">&lt;username&gt;.github.io</span></span><br></pre></td></tr></table></figure>
-<h2 id="Download-a-theme">Download a theme</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2 alternative themes that I find useful</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/cofess/hexo-theme-pure.git themes/pure</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yscoder/hexo-theme-indigo themes/indigo</span><br></pre></td></tr></table></figure>
-<p>Then edit the <code>theme</code> property in <code>_config.yml</code> and setup theme-specific properties in <code>themes/&lt;theme&gt;/_config.yml</code></p>
-<h2 id="Preview-Locally">Preview Locally</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo serve</span><br></pre></td></tr></table></figure>
-<h2 id="Publish">Publish</h2>
-<p>For GitHub Pages, we need to install <code>hexo-deployer-git</code> plugin and config the <code>deploy</code> property in <code>_config.yml</code>. Note that personal pages must be pushed to the <code>master</code> branch (not gh-pages!)</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-<p>Then publish to GitHub:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-<h2 id="Comment">Comment</h2>
-<p>Most themes have built-in support for comment systems. I personally find <code>gitalk</code> to be the most easy-to-use one. You just need to <a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">apply for a new Git OAuth application</a> and fill in necessary info in <code>themes/&lt;theme&gt;/_config.yml</code>:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitalk: </span><br><span class="line">    owner: &lt;username&gt;  </span><br><span class="line">    admin: &lt;username&gt; </span><br><span class="line">    repo: &lt;username&gt;.github.io  </span><br><span class="line">    ClientID: &lt;ClientID&gt;</span><br><span class="line">    ClientSecret: &lt;ClientSecret&gt;</span><br></pre></td></tr></table></figure>
-<p>Note that the comment system should be working even in a local review.</p>
-<h2 id="Tags-Categories-About">Tags, Categories, About</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line">hexo new page categories</span><br><span class="line">hexo new page about</span><br></pre></td></tr></table></figure>
-<p>In the created <code>.md</code> files, edit the <code>type</code> attribute:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Tags</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020</span><span class="number">-06</span><span class="number">-24</span> <span class="number">23</span><span class="string">:10:07</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">tags</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+    <title>Working with multiple GitHub accounts</title>
+    <url>/2020/06/25/2020-06-25-multiple-gits/</url>
+    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
+<h2 id="SSH-setups">SSH setups</h2>
+<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
+<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
+<p>Then, add the generated public keys to github for each account:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
+<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
+<h2 id="Git-configs">Git configs</h2>
+<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
+<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
 ]]></content>
       <categories>
         <category>tech</category>
       </categories>
       <tags>
-        <tag>web</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -267,7 +267,7 @@
 <p>博士入学一年，我见到了太多真正意义上优秀的人。看过一些人本科的经历，各种活动眼花缭乱，偶尔甚至还加上一个双学位，而其人精神丰朗，待人接物如沐春风，身上找不到那种我在本科司空见惯的自我保护性格，便时常产生一种恍惚感 —— 我或许读了一个假的大学，曾经过分的努力不过是在play the game，本来毫无意义。毕业了，这场内卷游戏就像庞氏骗局一样灰飞烟灭，而曾经的入局者都输掉了年轻的激情和时间。</p>
 <p>如果曾经的内卷游戏还多少提供给我一点简单易得的reward，像驴子前方的那根胡萝卜一样钓着我向前走，那么现在呢。读了博士，进入了一场全新的游戏，reward的获取难度、observation的复杂程度都数倍于从前。残酷之处在于，如果explore不到一条适合自己的路线，就永远只能在低谷打转。而人不是机器，没有无限的时间，会因为缺少reward而疲惫沮丧、自我怀疑，甚至陷入矛盾的怪圈：有时怀疑自己根本不擅长科研，却又愈发希望能向同行和导师证明自己；厌倦了这种矛盾的卑微感，却又身不由己地被项目的进程推着一天天地走下去。</p>
 <p>“实在不行，你还可以拿个master走人嘛。当然我没有建议你这样做；我只是觉得这是一个可行的选项，压力不用那么大。”</p>
-<p>虽然我已经开始怀疑科研是否是一场新的庞氏骗局，但还是打算最后再垂死挣扎一下。就当是祛魅吧（笑）。</p>
+<p>虽然我已经开始怀疑科研是否是一场新的庞氏骗局，但还是打算最后再垂死挣扎一下。权当作是祛魅吧（笑）。</p>
 <blockquote>
 <p>而世之奇伟、瑰怪，非常之观，常在于险远，而人之所罕至焉，故非有志者不能至也。有志矣，不随以止也，然力不足者，亦不能至也。有志与力，而又不随以怠，至于幽暗昏惑而无物以相之，亦不能至也。然力足以至焉，于人为可讥，而在己为有悔；尽吾志也而不能至者，可以无悔矣，其孰能讥之乎？此余之所得也！</p>
 <p>—— 王安石《游褒禅山记》</p>
