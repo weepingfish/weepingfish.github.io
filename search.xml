@@ -173,114 +173,6 @@
       </tags>
   </entry>
   <entry>
-    <title>2020夏 | 战拖打卡</title>
-    <url>/2020/07/11/2020-summer-no-procrastination/</url>
-    <content><![CDATA[<p><img src="/2020/07/11/2020-summer-no-procrastination/is_it_worth_the_time.png" alt="img"></p>
-<h2 id="Scrum-Log">Scrum Log</h2>
-<p>实验室</p>
-<ul>
-<li>手画轨迹实验（100）+50+10</li>
-<li>真人图像渲染器（150）+100</li>
-<li><strong>周报</strong>（100）</li>
-<li>文档（200）</li>
-<li>起始点实验降噪（100）</li>
-<li>全身动态模型（500）</li>
-<li>读论文（100）</li>
-<li><strong>找秋季老板</strong>（500）</li>
-<li><strong>报税</strong>（100，by 7.15）</li>
-</ul>
-<p>实习</p>
-<ul>
-<li><strong>给fedex打电话1.800.463.3339取快递</strong>（10）</li>
-<li><s><strong>改PPT</strong>（100）</s></li>
-<li>树实验（150）</li>
-<li>带边的树实验（200）</li>
-<li>读论文（100）</li>
-</ul>
-<p>General</p>
-<ul>
-<li><strong>连续7天12:30am前睡觉</strong>（500）</li>
-<li>连续7天每天有效工作时长&gt;=8h（200）+1+1+0</li>
-<li>连续7天每天productivity得分超过200（500）+1+1+0</li>
-<li>连续7天日均读论文数&gt;=1（300）</li>
-<li>体重下降到125斤（200）</li>
-<li>体重下降到120斤（400）</li>
-<li>连续7天每天看手机不超过2h（200）</li>
-<li>连续7天每隔一天跑一次步（200）</li>
-<li>连续4个周日给爸爸打电话（500）</li>
-<li>洗衣服（10）</li>
-</ul>
-<h2 id="7-11-Sat">7.11 (Sat)</h2>
-<p>怒搞实习！！！还有两天！！！</p>
-<h2 id="7-10-Fri">7.10 (Fri)</h2>
-<p>3h total （+150），sleep：1:30am</p>
-<ul>
-<li>9:15-10:30 实验室meet（+50）</li>
-<li>10:30-11:00 跟FedEx电话撕逼</li>
-<li>11:00-16:00 补觉</li>
-<li>16:00-18:30 起床吃饭，餐后休息</li>
-<li>19:00-22:00 typora theme；修复hexo图片链接；加入auto sync</li>
-<li>22:30-23:30 休息</li>
-<li>23:30-1:00 本日meeting总结（+100）</li>
-</ul>
-<h2 id="7-9-Thu">7.9 (Thu)</h2>
-<p>8h total（+330），sleep：4-5am</p>
-<ul>
-<li>12:30-13:00 检查了昨天手画轨迹的结果。2个waving的work的还行，其他的image render有问题（+10）</li>
-<li>13:00-14:00 午餐，给SSN office打电话，给Fedex打电话，等候international center的zoom meet</li>
-<li>15:00-16:00 练习intro talk</li>
-<li>16:00-16:30 intro talk</li>
-<li>16:30-17:00 处理报税（垃圾IRS系统）</li>
-<li>17:00-18:30 晚饭，取weee</li>
-<li>18:30-19:30 添加博客搜索功能</li>
-<li>19:30-20:30 crop images and extract 2D keypoints with openpose</li>
-<li>20:30-21:00 download and install pix2pix</li>
-<li>21:00-21:30 休息</li>
-<li>21:30-24:00 检查是否可以使用一个affine transform映射真人姿态和模拟姿态（发现不行，+20），学习使用pix2pix</li>
-<li>24:00-1:00 休息</li>
-<li>1:00-2:00 用pix2pix训从colorstick到人的映射（+100，效果一般）</li>
-<li>2:00-3:00 思考如何对齐两个相机空间中的姿态，提出一个也许可行的解决方案（+100）</li>
-<li>6:00-9:00 周报（+100）</li>
-</ul>
-<h2 id="7-8-Wed">7.8 (Wed)</h2>
-<p>10.5h total（+200）, sleep: 2am</p>
-<ul>
-<li>22:30-1:30 补全intro talk PPT的配图并加入speaker notes（+100）</li>
-<li>20:30-22:00 采集5组手画轨迹并运行（还需检查质量）（+50）</li>
-<li>19:00-20:30 饭后休息+洗澡</li>
-<li>18:20-19:00 晚饭（炒饭）</li>
-<li>17:00-18:20 建立打卡目标scrum log</li>
-<li>16:00-17:00 逛一亩三分地、豆瓣战拖组</li>
-<li>15:00-16:00 和朋友去星爸爸买咖啡</li>
-<li>9:30-14:30 补觉</li>
-<li>8:00-9:00 internship weekly meeting（+50）</li>
-<li>2:00-7:00 draft slides（效率太低，不算分）</li>
-</ul>
-<h2 id="延迟愿望清单">延迟愿望清单</h2>
-<ul>
-<li><s>建立战拖打卡贴</s></li>
-<li>build personal academic blog（200）</li>
-<li>Research Notes (200)</li>
-<li>write a blog for RL/PPO/GAE（500）</li>
-<li>write a blog for internship related works（500）</li>
-<li>WorkingCopy for linux?（20）</li>
-<li>新鞋子（200）</li>
-<li>手写输入 for iPad（50）</li>
-<li>秘密花园涂色 for iPad（200）</li>
-<li>Reader’s Digest / Teen books in English (200)</li>
-<li>make a github repo for Dockerfile (50)</li>
-<li>解决paper theme导出成html的字体问题（100）</li>
-</ul>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>diary</tag>
-        <tag>procrastination</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2020夏</title>
     <url>/2020/07/11/2020-summer/</url>
     <content><![CDATA[<blockquote>
@@ -349,6 +241,114 @@
       </categories>
       <tags>
         <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2020夏 | 战拖打卡</title>
+    <url>/2020/07/11/2020-summer-no-procrastination/</url>
+    <content><![CDATA[<p><img src="/2020/07/11/2020-summer-no-procrastination/is_it_worth_the_time.png" alt="img"></p>
+<h2 id="Scrum-Log">Scrum Log</h2>
+<p>实验室</p>
+<ul>
+<li>手画轨迹实验（100）+50+10</li>
+<li>真人图像渲染器（150）+100</li>
+<li><strong>周报</strong>（100）</li>
+<li>文档（200）</li>
+<li>起始点实验降噪（100）</li>
+<li>全身动态模型（500）</li>
+<li>读论文（100）</li>
+<li><strong>找秋季老板</strong>（500）</li>
+<li><strong>报税</strong>（100，by 7.15）</li>
+</ul>
+<p>实习</p>
+<ul>
+<li><strong>给fedex打电话1.800.463.3339取快递</strong>（10）</li>
+<li><s><strong>改PPT</strong>（100）</s></li>
+<li>树实验（150）</li>
+<li>带边的树实验（200）</li>
+<li>读论文（100）</li>
+</ul>
+<p>General</p>
+<ul>
+<li><strong>连续7天12:30am前睡觉</strong>（500）</li>
+<li>连续7天每天有效工作时长&gt;=8h（200）+1+1+0</li>
+<li>连续7天每天productivity得分超过200（500）+1+1+0</li>
+<li>连续7天日均读论文数&gt;=1（300）</li>
+<li>体重下降到125斤（200）</li>
+<li>体重下降到120斤（400）</li>
+<li>连续7天每天看手机不超过2h（200）</li>
+<li>连续7天每隔一天跑一次步（200）</li>
+<li>连续4个周日给爸爸打电话（500）</li>
+<li>洗衣服（10）</li>
+</ul>
+<h2 id="7-11-Sat">7.11 (Sat)</h2>
+<p>怒搞实习！！！还有两天！！！</p>
+<h2 id="7-10-Fri">7.10 (Fri)</h2>
+<p>3h total （+150），sleep: 2am</p>
+<ul>
+<li>9:15-10:30 实验室meet（+50）</li>
+<li>10:30-11:00 跟FedEx电话撕逼</li>
+<li>11:00-16:00 补觉</li>
+<li>16:00-18:30 起床吃饭，餐后休息</li>
+<li>19:00-22:00 typora theme；修复hexo图片链接；加入auto sync</li>
+<li>22:30-23:30 休息</li>
+<li>23:30-1:00 本日meeting总结（+100）</li>
+</ul>
+<h2 id="7-9-Thu">7.9 (Thu)</h2>
+<p>8h total（+330），sleep：4-5am</p>
+<ul>
+<li>12:30-13:00 检查了昨天手画轨迹的结果。2个waving的work的还行，其他的image render有问题（+10）</li>
+<li>13:00-14:00 午餐，给SSN office打电话，给Fedex打电话，等候international center的zoom meet</li>
+<li>15:00-16:00 练习intro talk</li>
+<li>16:00-16:30 intro talk</li>
+<li>16:30-17:00 处理报税（垃圾IRS系统）</li>
+<li>17:00-18:30 晚饭，取weee</li>
+<li>18:30-19:30 添加博客搜索功能</li>
+<li>19:30-20:30 crop images and extract 2D keypoints with openpose</li>
+<li>20:30-21:00 download and install pix2pix</li>
+<li>21:00-21:30 休息</li>
+<li>21:30-24:00 检查是否可以使用一个affine transform映射真人姿态和模拟姿态（发现不行，+20），学习使用pix2pix</li>
+<li>24:00-1:00 休息</li>
+<li>1:00-2:00 用pix2pix训从colorstick到人的映射（+100，效果一般）</li>
+<li>2:00-3:00 思考如何对齐两个相机空间中的姿态，提出一个也许可行的解决方案（+100）</li>
+<li>6:00-9:00 周报（+100）</li>
+</ul>
+<h2 id="7-8-Wed">7.8 (Wed)</h2>
+<p>10.5h total（+200）, sleep: 2am</p>
+<ul>
+<li>22:30-1:30 补全intro talk PPT的配图并加入speaker notes（+100）</li>
+<li>20:30-22:00 采集5组手画轨迹并运行（还需检查质量）（+50）</li>
+<li>19:00-20:30 饭后休息+洗澡</li>
+<li>18:20-19:00 晚饭（炒饭）</li>
+<li>17:00-18:20 建立打卡目标scrum log</li>
+<li>16:00-17:00 逛一亩三分地、豆瓣战拖组</li>
+<li>15:00-16:00 和朋友去星爸爸买咖啡</li>
+<li>9:30-14:30 补觉</li>
+<li>8:00-9:00 internship weekly meeting（+50）</li>
+<li>2:00-7:00 draft slides（效率太低，不算分）</li>
+</ul>
+<h2 id="延迟愿望清单">延迟愿望清单</h2>
+<ul>
+<li><s>建立战拖打卡贴</s></li>
+<li>build personal academic blog（200）</li>
+<li>Research Notes (200)</li>
+<li>write a blog for RL/PPO/GAE（500）</li>
+<li>write a blog for internship related works（500）</li>
+<li>WorkingCopy for linux?（20）</li>
+<li>新鞋子（200）</li>
+<li>手写输入 for iPad（50）</li>
+<li>秘密花园涂色 for iPad（200）</li>
+<li>Reader’s Digest / Teen books in English (200)</li>
+<li>make a github repo for Dockerfile (50)</li>
+<li>解决paper theme导出成html的字体问题（100）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>diary</tag>
+        <tag>procrastination</tag>
       </tags>
   </entry>
 </search>
