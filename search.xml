@@ -63,6 +63,21 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker cheatsheet</title>
+    <url>/2020/07/10/2020-07-08-docker/</url>
+    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="Usage">Usage</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>最近怎样？</title>
     <url>/2020/07/10/2020-06-28-how-are-you/</url>
     <content><![CDATA[<blockquote>
@@ -97,21 +112,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker cheatsheet</title>
-    <url>/2020/07/10/2020-07-08-docker/</url>
-    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
-<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="Usage">Usage</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo Auto Sync</title>
     <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
     <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
@@ -121,27 +121,6 @@
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Auto-numbering in Typora Markdown</title>
-    <url>/2020/07/10/2020-07-10-typora-theme/</url>
-    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
-<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<h2 id="serif">serif</h2>
-<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
-<p><img src="/2020/07/10/2020-07-10-typora-theme/image-20200710193009823.png" alt="image-20200710193009823"></p>
-<h2 id="sans-serif">sans-serif</h2>
-<p>GitHub</p>
-<p><img src="/2020/07/10/2020-07-10-typora-theme/image-20200710203832748.png" alt="image-20200710203832748"></p>
-<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
-<p><img src="/2020/07/10/2020-07-10-typora-theme/image-20200710204004740.png" alt="image-20200710204004740"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
       </tags>
   </entry>
   <entry>
@@ -170,6 +149,62 @@
       <tags>
         <tag>hexo</tag>
         <tag>typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Auto-numbering in Typora Markdown</title>
+    <url>/2020/07/10/2020-07-10-typora-theme/</url>
+    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
+<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<h2 id="serif">serif</h2>
+<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
+<p><img src="/2020/07/10/2020-07-10-typora-theme/image-20200710193009823.png" alt="image-20200710193009823"></p>
+<h2 id="sans-serif">sans-serif</h2>
+<p>GitHub</p>
+<p><img src="/2020/07/10/2020-07-10-typora-theme/image-20200710203832748.png" alt="image-20200710203832748"></p>
+<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
+<p><img src="/2020/07/10/2020-07-10-typora-theme/image-20200710204004740.png" alt="image-20200710204004740"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Centering Google Search and Google Scholar</title>
+    <url>/2020/07/11/2020-07-11-google-search-centering/</url>
+    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
+<table>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
+<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
+</tr>
+<tr>
+<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
+<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
+</tr>
+</tbody>
+</table>
+<p>Centering Google Scholar:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>tampermonkey</tag>
+        <tag>google</tag>
       </tags>
   </entry>
   <entry>
@@ -216,15 +251,15 @@
 <li>12:30-?</li>
 </ul>
 <h2 id="7-10-Fri">7.10 (Fri)</h2>
-<p>3h total （+150），sleep: 2am</p>
+<p>3h total （<strong>+150</strong>），sleep: 2am</p>
 <ul>
-<li>9:15-10:30 实验室meet（+50）</li>
+<li>9:15-10:30 实验室meet（<strong>+50</strong>）</li>
 <li>10:30-11:00 跟FedEx电话撕逼</li>
 <li>11:00-16:00 补觉</li>
 <li>16:00-18:30 起床吃饭，餐后休息</li>
 <li>19:00-22:00 typora theme；修复hexo图片链接；加入auto sync</li>
 <li>22:30-23:30 休息</li>
-<li>23:30-1:00 本日meeting总结（+100）</li>
+<li>23:30-1:00 本日meeting总结（<strong>+100</strong>）</li>
 </ul>
 <h2 id="7-9-Thu">7.9 (Thu)</h2>
 <p>8h total（<strong>+330</strong>），sleep：4-5am</p>
@@ -246,7 +281,7 @@
 <li>6:00-9:00 周报（<strong>+100</strong>）</li>
 </ul>
 <h2 id="7-8-Wed">7.8 (Wed)</h2>
-<p>10.5h total（+200）, sleep: 2am</p>
+<p>10.5h total（<strong>+200</strong>）, sleep: 2am</p>
 <ul>
 <li>22:30-1:30 补全intro talk PPT的配图并加入speaker notes（<strong>+100</strong>）</li>
 <li>20:30-22:00 采集5组手画轨迹并运行（还需检查质量）（<strong>+50</strong>）</li>
@@ -282,41 +317,6 @@
       <tags>
         <tag>diary</tag>
         <tag>procrastination</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Centering Google Search and Google Scholar</title>
-    <url>/2020/07/11/2020-07-11-google-search-centering/</url>
-    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
-<table>
-<thead>
-<tr>
-<th>Before</th>
-<th>After</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
-<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
-</tr>
-<tr>
-<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
-<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
-</tr>
-</tbody>
-</table>
-<p>Centering Google Scholar:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>tampermonkey</tag>
-        <tag>google</tag>
       </tags>
   </entry>
   <entry>
