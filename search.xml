@@ -187,12 +187,30 @@
 <td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
 <td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
 </tr>
+<tr>
+<td></td>
+<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
+</tr>
 </tbody>
 </table>
 <p>Centering Google Scholar:</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 <p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<pre><code class="language-js">// ==UserScript==
+// @name         Google Search Centering
+// @namespace    http://tampermonkey.net/
+// @version 1.3
+// @description  Center the Google search results.
+// @author       GDUFXRT
+// @match        https://www.google.com/search*
+// @run-at       document-start
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+    var style = document.createElement('style');
+    var cssStyle = '.mw {margin: auto !import</code></pre>
 ]]></content>
       <categories>
         <category>tech</category>
