@@ -97,34 +97,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Inserting images into Hexo posts with Typora</title>
-    <url>/2020/07/10/2020-07-10-hexo-image/</url>
-    <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
-<h2 id="Typora">Typora</h2>
-<p>In Preferences:</p>
-<p><img src="/2020/07/10/2020-07-10-hexo-image/image-20200710205313639.png" alt="image-20200710205313639"></p>
-<p>File structure:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo&#x2F;</span><br><span class="line">  source&#x2F;</span><br><span class="line">    _posts&#x2F;</span><br><span class="line">      some-post.md</span><br><span class="line">      some-post&#x2F;</span><br><span class="line">        image.png</span><br></pre></td></tr></table></figure>
-<p>In <code>some-post.md</code>:</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt</span>](<span class="link">some-post/image.png</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="Hexo">Hexo</h2>
-<p>In <code>hexo/_config.yml</code></p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>In hexo root folder:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-asset-link</span><br></pre></td></tr></table></figure>
-<p>In <code>node_modules/hexo-asset-link/index.js</code> :</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// strip domain</span></span><br><span class="line">path_html = path_html.replace(path_html.split(<span class="string">"/"</span>)[<span class="number">0</span>], <span class="string">""</span>);</span><br><span class="line"><span class="comment">// image path in rendered HTML:</span></span><br><span class="line"><span class="comment">// /YYYY/MM/DD/some-post/image.png</span></span><br></pre></td></tr></table></figure>
-<p>This will generate absolute paths for the images in rendered HTML (instead of relative path), which is useful when contents of a post are also displayed from the homepage (which lies in a different folder).</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>typora</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker cheatsheet</title>
     <url>/2020/07/10/2020-07-08-docker/</url>
     <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
@@ -149,27 +121,6 @@
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Auto-numbering in Typora Markdown</title>
-    <url>/2020/07/10/2020-07-10-typora-theme/</url>
-    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
-<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<h2 id="serif">serif</h2>
-<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
-<p><img src="/2020/07/10/2020-07-10-typora-theme/image-20200710193009823.png" alt="image-20200710193009823"></p>
-<h2 id="sans-serif">sans-serif</h2>
-<p>GitHub</p>
-<p><img src="/2020/07/10/2020-07-10-typora-theme/image-20200710203832748.png" alt="image-20200710203832748"></p>
-<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
-<p><img src="/2020/07/10/2020-07-10-typora-theme/image-20200710204004740.png" alt="image-20200710204004740"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
       </tags>
   </entry>
   <entry>
@@ -281,16 +232,65 @@
       </tags>
   </entry>
   <entry>
+    <title>Inserting images into Hexo posts with Typora</title>
+    <url>/2020/07/10/2020-07-10-hexo-image/</url>
+    <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
+<h2 id="Typora">Typora</h2>
+<p>In Preferences:</p>
+<p><img src="/2020/07/10/2020-07-10-hexo-image/image-20200710205313639.png" alt="image-20200710205313639"></p>
+<p>File structure:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo&#x2F;</span><br><span class="line">  source&#x2F;</span><br><span class="line">    _posts&#x2F;</span><br><span class="line">      some-post.md</span><br><span class="line">      some-post&#x2F;</span><br><span class="line">        image.png</span><br></pre></td></tr></table></figure>
+<p>In <code>some-post.md</code>:</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt</span>](<span class="link">some-post/image.png</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="Hexo">Hexo</h2>
+<p>In <code>hexo/_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>In hexo root folder:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-asset-link</span><br></pre></td></tr></table></figure>
+<p>In <code>node_modules/hexo-asset-link/index.js</code> :</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// strip domain</span></span><br><span class="line">path_html = path_html.replace(path_html.split(<span class="string">"/"</span>)[<span class="number">0</span>], <span class="string">""</span>);</span><br><span class="line"><span class="comment">// image path in rendered HTML:</span></span><br><span class="line"><span class="comment">// /YYYY/MM/DD/some-post/image.png</span></span><br></pre></td></tr></table></figure>
+<p>This will generate absolute paths for the images in rendered HTML (instead of relative path), which is useful when contents of a post are also displayed from the homepage (which lies in a different folder).</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Auto-numbering in Typora Markdown</title>
+    <url>/2020/07/10/2020-07-10-typora-theme/</url>
+    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
+<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<h2 id="serif">serif</h2>
+<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
+<p><img src="/2020/07/10/2020-07-10-typora-theme/image-20200710193009823.png" alt="image-20200710193009823"></p>
+<h2 id="sans-serif">sans-serif</h2>
+<p>GitHub</p>
+<p><img src="/2020/07/10/2020-07-10-typora-theme/image-20200710203832748.png" alt="image-20200710203832748"></p>
+<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
+<p><img src="/2020/07/10/2020-07-10-typora-theme/image-20200710204004740.png" alt="image-20200710204004740"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2020夏</title>
-    <url>/2020/07/10/2020-summer/</url>
+    <url>/2020/07/11/2020-summer/</url>
     <content><![CDATA[<blockquote>
 <p>流水账。</p>
 </blockquote>
 <h2 id="7-10-Fri">7.10 (Fri)</h2>
-<p>我又刷夜了。这周第三次了。</p>
-<p>头又疼又涨又晕。</p>
-<p>Morning meetings are killing me.</p>
-<p>无法理解为什么FedEx的送货提醒如此智障。无法理解为什么我总能错过SSN Office的电话。</p>
+<p>本周第三次强迫性刷夜。头又涨又疼又晕。仿佛灵魂出窍，活气散尽，只留下一副钝滞的皮囊。</p>
+<p>无法理解为什么FedEx的送货提醒如此智障。就像我无法理解为什么总能恰好错过SSN Office的电话。</p>
+<p>对FedEx客服发了脾气。送货出了问题，不但死不认错，还强行把责任推卸到顾客身上，逻辑狗屁不通，东拉西扯叨逼叨半天。</p>
+<p>那一刻我很愤怒，其程度甚至远超于糟糕的客户服务可以导致的范围。或许这不过是一系列魔幻现实主义事件之后的最后一根稻草 – 从入境开始，卡签证，对疫情不作为，通过辱华转移注意力，种族歧视引发暴乱，直到现在叫嚣遣返留学生。一些人的傲慢和反智时刻刷新着我的认知下限。或许我应该为我暴躁的态度道歉 – 毕竟那其中夹杂的相当一部分怨气并不是她的错。往深了想，我不过是在挑软柿子撒气罢了。</p>
 <p>晚上想写一个会议总结，结果折腾了仨小时hexo+typora。我没救了。</p>
 <h2 id="7-9">7.9</h2>
 <p>谁能告诉我没有SSN怎么报税啊啊啊！！！</p>
