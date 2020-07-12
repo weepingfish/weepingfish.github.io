@@ -1,32 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Working with multiple GitHub accounts</title>
-    <url>/2020/07/10/2020-06-25-multiple-gits/</url>
-    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
-<h2 id="SSH-setups">SSH setups</h2>
-<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
-<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
-<p>Then, add the generated public keys to github for each account:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
-<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
-<h2 id="Git-configs">Git configs</h2>
-<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
-<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Building a Hexo Blog with GitHub Pages</title>
     <url>/2020/07/10/2020-06-24-hexo-blog/</url>
     <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
@@ -60,6 +34,66 @@
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Working with multiple GitHub accounts</title>
+    <url>/2020/07/10/2020-06-25-multiple-gits/</url>
+    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
+<h2 id="SSH-setups">SSH setups</h2>
+<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
+<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
+<p>Then, add the generated public keys to github for each account:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
+<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
+<h2 id="Git-configs">Git configs</h2>
+<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
+<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>最近怎样？</title>
+    <url>/2020/07/10/2020-06-28-how-are-you/</url>
+    <content><![CDATA[<blockquote>
+<p>近期对话。</p>
+</blockquote>
+<h2 id="实验室学长">实验室学长</h2>
+<p>“最近怎样？”</p>
+<p>“啊，我最近在忙xxx课题，输入###输出%%%，可以看作是yyy和zzz方向的结合。我最近刚开始在小数据上做一些实验，结果遇到一堆问题…主要是对zzz方向不太熟，最近几周都没什么进展。我下周打算开始和实习那边meet，看看实习还能不能抢救一下…”</p>
+<h2 id="父母">父母</h2>
+<p>“最近怎样？”</p>
+<p>“最近挺好的，学校里的人都挺友善的，附近很安全。食堂能拿饭，门口草坪一堆人铺个毯子晒太阳。我常常穿过一条街去星爸爸买咖啡，路边开满了鲜花，建筑物也很美。另外，我最近研制出来一种炒饭，饭+鸡蛋+葱花+西兰花/玉米粒/虾仁/蘑菇片，加糖和味极鲜一炒就行，10分钟以内出锅，香到不行……什么，你说科研嘛。嗨，没啥新鲜事，每天都差不多。实在没有老板肯要我的话还有硕士这条退路嘛（笑）。”</p>
+<h2 id="对象">对象</h2>
+<p>“在干嘛？”（好像没问过最近怎样）</p>
+<p>“代码写不出来，等死中 /<br>
+靠为什么我写的全是bug /<br>
+又被老板骂了一顿，人生无望 /<br>
+实验又不work，心态崩了 /<br>
+昨天没咋睡觉，现在整个人飘在天上 /<br>
+…”</p>
+<h2 id="朋友">朋友</h2>
+<p>“最近怎样？”</p>
+<p>“混吃等死中…最近在弄xxx。等我弄完了就和你一起yyyy（大概率空头支票）。（内心OS：其实我特别想和你一直聊一通宵只是最近我浑身负能量怕传染给你而且我也不知道什么时候能好起来对不起我这个朋友真是一点用都没有希望不要因此失去一个朋友啊啊啊啊啊）</p>
+<h2 id="导师-路人">导师/路人</h2>
+<p>“How are you?”</p>
+<p>“Oh I’m pretty good（浮夸语气+尴尬而不失礼貌的商业假笑）. How are you?”</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>misc</tag>
       </tags>
   </entry>
   <entry>
@@ -153,22 +187,6 @@
         <tag>typora</tag>
         <tag>css</tag>
         <tag>font</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Typora Paper Night</title>
-    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
-    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
-<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
@@ -288,13 +306,65 @@
       </tags>
   </entry>
   <entry>
+    <title>Centering Google Search and Google Scholar</title>
+    <url>/2020/07/11/2020-07-11-google-search-centering/</url>
+    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
+<table>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
+<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
+</tr>
+<tr>
+<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
+<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
+</tr>
+</tbody>
+</table>
+<p>Centering Google Scholar:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+        <tag>tampermonkey</tag>
+        <tag>google</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Typora Paper Night</title>
+    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
+    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
+<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>typora-theme</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2020夏</title>
     <url>/2020/07/11/2020-summer/</url>
     <content><![CDATA[<blockquote>
 <p>流水账。</p>
 </blockquote>
 <h2 id="7-11-Sat">7.11 (Sat)</h2>
-<p>There have been so many people repeatedly telling me what I should/shouldn’t do, but so few asking for what I want and/or how I feel.</p>
+<p>There have been so many people repeatedly telling me what I should/shouldn’t do, but so few asking what I like/dislike.</p>
 <h2 id="7-10-Fri">7.10 (Fri)</h2>
 <p>本周第三次强迫性刷夜。头又涨又疼又晕。仿佛灵魂出窍，活气散尽，只留下一副钝滞的皮囊。</p>
 <p>对FedEx客服发了脾气。送货出了问题，不但死不认错，还强词夺理把责任全推到顾客身上，逻辑狗屁不通，东拉西扯叨逼叨半天。那一刻我很愤怒，其程度甚至远超于糟糕的客户服务可以导致的范围。或许这不过是一系列魔幻现实主义事件之后的最后一根稻草 – 从入境开始，卡签证，对疫情不作为，通过辱华转移注意力，种族歧视引发暴乱，直到现在叫嚣遣返留学生。一些人的傲慢和反智时刻刷新着我的认知下限。或许我应该为我暴躁的态度道歉 – 毕竟那其中夹杂的相当一部分怨气并不是她的错。往阴暗了想，我不过是在挑软柿子撒气罢了。</p>
@@ -356,76 +426,6 @@
       </categories>
       <tags>
         <tag>diary</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Centering Google Search and Google Scholar</title>
-    <url>/2020/07/11/2020-07-11-google-search-centering/</url>
-    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
-<table>
-<thead>
-<tr>
-<th>Before</th>
-<th>After</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
-<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
-</tr>
-<tr>
-<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
-<td><img src="/2020/07/11/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
-</tr>
-</tbody>
-</table>
-<p>Centering Google Scholar:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-        <tag>tampermonkey</tag>
-        <tag>google</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>最近怎样？</title>
-    <url>/2020/07/10/2020-06-28-how-are-you/</url>
-    <content><![CDATA[<blockquote>
-<p>近期对话。</p>
-</blockquote>
-<h2 id="实验室学长">实验室学长</h2>
-<p>“最近怎样？”</p>
-<p>“啊，我最近在忙xxx课题，输入###输出%%%，可以看作是yyy和zzz方向的结合。我最近刚开始在小数据上做一些实验，结果遇到一堆问题…主要是对zzz方向不太熟，最近几周都没什么进展。我下周打算开始和实习那边meet，看看实习还能不能抢救一下…”</p>
-<h2 id="父母">父母</h2>
-<p>“最近怎样？”</p>
-<p>“最近挺好的，学校里的人都挺友善的，附近很安全。食堂能拿饭，门口草坪一堆人铺个毯子晒太阳。我常常穿过一条街去星爸爸买咖啡，路边开满了鲜花，建筑物也很美。另外，我最近研制出来一种炒饭，饭+鸡蛋+葱花+西兰花/玉米粒/虾仁/蘑菇片，加糖和味极鲜一炒就行，10分钟以内出锅，香到不行……什么，你说科研嘛。嗨，没啥新鲜事，每天都差不多。实在没有老板肯要我的话还有硕士这条退路嘛（笑）。”</p>
-<h2 id="对象">对象</h2>
-<p>“在干嘛？”（好像没问过最近怎样）</p>
-<p>“代码写不出来，等死中 /<br>
-靠为什么我写的全是bug /<br>
-又被老板骂了一顿，人生无望 /<br>
-实验又不work，心态崩了 /<br>
-昨天没咋睡觉，现在整个人飘在天上 /<br>
-…”</p>
-<h2 id="朋友">朋友</h2>
-<p>“最近怎样？”</p>
-<p>“混吃等死中…最近在弄xxx。等我弄完了就和你一起yyyy（大概率空头支票）。（内心OS：其实我特别想和你一直聊一通宵只是最近我浑身负能量怕传染给你而且我也不知道什么时候能好起来对不起我这个朋友真是一点用都没有希望不要因此失去一个朋友啊啊啊啊啊）</p>
-<h2 id="导师-路人">导师/路人</h2>
-<p>“How are you?”</p>
-<p>“Oh I’m pretty good（浮夸语气+尴尬而不失礼貌的商业假笑）. How are you?”</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>misc</tag>
       </tags>
   </entry>
 </search>
