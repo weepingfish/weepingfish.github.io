@@ -126,6 +126,30 @@
       </tags>
   </entry>
   <entry>
+    <title>Typora Auto Numbering</title>
+    <url>/2020/07/12/2020-07-10-typora-auto-number/</url>
+    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
+<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<h2 id="serif">serif</h2>
+<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710193009823.png" alt="image-20200710193009823"></p>
+<a id="more"></a>
+<h2 id="sans-serif">sans-serif</h2>
+<p>GitHub</p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710203832748.png" alt="image-20200710203832748"></p>
+<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710204004740.png" alt="image-20200710204004740"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>typora-theme</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Inserting images into Hexo posts with Typora</title>
     <url>/2020/07/12/2020-07-10-hexo-image/</url>
     <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
@@ -155,19 +179,10 @@
       </tags>
   </entry>
   <entry>
-    <title>Typora Auto Numbering</title>
-    <url>/2020/07/12/2020-07-10-typora-auto-number/</url>
-    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
-<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<h2 id="serif">serif</h2>
-<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710193009823.png" alt="image-20200710193009823"></p>
-<a id="more"></a>
-<h2 id="sans-serif">sans-serif</h2>
-<p>GitHub</p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710203832748.png" alt="image-20200710203832748"></p>
-<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710204004740.png" alt="image-20200710204004740"></p>
+    <title>CSS for Customized Fonts</title>
+    <url>/2020/07/11/2020-07-11-fontface-css/</url>
+    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>tech</category>
@@ -175,7 +190,7 @@
       <tags>
         <tag>typora</tag>
         <tag>css</tag>
-        <tag>typora-theme</tag>
+        <tag>font</tag>
       </tags>
   </entry>
   <entry>
@@ -232,18 +247,65 @@
       </tags>
   </entry>
   <entry>
-    <title>CSS for Customized Fonts</title>
-    <url>/2020/07/11/2020-07-11-fontface-css/</url>
-    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>Instead -- Madeleine Peyroux</title>
+    <url>/2020/07/12/2020-07-12-instead/</url>
+    <content><![CDATA[<p>&quot;Instead of trying to win something you never understood<br>
+Just play the game you know eventually you will you both look good<br>
+It’s silly to pretend to have something you don’t own</p>
+<p>Instead of acting crazy chasing things that make you mad<br>
+Keep your heart ahead, it’ll lead you back to what you have<br>
+With every step you are closer to the place you need to be&quot;</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KgccdIjocDs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<a id="more"></a>
+<p><a href="https://www.musixmatch.com/lyrics/Madeleine-Peyroux/Instead" target="_blank" rel="noopener">[lyrics source]</a></p>
+<p>Instead of feeling bad<br>
+Be glad you got somewhere to go<br>
+Instead of feeling sad<br>
+Be happy you’re not all alone<br>
+Instead of feeling low<br>
+Get high on everything you love<br>
+Instead of wastin’ time<br>
+Feel good 'bout what you are dreaming of</p>
+<p><strong>Instead of trying to win something you never understood</strong><br>
+<strong>Just play the game you know eventually you will you both look good</strong><br>
+<strong>It’s silly to pretend to have something you don’t own</strong></p>
+<p>Just let her be a woman and you’ll be her man</p>
+<p>Instead of feelin’ broke<br>
+Buck up and get yourself in the black<br>
+Instead of losing hope<br>
+Touch up the things that feel out of whack<br>
+Instead of being old<br>
+Be young because you know you are<br>
+Instead of feeling cold<br>
+Let sunshine into your heart</p>
+<p><strong>Instead of acting crazy chasing things that make you mad</strong><br>
+<strong>Keep your heart ahead, it’ll lead you back to what you have</strong><br>
+<strong>With every step you are closer to the place you need to be</strong></p>
+<p>It’s up to you to let her love you sweetly</p>
+<p>Instead of acting crazy chasing things that make you mad<br>
+Just keep your heart ahead, it’ll lead you back to what you have<br>
+With every step you are closer to the place you need to be<br>
+But it’s up to you to let her love you sweetly</p>
+<p>Instead of feeling bad<br>
+Be glad you got someone to love<br>
+Instead of feeling sad<br>
+Be happy there’s a god above<br>
+Instead of feeling ‘lone<br>
+Remember you are never on your own<br>
+Instead of feeling sad<br>
+Be happy that she’s there at home<br>
+She’s waitin’ for by the phone<br>
+So be glad she all your own</p>
+<p>Get happy…<br>
+Watin’ for you by the telephone…</p>
+<p>Don’t get…</p>
+<p>Back home,</p>
 ]]></content>
       <categories>
-        <category>tech</category>
+        <category>life</category>
       </categories>
       <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>font</tag>
+        <tag>lyrics</tag>
       </tags>
   </entry>
   <entry>
@@ -363,73 +425,13 @@
       </tags>
   </entry>
   <entry>
-    <title>Instead -- Madeleine Peyroux</title>
-    <url>/2020/07/12/2020-07-12-instead/</url>
-    <content><![CDATA[<p>&quot;Instead of trying to win something you never understood<br>
-Just play the game you know eventually you will you both look good<br>
-It’s silly to pretend to have something you don’t own</p>
-<p>Instead of acting crazy chasing things that make you mad<br>
-Keep your heart ahead, it’ll lead you back to what you have<br>
-With every step you are closer to the place you need to be&quot;</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KgccdIjocDs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<a id="more"></a>
-<p><a href="https://www.musixmatch.com/lyrics/Madeleine-Peyroux/Instead" target="_blank" rel="noopener">[lyrics source]</a></p>
-<p>Instead of feeling bad<br>
-Be glad you got somewhere to go<br>
-Instead of feeling sad<br>
-Be happy you’re not all alone<br>
-Instead of feeling low<br>
-Get high on everything you love<br>
-Instead of wastin’ time<br>
-Feel good 'bout what you are dreaming of</p>
-<p><strong>Instead of trying to win something you never understood</strong><br>
-<strong>Just play the game you know eventually you will you both look good</strong><br>
-<strong>It’s silly to pretend to have something you don’t own</strong></p>
-<p>Just let her be a woman and you’ll be her man</p>
-<p>Instead of feelin’ broke<br>
-Buck up and get yourself in the black<br>
-Instead of losing hope<br>
-Touch up the things that feel out of whack<br>
-Instead of being old<br>
-Be young because you know you are<br>
-Instead of feeling cold<br>
-Let sunshine into your heart</p>
-<p><strong>Instead of acting crazy chasing things that make you mad</strong><br>
-<strong>Keep your heart ahead, it’ll lead you back to what you have</strong><br>
-<strong>With every step you are closer to the place you need to be</strong></p>
-<p>It’s up to you to let her love you sweetly</p>
-<p>Instead of acting crazy chasing things that make you mad<br>
-Just keep your heart ahead, it’ll lead you back to what you have<br>
-With every step you are closer to the place you need to be<br>
-But it’s up to you to let her love you sweetly</p>
-<p>Instead of feeling bad<br>
-Be glad you got someone to love<br>
-Instead of feeling sad<br>
-Be happy there’s a god above<br>
-Instead of feeling ‘lone<br>
-Remember you are never on your own<br>
-Instead of feeling sad<br>
-Be happy that she’s there at home<br>
-She’s waitin’ for by the phone<br>
-So be glad she all your own</p>
-<p>Get happy…<br>
-Watin’ for you by the telephone…</p>
-<p>Don’t get…</p>
-<p>Back home,</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>lyrics</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2020夏</title>
-    <url>/2020/07/12/2020-summer/</url>
+    <url>/2020/07/13/2020-summer/</url>
     <content><![CDATA[<blockquote>
 <p>流水账。</p>
 </blockquote>
+<h2 id="7-12-Sun">7.12 (Sun)</h2>
+<p>又是一事无成的一天。</p>
 <h2 id="7-11-Sat">7.11 (Sat)</h2>
 <p>There have been so many people repeatedly telling me what I should/shouldn’t do, but so few asking how I feel and what I want. Sometimes I cannot (or dare not) tell the difference between “I’m excited about it” and “I’m good at it and it’s not painful”. It’s kind of like the difference between an addictable chocolate cake and a healthy veggie salad. If I know it’s actually the latter one, in most cases I just lie to myself and pretend it’s the former one. If someone asks for a frank answer, I would say “I like it”, which means that thing is beneficial but not necessarily enjoyable to me.</p>
 <p>爸爸说下周三要做增强CT。如果肿瘤的尺寸/密度有减小，就证明还没有耐药。</p>
