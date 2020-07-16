@@ -155,21 +155,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CSS for Customized Fonts</title>
-    <url>/2020/07/11/2020-07-11-fontface-css/</url>
-    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>font</tag>
-        <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Typora Auto Numbering</title>
     <url>/2020/07/12/2020-07-10-typora-auto-number/</url>
     <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
@@ -191,6 +176,21 @@
         <tag>typora</tag>
         <tag>css</tag>
         <tag>typora-theme</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS for Customized Fonts</title>
+    <url>/2020/07/11/2020-07-11-fontface-css/</url>
+    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>font</tag>
       </tags>
   </entry>
   <entry>
@@ -440,8 +440,7 @@ Watin’ for you by the telephone…</p>
 </blockquote>
 <h2 id="7-15-Wed">7.15 (Wed)</h2>
 <p><a href="https://www.bilibili.com/s/video/BV1r7411Z785" target="_blank" rel="noopener">[眼保健操音乐]</a></p>
-<p>读了另一个dataset的论文。</p>
-<p>为半年前骑车没停stop sign交了200多刀的交通罚单。算了，不过也就是一天的实习工资罢了。</p>
+<p>读了另一个dataset的论文。为半年前骑车没停stop sign交了200多刀的交通罚单。</p>
 <blockquote>
 <p>牙科恐惧（dental fear）是指对于牙科和接受牙科治疗的恐惧。…他们类似有创伤后压力心理障碍症的人，症状是以前看牙医的创伤经验造成的。…由于害怕接受牙科治疗，他们不计一切代价逃避看牙医。很多害怕看牙医的人会等到得了牙科急症才去看病，像是牙痛或长脓疮的时候。非常害怕看牙医的人往往会经历“逃避的循环”，他们由于恐惧而逃避看牙医，直到得了需要侵入性治疗的牙科急症才去看病，如此又会加强他们对牙科的恐惧。</p>
 <p>—— 创伤后滚雪球式拖延：维基百科“<a href="https://zh.m.wikipedia.org/zh-hans/%E7%89%99%E7%A7%91%E6%81%90%E6%87%BC" target="_blank" rel="noopener">牙科恐惧症</a>”词条</p>
