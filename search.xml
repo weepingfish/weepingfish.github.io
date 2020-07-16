@@ -38,21 +38,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker cheatsheet</title>
-    <url>/2020/07/10/2020-07-08-docker/</url>
-    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
-<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="Usage">Usage</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Working with multiple GitHub accounts</title>
     <url>/2020/07/12/2020-06-25-multiple-gits/</url>
     <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
@@ -77,6 +62,21 @@
       </categories>
       <tags>
         <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker cheatsheet</title>
+    <url>/2020/07/10/2020-07-08-docker/</url>
+    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="Usage">Usage</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -114,18 +114,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo Auto Sync</title>
-    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
-    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Inserting images into Hexo posts with Typora</title>
     <url>/2020/07/12/2020-07-10-hexo-image/</url>
     <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
@@ -152,6 +140,55 @@
       <tags>
         <tag>hexo</tag>
         <tag>typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Auto Sync</title>
+    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
+    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Centering Google Search and Google Scholar</title>
+    <url>/2020/07/12/2020-07-11-google-search-centering/</url>
+    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
+<table>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
+</tr>
+<tr>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<p>Centering Google Scholar:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>tampermonkey</tag>
+        <tag>google</tag>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
@@ -194,43 +231,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Centering Google Search and Google Scholar</title>
-    <url>/2020/07/12/2020-07-11-google-search-centering/</url>
-    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
-<table>
-<thead>
-<tr>
-<th>Before</th>
-<th>After</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
-</tr>
-<tr>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
-</tr>
-</tbody>
-</table>
-<a id="more"></a>
-<p>Centering Google Scholar:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-        <tag>tampermonkey</tag>
-        <tag>google</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Typora Paper Night</title>
     <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
     <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
@@ -244,68 +244,6 @@
         <tag>typora</tag>
         <tag>css</tag>
         <tag>typora-theme</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Instead -- Madeleine Peyroux</title>
-    <url>/2020/07/12/2020-07-12-instead/</url>
-    <content><![CDATA[<p>&quot;Instead of trying to win something you never understood<br>
-Just play the game you know eventually you will you both look good<br>
-It’s silly to pretend to have something you don’t own</p>
-<p>Instead of acting crazy chasing things that make you mad<br>
-Keep your heart ahead, it’ll lead you back to what you have<br>
-With every step you are closer to the place you need to be&quot;</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KgccdIjocDs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<a id="more"></a>
-<p><a href="https://www.musixmatch.com/lyrics/Madeleine-Peyroux/Instead" target="_blank" rel="noopener">[lyrics source]</a></p>
-<p>Instead of feeling bad<br>
-Be glad you got somewhere to go<br>
-Instead of feeling sad<br>
-Be happy you’re not all alone<br>
-Instead of feeling low<br>
-Get high on everything you love<br>
-Instead of wastin’ time<br>
-Feel good 'bout what you are dreaming of</p>
-<p><strong>Instead of trying to win something you never understood</strong><br>
-<strong>Just play the game you know eventually you will you both look good</strong><br>
-<strong>It’s silly to pretend to have something you don’t own</strong></p>
-<p>Just let her be a woman and you’ll be her man</p>
-<p>Instead of feelin’ broke<br>
-Buck up and get yourself in the black<br>
-Instead of losing hope<br>
-Touch up the things that feel out of whack<br>
-Instead of being old<br>
-Be young because you know you are<br>
-Instead of feeling cold<br>
-Let sunshine into your heart</p>
-<p><strong>Instead of acting crazy chasing things that make you mad</strong><br>
-<strong>Keep your heart ahead, it’ll lead you back to what you have</strong><br>
-<strong>With every step you are closer to the place you need to be</strong></p>
-<p>It’s up to you to let her love you sweetly</p>
-<p>Instead of acting crazy chasing things that make you mad<br>
-Just keep your heart ahead, it’ll lead you back to what you have<br>
-With every step you are closer to the place you need to be<br>
-But it’s up to you to let her love you sweetly</p>
-<p>Instead of feeling bad<br>
-Be glad you got someone to love<br>
-Instead of feeling sad<br>
-Be happy there’s a god above<br>
-Instead of feeling ‘lone<br>
-Remember you are never on your own<br>
-Instead of feeling sad<br>
-Be happy that she’s there at home<br>
-She’s waitin’ for by the phone<br>
-So be glad she all your own</p>
-<p>Get happy…<br>
-Watin’ for you by the telephone…</p>
-<p>Don’t get…</p>
-<p>Back home,</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>lyrics</tag>
       </tags>
   </entry>
   <entry>
@@ -433,6 +371,68 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
+    <title>Instead -- Madeleine Peyroux</title>
+    <url>/2020/07/12/2020-07-12-instead/</url>
+    <content><![CDATA[<p>&quot;Instead of trying to win something you never understood<br>
+Just play the game you know eventually you will you both look good<br>
+It’s silly to pretend to have something you don’t own</p>
+<p>Instead of acting crazy chasing things that make you mad<br>
+Keep your heart ahead, it’ll lead you back to what you have<br>
+With every step you are closer to the place you need to be&quot;</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KgccdIjocDs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<a id="more"></a>
+<p><a href="https://www.musixmatch.com/lyrics/Madeleine-Peyroux/Instead" target="_blank" rel="noopener">[lyrics source]</a></p>
+<p>Instead of feeling bad<br>
+Be glad you got somewhere to go<br>
+Instead of feeling sad<br>
+Be happy you’re not all alone<br>
+Instead of feeling low<br>
+Get high on everything you love<br>
+Instead of wastin’ time<br>
+Feel good 'bout what you are dreaming of</p>
+<p><strong>Instead of trying to win something you never understood</strong><br>
+<strong>Just play the game you know eventually you will you both look good</strong><br>
+<strong>It’s silly to pretend to have something you don’t own</strong></p>
+<p>Just let her be a woman and you’ll be her man</p>
+<p>Instead of feelin’ broke<br>
+Buck up and get yourself in the black<br>
+Instead of losing hope<br>
+Touch up the things that feel out of whack<br>
+Instead of being old<br>
+Be young because you know you are<br>
+Instead of feeling cold<br>
+Let sunshine into your heart</p>
+<p><strong>Instead of acting crazy chasing things that make you mad</strong><br>
+<strong>Keep your heart ahead, it’ll lead you back to what you have</strong><br>
+<strong>With every step you are closer to the place you need to be</strong></p>
+<p>It’s up to you to let her love you sweetly</p>
+<p>Instead of acting crazy chasing things that make you mad<br>
+Just keep your heart ahead, it’ll lead you back to what you have<br>
+With every step you are closer to the place you need to be<br>
+But it’s up to you to let her love you sweetly</p>
+<p>Instead of feeling bad<br>
+Be glad you got someone to love<br>
+Instead of feeling sad<br>
+Be happy there’s a god above<br>
+Instead of feeling ‘lone<br>
+Remember you are never on your own<br>
+Instead of feeling sad<br>
+Be happy that she’s there at home<br>
+She’s waitin’ for by the phone<br>
+So be glad she all your own</p>
+<p>Get happy…<br>
+Watin’ for you by the telephone…</p>
+<p>Don’t get…</p>
+<p>Back home,</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>lyrics</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2020夏</title>
     <url>/2020/07/16/2020-summer/</url>
     <content><![CDATA[<blockquote>
@@ -441,7 +441,7 @@ Watin’ for you by the telephone…</p>
 <h2 id="7-15-Wed">7.15 (Wed)</h2>
 <p><a href="https://www.bilibili.com/s/video/BV1r7411Z785" target="_blank" rel="noopener">[眼保健操音乐]</a></p>
 <p>读了另一个dataset的论文。</p>
-<p>黄昏时在宿舍周围走了半小时。绿的草木，红白紫黄的花，跑着步的三五成群的人。一切都显得生机勃勃而有条不紊。有一瞬间，我感到久违的空旷和平静，心绪的万千褶皱熨烫平整，思维之树纠结的枝枝叉叉像水中的沙漠玫瑰一样舒展开来。没头没尾地想了很多事，没有结论，但好像自己也没有那么执念于一个结论了。</p>
+<p>黄昏时在宿舍周围走了半小时。绿的草木，红白紫黄的花，跑着步的三五成群的人。一切都显得生机勃勃而有条不紊。有一瞬间，我感到久违的空旷和平静，心绪的万千褶皱熨烫平整，思维之树纠结的枝枝叉叉像水中的沙漠玫瑰一样舒展开来。没头没尾地想了很多事，没有结论，但好像自己也终于没有那么执念于一个结论了。</p>
 <p>清理了冰箱里的过期食物。帮男票咨询了一下怎么在美国看牙。为半年前骑车没停stop sign交了200多刀的交通罚单。从safeway订了早餐麦片、面包、牛奶、挂面、番茄。暂时不打算买零食了。希望接下来一周不要太热。</p>
 <p>早上的meet可以说是一塌糊涂，什么实验都不work，什么结论都没总结出来，脑子完全不转，反应慢得令人窒息。team里的人倒是很给我留面子地没有当面斥责。I guess morning is not the best time for my brain to function properly. 于是我鼓起勇气提出了把morning meet向后shift 2小时。mentor表示我应该早点提（看起来有点不悦）。我当场社死+脚趾抠出整座庞贝城，两周前我还表示自己可以适应这个schedule。但如果一直拖着不提，只怕后面越来越僵硬。长痛不如短痛。</p>
 <blockquote>
