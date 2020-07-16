@@ -99,18 +99,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo Auto Sync</title>
-    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
-    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker cheatsheet</title>
     <url>/2020/07/10/2020-07-08-docker/</url>
     <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
@@ -123,6 +111,18 @@
       </categories>
       <tags>
         <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Auto Sync</title>
+    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
+    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -441,7 +441,7 @@ Watin’ for you by the telephone…</p>
 <h2 id="7-15-Wed">7.15 (Wed)</h2>
 <p><a href="https://www.bilibili.com/s/video/BV1r7411Z785" target="_blank" rel="noopener">[眼保健操音乐]</a></p>
 <p>读了另一个dataset的论文。帮男票咨询了一下怎么在美国看牙。为半年前骑车没停stop sign交了200多刀的交通罚单。</p>
-<p>早上的meet可以说是一塌糊涂，什么实验都不work，什么结论都没总结出来，脑子完全不转，反应慢得令人窒息。team里的人倒是很给我留面子地没有当面斥责。最后我鼓起勇气提出了把morning meet向后shift 2小时。几乎当场社死+脚趾抠出整座庞贝城（两周前我还表示自己可以适应这个schedule），但如果不纠正的话可能今后每周都要面对这种尴尬的局面。对方虽然不太情愿（因为有时差）但还是勉强重新schedule了一个slot。</p>
+<p>早上的meet可以说是一塌糊涂，什么实验都不work，什么结论都没总结出来，脑子完全不转，反应慢得令人窒息。team里的人倒是很给我留面子地没有当面斥责。I guess morning is not the best time for my brain to function properly. 于是我鼓起勇气提出了把morning meet向后shift 2小时。mentor表示我应该早点提（看起来有点不悦）。我当场社死+脚趾抠出整座庞贝城，两周前我还表示自己可以适应这个schedule。自己挖的坑流着泪也要填掉。</p>
 <blockquote>
 <p>牙科恐惧（dental fear）是指对于牙科和接受牙科治疗的恐惧。…他们类似有创伤后压力心理障碍症的人，症状是以前看牙医的创伤经验造成的。…由于害怕接受牙科治疗，他们不计一切代价逃避看牙医。很多害怕看牙医的人会等到得了牙科急症才去看病，像是牙痛或长脓疮的时候。非常害怕看牙医的人往往会经历“逃避的循环”，他们由于恐惧而逃避看牙医，直到得了需要侵入性治疗的牙科急症才去看病，如此又会加强他们对牙科的恐惧。</p>
 <p>—— 创伤后滚雪球式拖延：维基百科“<a href="https://zh.m.wikipedia.org/zh-hans/%E7%89%99%E7%A7%91%E6%81%90%E6%87%BC" target="_blank" rel="noopener">牙科恐惧症</a>”词条</p>
