@@ -194,59 +194,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Centering Google Search and Google Scholar</title>
-    <url>/2020/07/12/2020-07-11-google-search-centering/</url>
-    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
-<table>
-<thead>
-<tr>
-<th>Before</th>
-<th>After</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
-</tr>
-<tr>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
-</tr>
-</tbody>
-</table>
-<a id="more"></a>
-<p>Centering Google Scholar:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-        <tag>tampermonkey</tag>
-        <tag>google</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Typora Paper Night</title>
-    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
-    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
-<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>typora-theme</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Instead -- Madeleine Peyroux</title>
     <url>/2020/07/12/2020-07-12-instead/</url>
     <content><![CDATA[<p>&quot;Instead of trying to win something you never understood<br>
@@ -306,6 +253,22 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>lyrics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Typora Paper Night</title>
+    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
+    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
+<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
@@ -440,7 +403,8 @@ Watin’ for you by the telephone…</p>
 </blockquote>
 <h2 id="7-15-Wed">7.15 (Wed)</h2>
 <p><a href="https://www.bilibili.com/s/video/BV1r7411Z785" target="_blank" rel="noopener">[眼保健操音乐]</a></p>
-<p>读了另一个dataset的论文。帮男票咨询了一下怎么在美国看牙。为半年前骑车没停stop sign交了200多刀的交通罚单。</p>
+<p>读了另一个dataset的论文。</p>
+<p>帮男票咨询了一下怎么在美国看牙。为半年前骑车没停stop sign交了200多刀的交通罚单。家里没零食了，明天早饭恐怕只能红糖汤圆+红茶了。</p>
 <p>早上的meet可以说是一塌糊涂，什么实验都不work，什么结论都没总结出来，脑子完全不转，反应慢得令人窒息。team里的人倒是很给我留面子地没有当面斥责。I guess morning is not the best time for my brain to function properly. 于是我鼓起勇气提出了把morning meet向后shift 2小时。mentor表示我应该早点提（看起来有点不悦）。我当场社死+脚趾抠出整座庞贝城，两周前我还表示自己可以适应这个schedule。自己挖的坑流着泪也要填掉。</p>
 <blockquote>
 <p>牙科恐惧（dental fear）是指对于牙科和接受牙科治疗的恐惧。…他们类似有创伤后压力心理障碍症的人，症状是以前看牙医的创伤经验造成的。…由于害怕接受牙科治疗，他们不计一切代价逃避看牙医。很多害怕看牙医的人会等到得了牙科急症才去看病，像是牙痛或长脓疮的时候。非常害怕看牙医的人往往会经历“逃避的循环”，他们由于恐惧而逃避看牙医，直到得了需要侵入性治疗的牙科急症才去看病，如此又会加强他们对牙科的恐惧。</p>
@@ -522,6 +486,43 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Centering Google Search and Google Scholar</title>
+    <url>/2020/07/12/2020-07-11-google-search-centering/</url>
+    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
+<table>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
+</tr>
+<tr>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<p>Centering Google Scholar:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+        <tag>tampermonkey</tag>
+        <tag>google</tag>
       </tags>
   </entry>
 </search>
