@@ -194,6 +194,22 @@
       </tags>
   </entry>
   <entry>
+    <title>Typora Paper Night</title>
+    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
+    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
+<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>typora-theme</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Centering Google Search and Google Scholar</title>
     <url>/2020/07/12/2020-07-11-google-search-centering/</url>
     <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
@@ -228,22 +244,6 @@
         <tag>css</tag>
         <tag>tampermonkey</tag>
         <tag>google</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Typora Paper Night</title>
-    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
-    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
-<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
@@ -434,13 +434,13 @@ Watin’ for you by the telephone…</p>
   </entry>
   <entry>
     <title>2020夏</title>
-    <url>/2020/07/15/2020-summer/</url>
+    <url>/2020/07/16/2020-summer/</url>
     <content><![CDATA[<blockquote>
 <p>流水账。</p>
 </blockquote>
 <h2 id="7-15-Wed">7.15 (Wed)</h2>
 <p><a href="https://www.bilibili.com/s/video/BV1r7411Z785" target="_blank" rel="noopener">[眼保健操音乐]</a></p>
-<p>读了另一个dataset的论文。</p>
+<p>读了另一个dataset的论文。因为八年前交了200多刀的交通罚单。</p>
 <blockquote>
 <p>牙科恐惧（dental fear）是指对于牙科和接受牙科治疗的恐惧。…他们类似有创伤后压力心理障碍症的人，症状是以前看牙医的创伤经验造成的。…由于害怕接受牙科治疗，他们不计一切代价逃避看牙医。很多害怕看牙医的人会等到得了牙科急症才去看病，像是牙痛或长脓疮的时候。非常害怕看牙医的人往往会经历“逃避的循环”，他们由于恐惧而逃避看牙医，直到得了需要侵入性治疗的牙科急症才去看病，如此又会加强他们对牙科的恐惧。</p>
 <p>—— 创伤后滚雪球式拖延：维基百科“<a href="https://zh.m.wikipedia.org/zh-hans/%E7%89%99%E7%A7%91%E6%81%90%E6%87%BC" target="_blank" rel="noopener">牙科恐惧症</a>”词条</p>
