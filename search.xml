@@ -72,6 +72,21 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker cheatsheet</title>
+    <url>/2020/07/10/2020-07-08-docker/</url>
+    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="Usage">Usage</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Working with multiple GitHub accounts</title>
     <url>/2020/07/12/2020-06-25-multiple-gits/</url>
     <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
@@ -96,21 +111,6 @@
       </categories>
       <tags>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker cheatsheet</title>
-    <url>/2020/07/10/2020-07-08-docker/</url>
-    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
-<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="Usage">Usage</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -155,30 +155,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Typora Auto Numbering</title>
-    <url>/2020/07/12/2020-07-10-typora-auto-number/</url>
-    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
-<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<h2 id="serif">serif</h2>
-<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710193009823.png" alt="image-20200710193009823"></p>
-<a id="more"></a>
-<h2 id="sans-serif">sans-serif</h2>
-<p>GitHub</p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710203832748.png" alt="image-20200710203832748"></p>
-<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710204004740.png" alt="image-20200710204004740"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>typora-theme</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSS for Customized Fonts</title>
     <url>/2020/07/11/2020-07-11-fontface-css/</url>
     <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
@@ -189,8 +165,8 @@
       </categories>
       <tags>
         <tag>typora</tag>
-        <tag>css</tag>
         <tag>font</tag>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
@@ -228,6 +204,30 @@
         <tag>css</tag>
         <tag>tampermonkey</tag>
         <tag>google</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Typora Auto Numbering</title>
+    <url>/2020/07/12/2020-07-10-typora-auto-number/</url>
+    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
+<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<h2 id="serif">serif</h2>
+<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710193009823.png" alt="image-20200710193009823"></p>
+<a id="more"></a>
+<h2 id="sans-serif">sans-serif</h2>
+<p>GitHub</p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710203832748.png" alt="image-20200710203832748"></p>
+<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710204004740.png" alt="image-20200710204004740"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
@@ -441,7 +441,8 @@ Watin’ for you by the telephone…</p>
 <h2 id="7-20-Sun">7.20 (Sun)</h2>
 <p>颓废数日，不知所以。</p>
 <p>所有的人都在劝我弃车保帅。但是我很不想对不起我的mentor。因为他是P教授的学生。我博士入学以来，最大的心愿，就是有一天能够在某个顶级会议的现场再见到P教授，对他说，看呐，今天我终于发表了一篇真正属于自己的工作。当年你没有看错人。我配得上你的那封情真意切的推荐信。</p>
-<p>这么多年来，我甚至不敢给P教授写一封新年祝福邮件。我怕他在回信中问我，</p>
+<p>这么多年来，我甚至不敢给P教授写一封新年祝福邮件。我怕他在回信中问我，最近在做什么topic？导师是谁？</p>
+<p>我甚至不知道我的导师会是谁。更遑论毕业了。</p>
 <h2 id="7-16-Thu">7.16 (Thu)</h2>
 <p>爸爸增强CT的结果出来了：肿瘤没有变大！没耐药！<br>
 这是我本周听到的最好、最令我开心的消息。</p>
