@@ -179,6 +179,21 @@
       </tags>
   </entry>
   <entry>
+    <title>CSS for Customized Fonts</title>
+    <url>/2020/07/11/2020-07-11-fontface-css/</url>
+    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>font</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Centering Google Search and Google Scholar</title>
     <url>/2020/07/12/2020-07-11-google-search-centering/</url>
     <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
@@ -213,21 +228,6 @@
         <tag>css</tag>
         <tag>tampermonkey</tag>
         <tag>google</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSS for Customized Fonts</title>
-    <url>/2020/07/11/2020-07-11-fontface-css/</url>
-    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>font</tag>
       </tags>
   </entry>
   <entry>
@@ -443,7 +443,7 @@ Watin’ for you by the telephone…</p>
 <p>所有人都在劝我弃车保帅。但是我很不想对不起我的mentor。因为他是P教授的学生。</p>
 <p>那一年九月爸爸突然查出癌症扩散，保研无门，我临时决定弃硕申博。家里人说我没良心，实验室大老板冷眼相加，小老板趁火打劫抢一作。是P教授突然出现，帮我反复修改论文，推敲一切不严谨之处，对我说，you are doing impressively well. 那一瞬间我想要嚎啕大哭，这位老教授是三个月以来唯一一位真心夸奖我的人。如果没有他，我绝对不可能在申请前凑齐三封推荐信，更遑论进入现在的学校读博了。</p>
 <p>我博士入学以来，最大的心愿，就是有一天能够在某个顶级会议的现场再见到P教授，对他说，看呐，今天我终于发表了一篇真正属于自己的工作。当年你没有看错人。谢谢你，谢谢你在我人生的至暗时刻出现，你的那句话支撑着我一路走到今天。我终于配得上你当年那封情真意切的推荐信了。</p>
-<p>然而这几年来，我甚至不敢给P教授写一封新年祝福邮件。我怕他在回信中问我，最近在做什么topic？导师是谁？而我甚至不知道我的导师会是谁，更遑论将来要做什么topic，什么时候能毕业了。越来越怕对人说出自己的博士学校，觉得自己配不上对方惊羡的目光。周围的所有人好像都闪闪发亮，而我渐渐地沉下去，头顶的光线一点一点消失，表情由惊愕恐惧过渡到麻木，大脑慢慢缺氧。</p>
+<p>然而几年来，我甚至不敢给P教授写一封新年祝福邮件。我怕他在回信中问我，最近在做什么topic？导师是谁？而我甚至不知道我的导师会是谁，更遑论将来要做什么topic，什么时候能毕业。越来越怕对人说出自己的博士学校，觉得自己配不上对方惊羡的目光。周围的所有人好像都闪闪发亮，而我渐渐地沉下去，头顶的光线一点一点消失，表情由惊愕恐惧过渡到麻木，大脑慢慢缺氧。</p>
 <h2 id="7-16-Thu">7.16 (Thu)</h2>
 <p>爸爸增强CT的结果出来了：肿瘤没有变大！没耐药！<br>
 这是我本周听到的最好、最令我开心的消息。</p>
