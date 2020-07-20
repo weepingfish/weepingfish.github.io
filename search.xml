@@ -99,21 +99,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker cheatsheet</title>
-    <url>/2020/07/10/2020-07-08-docker/</url>
-    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
-<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="Usage">Usage</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo Auto Sync</title>
     <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
     <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
@@ -152,6 +137,21 @@
       <tags>
         <tag>hexo</tag>
         <tag>typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker cheatsheet</title>
+    <url>/2020/07/10/2020-07-08-docker/</url>
+    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="Usage">Usage</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -309,6 +309,109 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
+    <title>2020夏</title>
+    <url>/2020/07/20/2020-summer/</url>
+    <content><![CDATA[<blockquote>
+<p>流水账。</p>
+</blockquote>
+<h2 id="7-20-Sun">7.20 (Sun)</h2>
+<p>颓废数日，不知所以。</p>
+<p>所有的人都在劝我弃车保帅。但是我很不想对不起我的mentor。因为他是P教授的学生。我博士入学以来，最大的心愿，就是有一天能够在某个顶级会议的现场再见到P教授，对他说，看呐，今天我终于发表了一篇真正属于自己的工作。当年你没有看错人。我配得上你的那封情真意切的推荐信。</p>
+<p>这么多年来，我甚至不敢给P教授写一封新年祝福邮件。我怕他在回信中问我，最近在做什么topic？导师是谁？</p>
+<p>我甚至不知道我的导师会是谁。更遑论将来会做什么topic，什么时候能毕业了。</p>
+<p>耻辱。这对于我校PhD来说，是一种耻辱。越来越怕对人说出自己的博士学校，觉得自己配不上对方惊羡的目光。觉得周围的所有人都闪闪发亮，而我渐渐地下沉下去，手指伸向水面，身体渐渐</p>
+<h2 id="7-16-Thu">7.16 (Thu)</h2>
+<p>爸爸增强CT的结果出来了：肿瘤没有变大！没耐药！<br>
+这是我本周听到的最好、最令我开心的消息。</p>
+<h2 id="7-15-Wed">7.15 (Wed)</h2>
+<p><a href="https://www.bilibili.com/s/video/BV1r7411Z785" target="_blank" rel="noopener">[眼保健操音乐]</a></p>
+<p>读了另一个dataset的论文。</p>
+<p>黄昏时在宿舍周围走了半小时。没头没尾地想了很多事，没有结论，但好像也终于没有那么执念于一个结论了。</p>
+<p>清理了冰箱里的过期食物。帮男票咨询了一下怎么在美国看牙。为半年前骑车没停stop sign交了200多刀的交通罚单。从safeway订了早餐麦片、面包、牛奶、挂面、番茄。暂时不打算买零食了。希望接下来一周不要太热。</p>
+<p>早上的meet可以说是一塌糊涂，什么实验都不work，什么结论都没总结出来，脑子完全不转，反应慢得令人窒息。team里的人倒是很给我留面子地没有当面斥责。I guess morning is not the best time for my brain to function properly. 于是我鼓起勇气提出了把morning meet向后shift 2小时。mentor表示我应该早点提（看起来有点不悦）。我当场社死+脚趾抠出三室一厅，两周前我还表示自己可以适应这个schedule。但如果一直拖着不提，只怕后面越来越僵硬。长痛不如短痛。</p>
+<blockquote>
+<p>牙科恐惧（dental fear）是指对于牙科和接受牙科治疗的恐惧。…他们类似有创伤后压力心理障碍症的人，症状是以前看牙医的创伤经验造成的。…由于害怕接受牙科治疗，他们不计一切代价逃避看牙医。很多害怕看牙医的人会等到得了牙科急症才去看病，像是牙痛或长脓疮的时候。非常害怕看牙医的人往往会经历“逃避的循环”，他们由于恐惧而逃避看牙医，直到得了需要侵入性治疗的牙科急症才去看病，如此又会加强他们对牙科的恐惧。</p>
+<p>—— 创伤后滚雪球式拖延：维基百科“<a href="https://zh.m.wikipedia.org/zh-hans/%E7%89%99%E7%A7%91%E6%81%90%E6%87%BC" target="_blank" rel="noopener">牙科恐惧症</a>”词条</p>
+</blockquote>
+<h2 id="7-14-Tue">7.14 (Tue)</h2>
+<p>我就想知道有多少人像我一样，晚上是全天唯一清醒的时段 [微笑]<br>
+认真考虑买空调。<a href="https://www.amazon.com/Midea-Portable-Conditioner-Dehumidifier-Smartphone/dp/B088LTVMDL/ref=sr_1_2_sspa?dchild=1&amp;keywords=air%2Bconditioner&amp;qid=1594614691&amp;sr=8-2-spons&amp;spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUFXVUVUMFAxSkhSMTUmZW5jcnlwdGVkSWQ9QTAyMTU4MjUzTTdTUkhQNjRPNkhZJmVuY3J5cHRlZEFkSWQ9QTAxNTA0NjcyNExUU1JZNkJQSDYzJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ&amp;th=1" target="_blank" rel="noopener">[贵但下周一能到货的]</a> <a href="https://www.amazon.com/MAP08R1CWT-Portable-Conditioner-Dehumidifier-control/dp/B087CQVC9G?ref_=ast_sto_dp" target="_blank" rel="noopener">[价格适中但不知啥时发货的]</a></p>
+<blockquote>
+<p>“他坐了五十年的牢。五十年啊，成了井底之蛙。他念过书，在狱中有地位，出狱就成了废人。监狱是个怪地方：<strong>起先你恨它，然后习惯它，更久后，你不能没有它。这就是体制化。</strong>”</p>
+<p>—— 《肖申克的救赎》</p>
+</blockquote>
+<h2 id="7-12-Sun">7.12 (Sun)</h2>
+<p>又是一事无成的一天。不知道是不是因为过度熬夜，整个人昏昏沉沉，完全无法集中注意力。晚上的时候感觉头晕晕的。</p>
+<p>看了一篇讲年轻人熬夜然后脑溢血的文章。几乎一点前兆都没有，整个过程发生在一瞬间。太可怕了。。。还是命比较重要。</p>
+<p>厚着脸皮给mentor请了假，说自己不舒服，希望推迟第二天的meet。对方非常nice地答应了。感激涕零。</p>
+<p>明天一定要早早起来干活，重新做人，不要辜负mentor的信任。</p>
+<h2 id="7-11-Sat">7.11 (Sat)</h2>
+<p>There have been so many people repeatedly telling me what I should/shouldn’t do, but so few asking how I feel and what I want. Sometimes I cannot (or dare not) tell the difference between “I’m excited about it” and “I’m good at it and it’s not painful”. It’s kind of like the difference between an addictable chocolate cake and a healthy veggie salad. If I know it’s actually the latter one, in most cases I just lie to myself and pretend it’s the former one. If someone asks for a frank answer, I would say “I like it”, which means that thing is beneficial but not necessarily enjoyable to me.</p>
+<p>爸爸说下周三要做增强CT。如果肿瘤的尺寸/密度没变大，就证明还没有耐药。</p>
+<h2 id="7-10-Fri">7.10 (Fri)</h2>
+<p>本周第三次强迫性刷夜。头又涨又疼又晕。仿佛灵魂出窍，活气散尽，只留下一副钝滞的皮囊。</p>
+<p>对FedEx客服发了脾气。送货出了问题，不但死不认错，还强词夺理把责任全推到顾客身上，东拉西扯叨逼叨半天。那一刻我很愤怒，其程度甚至远超于糟糕的客户服务可以导致的范围。或许这不过是近期一系列魔幻现实主义事件之后的最后一根稻草。我应该为我暴躁的态度道歉 —— 毕竟那其中夹杂的相当一部分怨气并不是一个小小客服的错。往阴暗了想，我不过是在挑软柿子撒气罢了。</p>
+<p>晚上想写一个会议总结，结果折腾了仨小时hexo+typora。我没救了。</p>
+<p>最后还是写完了超长一大段。老板估计懒得看，就当给自己做个备忘吧。</p>
+<h2 id="7-9">7.9</h2>
+<p>谁能告诉我没有SSN怎么报税啊啊啊！！！</p>
+<p>7.10补充：被拉入了一个无证报税群，据说由于第一年是IRS欠我们钱，所以即使延迟报税也不会有罚款。</p>
+<h2 id="7-8">7.8</h2>
+<p>The only useful thing I learned from our school is how to write a decent email/letter without a single sentence of concrete commitment.</p>
+<h2 id="7-6">7.6</h2>
+<p>Stayed up for the entire night and finally finished the slides for my internship meeting. Rushing overnight is literally a nightmare.</p>
+<p>When I woke up in the afternoon, I was shocked by the gov news saying that all F1 intl. students must depart the U.S. if they only take online courses. I guess the main purpose was to pressure schools to open in fall. This is clearly malicious and inhumane. Not even stupid.</p>
+<p>Accidentally visited Trump’s Twitter page and was astonished by his arrogant, unscientific, and the amount of hostility/blaming posted towards China. Is this the best thing a U.S. president can do to disguise his incapability of handling the pandemic?</p>
+<h2 id="7-5">7.5</h2>
+<p>One of my friends cooked food for me today. She made kimchi fried rice and fried eggs. This is the first time when someone outside my family offers to cook for me. We spent 3-4 hours under a tree near my apartment, and then fetched coffee together from Starbucks.</p>
+<h2 id="7-3">7.3</h2>
+<p>体重再创历史新高。心态崩了。</p>
+<p>和一位学长电话聊了一下现在的实习项目。平时我们几乎没有交流，之前更是因为各种破事打扰了对方数次，因此我很担心这样贸然请求讨论会不会显得太过冒昧厚颜，但最后还是横下心去问了。很意外，学长对我的项目很感兴趣，给了我许多具体可行的建议，表示可以进行长期的讨论；之后认真听完了我最大的几个焦虑源，虽然没有给出解决方案，但中肯地指出了他观察到的我身上存在的一些问题。我非常感激，在商业互吹泛滥，人人面热心冷的美国，能听到有人坦诚地指出自己的缺点实在是太难得了。</p>
+<p>一点想法：可以敏感但不能神经质；培养发散性思维。</p>
+<h2 id="7-2：好好活着">7.2：好好活着</h2>
+<p>最后还是下定决心和导师推迟了本周的meet并改成了双周一见。发slack的时候浑身每一个毛孔都透着尴尬。</p>
+<p>昨天晚上给爸爸打了个电话。爸爸说，他这周停了靶向药，所以身上看起来有些虚胖。我赶紧恭维说哪里虚胖了，根本看不出来。他说，我告诉过你很多次为什么停了靶向药就会虚胖，你还记得吗？我说不是因为停了之后胃口好吗。他停顿片刻，然后非常失望地说，你果然完全不记得了。这是因为药里有利尿剂，停药之后排尿会受影响，所以才会浮肿虚胖。我感到很羞愧，嘴上却嬉皮笑脸地说，你这次说了我以后不就记住了吗。</p>
+<p>我知道他是真的很失望。要特别叮嘱了才能记住又有什么意思呢。我真混蛋啊。</p>
+<p>靶向药的副作用越来越轻了。这并不是一个好消息 — 当病人的身体彻底耐药，就必须换另一种靶向药，如此往复循环；到换无可换之后，还有免疫疗法，但风险堪比赌博。没有人能预测什么时候耐药，免疫力疗法有什么结果，更没有人能预测病人能维持多久。每隔一段时间会有一次CT检查，中间的每一天都是在等和熬。</p>
+<p>晚上断断续续跑了一公里。大概，现在唯一能做的就是好好活着吧。</p>
+<h2 id="7-1：停滞的一年">7.1：停滞的一年</h2>
+<p>经统计，最近几天在家的极限工作时长大概是每天8-9h。</p>
+<p>我对这个数据并不乐观，因为最近其实只是在针对一个数据集搭建infrastructure，并没有真正开始research。高效搬砖不难，难的是专注于解决open problem：前者是一个不断获取虚假正反馈的过程，而后者才是科研的核心竞争力。</p>
+<p>很慌。后天又要和实验室导师meet，然而这周什么都没干。不知道要怎么向她交代。她那么忙，浪费她的时间会让我觉得自己在犯罪。</p>
+<p>整整一年，我的时光好像停滞了。在几个实验室之间兜兜转转，无论是科研还是说话办事，都毫无长进，而身边的人并没有站在原地等着我。</p>
+<h2 id="6-26：开始一个肥宅的自救之旅">6.26：开始一个肥宅的自救之旅</h2>
+<p>这些天看到一个blog：<a href="https://drustz.com/posts/2020/05/29/Capsules/#%E8%AE%B0%E5%BD%95%E8%87%AA%E5%B7%B1%E7%9A%84%E6%97%B6%E9%97%B4" target="_blank" rel="noopener">记录自己的时间</a>，感到深受启发。</p>
+<p>开始在Google Sheet记录时间，发现自己的working hours少得惨不忍睹，哎。。。</p>
+<p>不过毕竟实习开始了，还是要认真工作的，就算实际工作时长达不到8h/d，productivity起码要对得起40h/wk的payroll。</p>
+<p>如果实习每周40h，实验室每周30h，那么每天平均要工作10h。假设睡觉8h，每天还可以放松6h。这算是一个可以接受的工作状态。</p>
+<p>考虑到每周一实习meet，每周五实验室meet，最划算的操作方式似乎是周五、六、日、一干实习，二、三、四做实验室。当然这只是理想情况，实际情况或许是a mix of shit。</p>
+<p>预计每天能读一篇paper，方向取决于当天做的topic是实习还是实验室。为了避免当天纠结找文章，本周要看的paper应该上周末提前找好。</p>
+<p>尝试使用Google Tasks记录日计划，每次向前看3天。考虑配合Google Sheet使用。</p>
+<p>准备买体重秤，去实验室取回跑鞋，尽量多跑步。</p>
+<blockquote>
+<p>P.S. 在服务器上加了一个后台程序，每隔10s从存blog的repo fetch一下，如果有diff就pull并重新deploy。这个蠢办法初步实现了用github的web界面写blog并自动发布，优势在于可以实现多终端（手机，ipad，etc）写博客。</p>
+<p>P.P.S. 就在线编辑器而言，gitbooks的编辑体验完爆github，甚至支持inline math，而且link share也很方便；硬伤是不支持discussion，所以弃了。</p>
+</blockquote>
+<h2 id="6-25：序-·-深夜乱语">6.25：序 · 深夜乱语</h2>
+<p>这一天我终于下定决心搭建了这个博客。<a href="https://github.com/cofess/hexo-theme-pure" target="_blank" rel="noopener">主题</a>很清爽，我很满意。美中不足是尚不支持公式渲染和文章目录，不过先不管了，之后再加吧。</p>
+<p>博士入学一年，我见到了太多真正意义上优秀的人。看过一些人本科的经历，各种活动眼花缭乱，偶尔甚至还加上一个双学位，而其人精神丰朗，待人接物如沐春风，身上找不到那种我在本科司空见惯的自我保护性格，便时常产生一种恍惚感 —— 我或许读了一个假的大学，曾经过分的努力不过是在play the game，本来毫无意义。毕业了，这场内卷游戏就像庞氏骗局一样灰飞烟灭，而曾经的入局者都输掉了年轻的激情和时间。</p>
+<p>如果曾经的内卷游戏还多少提供给我一点简单易得的reward，像驴子前方的那根胡萝卜一样钓着我向前走，那么现在呢。读了博士，进入了一场全新的游戏，reward的获取难度、observation的复杂程度都数倍于从前。残酷之处在于，如果explore不到一条适合自己的路线，就永远只能在低谷打转。而人不是机器，没有无限的时间，会因为缺少reward而疲惫沮丧、自我怀疑，甚至陷入矛盾的怪圈：有时怀疑自己根本不擅长科研，却又愈发希望能向同行和导师证明自己；厌倦了这种矛盾的卑微感，却又身不由己地被项目的进程推着一天天地走下去。</p>
+<p>“实在不行，你还可以拿个master走人嘛。当然我没有建议你这样做；我只是觉得这是一个可行的选项，压力不用那么大。”</p>
+<p>虽然我已经开始怀疑科研是否是一场新的庞氏骗局，但还是打算最后再垂死挣扎一下。权当作是祛魅吧（笑）。</p>
+<blockquote>
+<p>而世之奇伟、瑰怪，非常之观，常在于险远，而人之所罕至焉，故非有志者不能至也。有志矣，不随以止也，然力不足者，亦不能至也。有志与力，而又不随以怠，至于幽暗昏惑而无物以相之，亦不能至也。然力足以至焉，于人为可讥，而在己为有悔；尽吾志也而不能至者，可以无悔矣，其孰能讥之乎？此余之所得也！</p>
+<p>—— 王安石《游褒禅山记》</p>
+</blockquote>
+<p>深夜强行给自己灌一碗毒鸡汤，明早还是要滚起来实习。</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2020夏 | 战拖打卡</title>
     <url>/2020/07/14/2020-summer-no-procrastination/</url>
     <content><![CDATA[<p><img src="/2020/07/14/2020-summer-no-procrastination/is_it_worth_the_time.png" alt="img"></p>
@@ -430,109 +533,6 @@ Watin’ for you by the telephone…</p>
       <tags>
         <tag>diary</tag>
         <tag>procrastination</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2020夏</title>
-    <url>/2020/07/20/2020-summer/</url>
-    <content><![CDATA[<blockquote>
-<p>流水账。</p>
-</blockquote>
-<h2 id="7-20-Sun">7.20 (Sun)</h2>
-<p>颓废数日，不知所以。</p>
-<p>所有的人都在劝我弃车保帅。但是我很不想对不起我的mentor。因为他是P教授的学生。我博士入学以来，最大的心愿，就是有一天能够在某个顶级会议的现场再见到P教授，对他说，看呐，今天我终于发表了一篇真正属于自己的工作。当年你没有看错人。我配得上你的那封情真意切的推荐信。</p>
-<p>这么多年来，我甚至不敢给P教授写一封新年祝福邮件。我怕他在回信中问我，最近在做什么topic？导师是谁？</p>
-<p>我甚至不知道我的导师会是谁。更遑论将来会做什么topic，什么时候能毕业了。</p>
-<p>耻辱。这对于我校PhD来说，是一种耻辱。越来越怕对人说出自己的博士学校，觉得自己配不上对方惊羡的目光。觉得周围的所有人都闪闪发亮，而我渐渐地下沉下去，手指伸向水面，</p>
-<h2 id="7-16-Thu">7.16 (Thu)</h2>
-<p>爸爸增强CT的结果出来了：肿瘤没有变大！没耐药！<br>
-这是我本周听到的最好、最令我开心的消息。</p>
-<h2 id="7-15-Wed">7.15 (Wed)</h2>
-<p><a href="https://www.bilibili.com/s/video/BV1r7411Z785" target="_blank" rel="noopener">[眼保健操音乐]</a></p>
-<p>读了另一个dataset的论文。</p>
-<p>黄昏时在宿舍周围走了半小时。没头没尾地想了很多事，没有结论，但好像也终于没有那么执念于一个结论了。</p>
-<p>清理了冰箱里的过期食物。帮男票咨询了一下怎么在美国看牙。为半年前骑车没停stop sign交了200多刀的交通罚单。从safeway订了早餐麦片、面包、牛奶、挂面、番茄。暂时不打算买零食了。希望接下来一周不要太热。</p>
-<p>早上的meet可以说是一塌糊涂，什么实验都不work，什么结论都没总结出来，脑子完全不转，反应慢得令人窒息。team里的人倒是很给我留面子地没有当面斥责。I guess morning is not the best time for my brain to function properly. 于是我鼓起勇气提出了把morning meet向后shift 2小时。mentor表示我应该早点提（看起来有点不悦）。我当场社死+脚趾抠出三室一厅，两周前我还表示自己可以适应这个schedule。但如果一直拖着不提，只怕后面越来越僵硬。长痛不如短痛。</p>
-<blockquote>
-<p>牙科恐惧（dental fear）是指对于牙科和接受牙科治疗的恐惧。…他们类似有创伤后压力心理障碍症的人，症状是以前看牙医的创伤经验造成的。…由于害怕接受牙科治疗，他们不计一切代价逃避看牙医。很多害怕看牙医的人会等到得了牙科急症才去看病，像是牙痛或长脓疮的时候。非常害怕看牙医的人往往会经历“逃避的循环”，他们由于恐惧而逃避看牙医，直到得了需要侵入性治疗的牙科急症才去看病，如此又会加强他们对牙科的恐惧。</p>
-<p>—— 创伤后滚雪球式拖延：维基百科“<a href="https://zh.m.wikipedia.org/zh-hans/%E7%89%99%E7%A7%91%E6%81%90%E6%87%BC" target="_blank" rel="noopener">牙科恐惧症</a>”词条</p>
-</blockquote>
-<h2 id="7-14-Tue">7.14 (Tue)</h2>
-<p>我就想知道有多少人像我一样，晚上是全天唯一清醒的时段 [微笑]<br>
-认真考虑买空调。<a href="https://www.amazon.com/Midea-Portable-Conditioner-Dehumidifier-Smartphone/dp/B088LTVMDL/ref=sr_1_2_sspa?dchild=1&amp;keywords=air%2Bconditioner&amp;qid=1594614691&amp;sr=8-2-spons&amp;spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUFXVUVUMFAxSkhSMTUmZW5jcnlwdGVkSWQ9QTAyMTU4MjUzTTdTUkhQNjRPNkhZJmVuY3J5cHRlZEFkSWQ9QTAxNTA0NjcyNExUU1JZNkJQSDYzJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ&amp;th=1" target="_blank" rel="noopener">[贵但下周一能到货的]</a> <a href="https://www.amazon.com/MAP08R1CWT-Portable-Conditioner-Dehumidifier-control/dp/B087CQVC9G?ref_=ast_sto_dp" target="_blank" rel="noopener">[价格适中但不知啥时发货的]</a></p>
-<blockquote>
-<p>“他坐了五十年的牢。五十年啊，成了井底之蛙。他念过书，在狱中有地位，出狱就成了废人。监狱是个怪地方：<strong>起先你恨它，然后习惯它，更久后，你不能没有它。这就是体制化。</strong>”</p>
-<p>—— 《肖申克的救赎》</p>
-</blockquote>
-<h2 id="7-12-Sun">7.12 (Sun)</h2>
-<p>又是一事无成的一天。不知道是不是因为过度熬夜，整个人昏昏沉沉，完全无法集中注意力。晚上的时候感觉头晕晕的。</p>
-<p>看了一篇讲年轻人熬夜然后脑溢血的文章。几乎一点前兆都没有，整个过程发生在一瞬间。太可怕了。。。还是命比较重要。</p>
-<p>厚着脸皮给mentor请了假，说自己不舒服，希望推迟第二天的meet。对方非常nice地答应了。感激涕零。</p>
-<p>明天一定要早早起来干活，重新做人，不要辜负mentor的信任。</p>
-<h2 id="7-11-Sat">7.11 (Sat)</h2>
-<p>There have been so many people repeatedly telling me what I should/shouldn’t do, but so few asking how I feel and what I want. Sometimes I cannot (or dare not) tell the difference between “I’m excited about it” and “I’m good at it and it’s not painful”. It’s kind of like the difference between an addictable chocolate cake and a healthy veggie salad. If I know it’s actually the latter one, in most cases I just lie to myself and pretend it’s the former one. If someone asks for a frank answer, I would say “I like it”, which means that thing is beneficial but not necessarily enjoyable to me.</p>
-<p>爸爸说下周三要做增强CT。如果肿瘤的尺寸/密度没变大，就证明还没有耐药。</p>
-<h2 id="7-10-Fri">7.10 (Fri)</h2>
-<p>本周第三次强迫性刷夜。头又涨又疼又晕。仿佛灵魂出窍，活气散尽，只留下一副钝滞的皮囊。</p>
-<p>对FedEx客服发了脾气。送货出了问题，不但死不认错，还强词夺理把责任全推到顾客身上，东拉西扯叨逼叨半天。那一刻我很愤怒，其程度甚至远超于糟糕的客户服务可以导致的范围。或许这不过是近期一系列魔幻现实主义事件之后的最后一根稻草。我应该为我暴躁的态度道歉 —— 毕竟那其中夹杂的相当一部分怨气并不是一个小小客服的错。往阴暗了想，我不过是在挑软柿子撒气罢了。</p>
-<p>晚上想写一个会议总结，结果折腾了仨小时hexo+typora。我没救了。</p>
-<p>最后还是写完了超长一大段。老板估计懒得看，就当给自己做个备忘吧。</p>
-<h2 id="7-9">7.9</h2>
-<p>谁能告诉我没有SSN怎么报税啊啊啊！！！</p>
-<p>7.10补充：被拉入了一个无证报税群，据说由于第一年是IRS欠我们钱，所以即使延迟报税也不会有罚款。</p>
-<h2 id="7-8">7.8</h2>
-<p>The only useful thing I learned from our school is how to write a decent email/letter without a single sentence of concrete commitment.</p>
-<h2 id="7-6">7.6</h2>
-<p>Stayed up for the entire night and finally finished the slides for my internship meeting. Rushing overnight is literally a nightmare.</p>
-<p>When I woke up in the afternoon, I was shocked by the gov news saying that all F1 intl. students must depart the U.S. if they only take online courses. I guess the main purpose was to pressure schools to open in fall. This is clearly malicious and inhumane. Not even stupid.</p>
-<p>Accidentally visited Trump’s Twitter page and was astonished by his arrogant, unscientific, and the amount of hostility/blaming posted towards China. Is this the best thing a U.S. president can do to disguise his incapability of handling the pandemic?</p>
-<h2 id="7-5">7.5</h2>
-<p>One of my friends cooked food for me today. She made kimchi fried rice and fried eggs. This is the first time when someone outside my family offers to cook for me. We spent 3-4 hours under a tree near my apartment, and then fetched coffee together from Starbucks.</p>
-<h2 id="7-3">7.3</h2>
-<p>体重再创历史新高。心态崩了。</p>
-<p>和一位学长电话聊了一下现在的实习项目。平时我们几乎没有交流，之前更是因为各种破事打扰了对方数次，因此我很担心这样贸然请求讨论会不会显得太过冒昧厚颜，但最后还是横下心去问了。很意外，学长对我的项目很感兴趣，给了我许多具体可行的建议，表示可以进行长期的讨论；之后认真听完了我最大的几个焦虑源，虽然没有给出解决方案，但中肯地指出了他观察到的我身上存在的一些问题。我非常感激，在商业互吹泛滥，人人面热心冷的美国，能听到有人坦诚地指出自己的缺点实在是太难得了。</p>
-<p>一点想法：可以敏感但不能神经质；培养发散性思维。</p>
-<h2 id="7-2：好好活着">7.2：好好活着</h2>
-<p>最后还是下定决心和导师推迟了本周的meet并改成了双周一见。发slack的时候浑身每一个毛孔都透着尴尬。</p>
-<p>昨天晚上给爸爸打了个电话。爸爸说，他这周停了靶向药，所以身上看起来有些虚胖。我赶紧恭维说哪里虚胖了，根本看不出来。他说，我告诉过你很多次为什么停了靶向药就会虚胖，你还记得吗？我说不是因为停了之后胃口好吗。他停顿片刻，然后非常失望地说，你果然完全不记得了。这是因为药里有利尿剂，停药之后排尿会受影响，所以才会浮肿虚胖。我感到很羞愧，嘴上却嬉皮笑脸地说，你这次说了我以后不就记住了吗。</p>
-<p>我知道他是真的很失望。要特别叮嘱了才能记住又有什么意思呢。我真混蛋啊。</p>
-<p>靶向药的副作用越来越轻了。这并不是一个好消息 — 当病人的身体彻底耐药，就必须换另一种靶向药，如此往复循环；到换无可换之后，还有免疫疗法，但风险堪比赌博。没有人能预测什么时候耐药，免疫力疗法有什么结果，更没有人能预测病人能维持多久。每隔一段时间会有一次CT检查，中间的每一天都是在等和熬。</p>
-<p>晚上断断续续跑了一公里。大概，现在唯一能做的就是好好活着吧。</p>
-<h2 id="7-1：停滞的一年">7.1：停滞的一年</h2>
-<p>经统计，最近几天在家的极限工作时长大概是每天8-9h。</p>
-<p>我对这个数据并不乐观，因为最近其实只是在针对一个数据集搭建infrastructure，并没有真正开始research。高效搬砖不难，难的是专注于解决open problem：前者是一个不断获取虚假正反馈的过程，而后者才是科研的核心竞争力。</p>
-<p>很慌。后天又要和实验室导师meet，然而这周什么都没干。不知道要怎么向她交代。她那么忙，浪费她的时间会让我觉得自己在犯罪。</p>
-<p>整整一年，我的时光好像停滞了。在几个实验室之间兜兜转转，无论是科研还是说话办事，都毫无长进，而身边的人并没有站在原地等着我。</p>
-<h2 id="6-26：开始一个肥宅的自救之旅">6.26：开始一个肥宅的自救之旅</h2>
-<p>这些天看到一个blog：<a href="https://drustz.com/posts/2020/05/29/Capsules/#%E8%AE%B0%E5%BD%95%E8%87%AA%E5%B7%B1%E7%9A%84%E6%97%B6%E9%97%B4" target="_blank" rel="noopener">记录自己的时间</a>，感到深受启发。</p>
-<p>开始在Google Sheet记录时间，发现自己的working hours少得惨不忍睹，哎。。。</p>
-<p>不过毕竟实习开始了，还是要认真工作的，就算实际工作时长达不到8h/d，productivity起码要对得起40h/wk的payroll。</p>
-<p>如果实习每周40h，实验室每周30h，那么每天平均要工作10h。假设睡觉8h，每天还可以放松6h。这算是一个可以接受的工作状态。</p>
-<p>考虑到每周一实习meet，每周五实验室meet，最划算的操作方式似乎是周五、六、日、一干实习，二、三、四做实验室。当然这只是理想情况，实际情况或许是a mix of shit。</p>
-<p>预计每天能读一篇paper，方向取决于当天做的topic是实习还是实验室。为了避免当天纠结找文章，本周要看的paper应该上周末提前找好。</p>
-<p>尝试使用Google Tasks记录日计划，每次向前看3天。考虑配合Google Sheet使用。</p>
-<p>准备买体重秤，去实验室取回跑鞋，尽量多跑步。</p>
-<blockquote>
-<p>P.S. 在服务器上加了一个后台程序，每隔10s从存blog的repo fetch一下，如果有diff就pull并重新deploy。这个蠢办法初步实现了用github的web界面写blog并自动发布，优势在于可以实现多终端（手机，ipad，etc）写博客。</p>
-<p>P.P.S. 就在线编辑器而言，gitbooks的编辑体验完爆github，甚至支持inline math，而且link share也很方便；硬伤是不支持discussion，所以弃了。</p>
-</blockquote>
-<h2 id="6-25：序-·-深夜乱语">6.25：序 · 深夜乱语</h2>
-<p>这一天我终于下定决心搭建了这个博客。<a href="https://github.com/cofess/hexo-theme-pure" target="_blank" rel="noopener">主题</a>很清爽，我很满意。美中不足是尚不支持公式渲染和文章目录，不过先不管了，之后再加吧。</p>
-<p>博士入学一年，我见到了太多真正意义上优秀的人。看过一些人本科的经历，各种活动眼花缭乱，偶尔甚至还加上一个双学位，而其人精神丰朗，待人接物如沐春风，身上找不到那种我在本科司空见惯的自我保护性格，便时常产生一种恍惚感 —— 我或许读了一个假的大学，曾经过分的努力不过是在play the game，本来毫无意义。毕业了，这场内卷游戏就像庞氏骗局一样灰飞烟灭，而曾经的入局者都输掉了年轻的激情和时间。</p>
-<p>如果曾经的内卷游戏还多少提供给我一点简单易得的reward，像驴子前方的那根胡萝卜一样钓着我向前走，那么现在呢。读了博士，进入了一场全新的游戏，reward的获取难度、observation的复杂程度都数倍于从前。残酷之处在于，如果explore不到一条适合自己的路线，就永远只能在低谷打转。而人不是机器，没有无限的时间，会因为缺少reward而疲惫沮丧、自我怀疑，甚至陷入矛盾的怪圈：有时怀疑自己根本不擅长科研，却又愈发希望能向同行和导师证明自己；厌倦了这种矛盾的卑微感，却又身不由己地被项目的进程推着一天天地走下去。</p>
-<p>“实在不行，你还可以拿个master走人嘛。当然我没有建议你这样做；我只是觉得这是一个可行的选项，压力不用那么大。”</p>
-<p>虽然我已经开始怀疑科研是否是一场新的庞氏骗局，但还是打算最后再垂死挣扎一下。权当作是祛魅吧（笑）。</p>
-<blockquote>
-<p>而世之奇伟、瑰怪，非常之观，常在于险远，而人之所罕至焉，故非有志者不能至也。有志矣，不随以止也，然力不足者，亦不能至也。有志与力，而又不随以怠，至于幽暗昏惑而无物以相之，亦不能至也。然力足以至焉，于人为可讥，而在己为有悔；尽吾志也而不能至者，可以无悔矣，其孰能讥之乎？此余之所得也！</p>
-<p>—— 王安石《游褒禅山记》</p>
-</blockquote>
-<p>深夜强行给自己灌一碗毒鸡汤，明早还是要滚起来实习。</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>diary</tag>
       </tags>
   </entry>
 </search>
