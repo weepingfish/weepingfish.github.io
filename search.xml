@@ -114,15 +114,32 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo Auto Sync</title>
-    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
-    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+    <title>Inserting images into Hexo posts with Typora</title>
+    <url>/2020/07/12/2020-07-10-hexo-image/</url>
+    <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
+<h2 id="Typora">Typora</h2>
+<p>In Preferences:</p>
+<p><img src="/2020/07/12/2020-07-10-hexo-image/image-20200710205313639.png" alt="image-20200710205313639"></p>
+<p>File structure:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo&#x2F;</span><br><span class="line">  source&#x2F;</span><br><span class="line">    _posts&#x2F;</span><br><span class="line">      some-post.md</span><br><span class="line">      some-post&#x2F;</span><br><span class="line">        image.png</span><br></pre></td></tr></table></figure>
+<p>In <code>some-post.md</code>:</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt</span>](<span class="link">some-post/image.png</span>)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="Hexo">Hexo</h2>
+<p>In <code>hexo/_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>In hexo root folder:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-asset-link</span><br></pre></td></tr></table></figure>
+<p>In <code>node_modules/hexo-asset-link/index.js</code> :</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// strip domain</span></span><br><span class="line">path_html = path_html.replace(path_html.split(<span class="string">"/"</span>)[<span class="number">0</span>], <span class="string">""</span>);</span><br><span class="line"><span class="comment">// image path in rendered HTML:</span></span><br><span class="line"><span class="comment">// /YYYY/MM/DD/some-post/image.png</span></span><br></pre></td></tr></table></figure>
+<p>This will generate absolute paths for the images in rendered HTML (instead of relative path), which is useful when contents of a post are also displayed from the homepage (which lies in a different folder).</p>
+]]></content>
       <categories>
         <category>tech</category>
       </categories>
       <tags>
         <tag>hexo</tag>
+        <tag>typora</tag>
       </tags>
   </entry>
   <entry>
@@ -147,6 +164,18 @@
         <tag>typora</tag>
         <tag>css</tag>
         <tag>typora-theme</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Auto Sync</title>
+    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
+    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -215,35 +244,6 @@
         <tag>typora</tag>
         <tag>css</tag>
         <tag>typora-theme</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Inserting images into Hexo posts with Typora</title>
-    <url>/2020/07/12/2020-07-10-hexo-image/</url>
-    <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
-<h2 id="Typora">Typora</h2>
-<p>In Preferences:</p>
-<p><img src="/2020/07/12/2020-07-10-hexo-image/image-20200710205313639.png" alt="image-20200710205313639"></p>
-<p>File structure:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo&#x2F;</span><br><span class="line">  source&#x2F;</span><br><span class="line">    _posts&#x2F;</span><br><span class="line">      some-post.md</span><br><span class="line">      some-post&#x2F;</span><br><span class="line">        image.png</span><br></pre></td></tr></table></figure>
-<p>In <code>some-post.md</code>:</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt</span>](<span class="link">some-post/image.png</span>)</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="Hexo">Hexo</h2>
-<p>In <code>hexo/_config.yml</code></p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>In hexo root folder:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-asset-link</span><br></pre></td></tr></table></figure>
-<p>In <code>node_modules/hexo-asset-link/index.js</code> :</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// strip domain</span></span><br><span class="line">path_html = path_html.replace(path_html.split(<span class="string">"/"</span>)[<span class="number">0</span>], <span class="string">""</span>);</span><br><span class="line"><span class="comment">// image path in rendered HTML:</span></span><br><span class="line"><span class="comment">// /YYYY/MM/DD/some-post/image.png</span></span><br></pre></td></tr></table></figure>
-<p>This will generate absolute paths for the images in rendered HTML (instead of relative path), which is useful when contents of a post are also displayed from the homepage (which lies in a different folder).</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>typora</tag>
       </tags>
   </entry>
   <entry>
@@ -443,7 +443,7 @@ Watin’ for you by the telephone…</p>
 <p>所有人都在劝我弃车保帅。但是我很不想对不起我的mentor。因为他是P教授的学生。</p>
 <p>那一年九月爸爸突然查出癌症扩散，保研无门，我临时决定弃硕申博。家里人说我没良心，实验室大老板冷眼相加，小老板趁火打劫抢一作。是P教授突然出现，帮我反复修改论文，推敲一切不严谨之处，对我说，you are doing impressively well. 那一瞬间我想要嚎啕大哭，这位老教授是三个月以来唯一一位真心夸奖我的人。如果没有他，我绝对不可能在申请前凑齐三封推荐信，更遑论进入现在的学校读博了。</p>
 <p>我博士入学以来，最大的心愿，就是有一天能够在某个顶级会议的现场再见到P教授，对他说，看呐，今天我终于发表了一篇真正属于自己的工作。当年你没有看错人。谢谢你，谢谢你在我人生的至暗时刻出现，你的那句话支撑着我一路走到今天。</p>
-<p>然而这几年来，我甚至不敢给P教授写一封新年祝福邮件。我怕他在回信中问我，最近在做什么topic？导师是谁？而我甚至不知道我的导师会是谁，更遑论将来要做什么topic，什么时候能毕业了。越来越怕对人说出自己的博士学校，觉得自己配不上对方惊羡的目光。觉得周围的所有人都闪闪发亮，而我渐渐地沉下去，头顶的光线一点一点消失，表情由惊愕恐惧过渡到麻木，大脑慢慢缺氧。</p>
+<p>然而这几年来，我甚至不敢给P教授写一封新年祝福邮件。我怕他在回信中问我，最近在做什么topic？导师是谁？而我甚至不知道我的导师会是谁，更遑论将来要做什么topic，什么时候能毕业了。越来越怕对人说出自己的博士学校，觉得自己配不上对方惊羡的目光。觉得周围的所有人都闪闪发亮，而我渐渐地沉下去，头顶的光线一点一点消失，表情由惊愕恐惧过渡到麻木，大脑慢慢缺氧。我变得迟钝畏缩，小心翼翼地</p>
 <h2 id="7-16-Thu">7.16 (Thu)</h2>
 <p>爸爸增强CT的结果出来了：肿瘤没有变大！没耐药！<br>
 这是我本周听到的最好、最令我开心的消息。</p>
