@@ -99,18 +99,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo Auto Sync</title>
-    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
-    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker cheatsheet</title>
     <url>/2020/07/10/2020-07-08-docker/</url>
     <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
@@ -123,6 +111,18 @@
       </categories>
       <tags>
         <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Auto Sync</title>
+    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
+    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -441,7 +441,7 @@ Watin’ for you by the telephone…</p>
 <h2 id="7-20-Sun">7.20 (Sun)</h2>
 <p>颓废数日，不知所以。</p>
 <p>所有的人都在劝我弃车保帅。但是我很不想对不起我的mentor。因为他是P教授的学生。我博士入学以来，最大的心愿，就是有一天能够在某个顶级会议的现场再见到P教授，对他说，看呐，今天我终于发表了一篇真正属于自己的工作。当年你没有看错人。我配得上你的那封情真意切的推荐信。</p>
-<p>我至今都记得，那一年爸爸突然查出扩散，保研名额</p>
+<p>我不会忘记，那一年爸爸突然查出扩散，我临时决定申博，家里人说我没良心，实验室大老板冷眼相加，小老板趁火打劫抢一作。是P教授突然出现，帮我反复修改论文，推敲一切不严谨之处，对我说，you are doing impressively well. 那一瞬间</p>
 <p>这么多年来，我甚至不敢给P教授写一封新年祝福邮件。我怕他在回信中问我，最近在做什么topic？导师是谁？而我甚至不知道我的导师会是谁，更遑论将来要做什么topic，什么时候能毕业了。</p>
 <p>耻辱。这对于我校PhD来说，是一种耻辱。越来越怕对人说出自己的博士学校，觉得自己配不上对方惊羡的目光。觉得周围的所有人都闪闪发亮，而我渐渐地沉下去，手指伸向水面，四肢徒劳挣扎，表情由惊愕恐惧过渡到麻木，大脑慢慢缺氧。</p>
 <h2 id="7-16-Thu">7.16 (Thu)</h2>
