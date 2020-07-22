@@ -194,6 +194,22 @@
       </tags>
   </entry>
   <entry>
+    <title>Typora Paper Night</title>
+    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
+    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
+<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>typora-theme</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Centering Google Search and Google Scholar</title>
     <url>/2020/07/12/2020-07-11-google-search-centering/</url>
     <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
@@ -228,22 +244,6 @@
         <tag>css</tag>
         <tag>tampermonkey</tag>
         <tag>google</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Typora Paper Night</title>
-    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
-    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
-<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
