@@ -3,7 +3,7 @@
   <entry>
     <title>Suppress TensorFlow Warnings</title>
     <url>/2020/07/22/0722-suppress-tensorflow-warnings/</url>
-    <content><![CDATA[<p>To suppress TensorFlow warnings (in a single python file, or the <code>__init__.py</code> of a package that depends on tensorflow):<br>
+    <content><![CDATA[<p>To suppress TensorFlow warnings (in a single python file, or in the <code>__init__.py</code> of a package that depends on tensorflow):<br>
 <a href="https://github.com/hill-a/stable-baselines/issues/298#issuecomment-637613817" target="_blank" rel="noopener">[credit]</a></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">import_tensorflow</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># Filter tensorflow version warnings</span></span><br><span class="line">    <span class="keyword">import</span> os</span><br><span class="line">    <span class="comment"># https://stackoverflow.com/questions/40426502/is-there-a-way-to-suppress-the-messages-tensorflow-prints/40426709</span></span><br><span class="line">    os.environ[<span class="string">'TF_CPP_MIN_LOG_LEVEL'</span>] = <span class="string">'3'</span>  <span class="comment"># or any &#123;'0', '1', '2'&#125;</span></span><br><span class="line">    <span class="keyword">import</span> warnings</span><br><span class="line">    <span class="comment"># https://stackoverflow.com/questions/15777951/how-to-suppress-pandas-future-warning</span></span><br><span class="line">    warnings.simplefilter(action=<span class="string">'ignore'</span>, category=FutureWarning)</span><br><span class="line">    warnings.simplefilter(action=<span class="string">'ignore'</span>, category=Warning)</span><br><span class="line">    <span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">    tf.get_logger().setLevel(<span class="string">'INFO'</span>)</span><br><span class="line">    tf.autograph.set_verbosity(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">import</span> logging</span><br><span class="line">    tf.get_logger().setLevel(logging.ERROR)</span><br><span class="line">    <span class="keyword">return</span> tf</span><br><span class="line"></span><br><span class="line"><span class="comment"># replace `import tensorflow as tf` with this line</span></span><br><span class="line"><span class="comment"># or insert this line at the beginning of the `__init__.py` of a package that depends on tensorflow</span></span><br><span class="line">tf = import_tensorflow()</span><br></pre></td></tr></table></figure>
 ]]></content>
@@ -13,18 +13,6 @@
       <tags>
         <tag>tensorflow</tag>
         <tag>nn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Limit the usage of CPUs and GPUs of a process</title>
-    <url>/2020/07/22/0722-taskset/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0,1 taskset --cpu-list 0,1,2,3 python train.py</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>os</tag>
       </tags>
   </entry>
   <entry>
@@ -62,6 +50,18 @@
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Limit the usage of CPUs and GPUs of a process</title>
+    <url>/2020/07/22/0722-taskset/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0,1 taskset --cpu-list 0,1,2,3 python train.py</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>os</tag>
       </tags>
   </entry>
   <entry>
@@ -221,6 +221,22 @@
       </tags>
   </entry>
   <entry>
+    <title>Typora Paper Night</title>
+    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
+    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
+<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>typora-theme</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Centering Google Search and Google Scholar</title>
     <url>/2020/07/12/2020-07-11-google-search-centering/</url>
     <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
@@ -317,22 +333,6 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>lyrics</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Typora Paper Night</title>
-    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
-    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
-<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
