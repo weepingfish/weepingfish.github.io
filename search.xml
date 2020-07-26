@@ -28,33 +28,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Personal vim configuration</title>
-    <url>/2020/07/26/0725-vim-config/</url>
-    <content><![CDATA[<p><img src="/2020/07/26/0725-vim-config/image-20200725212737259.png" alt="image-20200725212737259"></p>
-<h2 id="Auto-Complete">Auto Complete</h2>
-<p>Download <strong>AutoComplPop</strong>: <a href="https://www.vim.org/scripts/script.php?script_id=1879" target="_blank" rel="noopener">[vim-autocomplpop.zip]</a> <em>(no dependency)</em></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/.vim/<span class="built_in">autoload</span></span><br><span class="line">mkdir -p ~/.vim/plugin</span><br><span class="line">unzip vim-autocomplpop.zip</span><br><span class="line">cp <span class="built_in">autoload</span>/* ~/.vim/<span class="built_in">autoload</span>/</span><br><span class="line">cp plugin/* ~/.vim/plugin/</span><br></pre></td></tr></table></figure>
-<h2 id="File-Sidebar">File Sidebar</h2>
-<p>First, install the <strong>pathogen</strong> package manager following instructions <a href="https://github.com/tpope/vim-pathogen" target="_blank" rel="noopener">[here]</a> (very easy to setup).</p>
-<p>Then install the <strong>NERDTree</strong> plugin <em>(depends on pathogen)</em>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree</span><br></pre></td></tr></table></figure>
-<h2 id="Statusline-Customization">Statusline Customization</h2>
-<p>Install <strong>Lightline</strong> <em>(depends on pathogen)</em>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/itchyny/lightline.vim ~/.vim/bundle/lightline.vim</span><br></pre></td></tr></table></figure>
-<h2 id="Color-Theme">Color Theme</h2>
-<p>Download <strong>monokai</strong> color themes from <a href="https://vimcolors.com/" target="_blank" rel="noopener">[vimcolors]</a> <em>(no dependency)</em>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/.vim/colors</span><br><span class="line">wget https://raw.githubusercontent.com/dunckr/vim-monokai-soda/master/colors/monokai-soda.vim -O ~/.vim/colors/monokai-soda.vim</span><br><span class="line">wget https://raw.githubusercontent.com/phanviet/vim-monokai-pro/master/colors/monokai_pro.vim -O ~/.vim/colors/monokai-pro.vim</span><br></pre></td></tr></table></figure>
-<h2 id="vimrc">~/.vimrc</h2>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">number</span>          <span class="comment">" show line number</span></span><br><span class="line"><span class="keyword">set</span> expandtab       <span class="comment">" convert tab to 4 spaces</span></span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">4</span>    <span class="comment">" shift 4 spaces when indenting code blocks</span></span><br><span class="line"><span class="keyword">set</span> autoindent      <span class="comment">" automatically indent for for, if, etc.</span></span><br><span class="line"><span class="keyword">set</span> mouse=<span class="keyword">a</span>         <span class="comment">" allow using mouse to move cursor, control split bars, etc.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" pathogen package manager</span></span><br><span class="line"><span class="keyword">execute</span> pathogen#infect()</span><br><span class="line"><span class="keyword">filetype</span> plugin <span class="built_in">indent</span> <span class="keyword">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" Ctrl-T to toggle file sidebar</span></span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;C-t&gt;</span> :NERDTreeToggle<span class="symbol">&lt;cr&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" status line color theme</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:lightline</span> = &#123;</span><br><span class="line">      \ <span class="string">'colorscheme'</span>: <span class="string">'seoul256'</span>,</span><br><span class="line">      \ &#125;</span><br><span class="line"><span class="keyword">set</span> ttymouse=xterm2</span><br><span class="line"></span><br><span class="line"><span class="comment">" main color theme</span></span><br><span class="line"><span class="keyword">colo</span> monokai-<span class="keyword">pro</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" vertical split color</span></span><br><span class="line"><span class="keyword">hi</span> VertSplit      guifg=#<span class="number">303030</span> guibg=#<span class="number">303030</span> <span class="keyword">gui</span>=NONE</span><br><span class="line"></span><br><span class="line"><span class="comment">" automatically trim white spaces on save</span></span><br><span class="line">fun! TrimWhitespace()</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">l:save</span> = <span class="built_in">winsaveview</span>()</span><br><span class="line">    keeppatterns %s/\s\+$//<span class="keyword">e</span></span><br><span class="line">    <span class="keyword">call</span> <span class="built_in">winrestview</span>(<span class="variable">l:save</span>)</span><br><span class="line">endfun</span><br><span class="line"></span><br><span class="line">command! TW <span class="keyword">call</span> TrimWhitespace()</span><br><span class="line">:<span class="keyword">noremap</span> <span class="symbol">&lt;F8&gt;</span> :<span class="keyword">call</span> TrimWhitespace()<span class="symbol">&lt;CR&gt;</span></span><br><span class="line"><span class="keyword">autocmd</span> BufWritePre * :<span class="keyword">call</span> TrimWhitespace()</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>vim</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Building a Hexo Blog with GitHub Pages</title>
     <url>/2020/07/12/2020-06-24-hexo-blog/</url>
     <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
@@ -92,18 +65,30 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker cheatsheet</title>
-    <url>/2020/07/10/2020-07-08-docker/</url>
-    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
-<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="Usage">Usage</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
+    <title>Personal vim configuration</title>
+    <url>/2020/07/26/0725-vim-config/</url>
+    <content><![CDATA[<p><img src="/2020/07/26/0725-vim-config/image-20200725212737259.png" alt="image-20200725212737259"></p>
+<h2 id="Auto-Complete">Auto Complete</h2>
+<p>Download <strong>AutoComplPop</strong>: <a href="https://www.vim.org/scripts/script.php?script_id=1879" target="_blank" rel="noopener">[vim-autocomplpop.zip]</a> <em>(no dependency)</em></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/.vim/<span class="built_in">autoload</span></span><br><span class="line">mkdir -p ~/.vim/plugin</span><br><span class="line">unzip vim-autocomplpop.zip</span><br><span class="line">cp <span class="built_in">autoload</span>/* ~/.vim/<span class="built_in">autoload</span>/</span><br><span class="line">cp plugin/* ~/.vim/plugin/</span><br></pre></td></tr></table></figure>
+<h2 id="File-Sidebar">File Sidebar</h2>
+<p>First, install the <strong>pathogen</strong> package manager following instructions <a href="https://github.com/tpope/vim-pathogen" target="_blank" rel="noopener">[here]</a> (very easy to setup).</p>
+<p>Then install the <strong>NERDTree</strong> plugin <em>(depends on pathogen)</em>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree</span><br></pre></td></tr></table></figure>
+<h2 id="Statusline-Customization">Statusline Customization</h2>
+<p>Install <strong>Lightline</strong> <em>(depends on pathogen)</em>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/itchyny/lightline.vim ~/.vim/bundle/lightline.vim</span><br></pre></td></tr></table></figure>
+<h2 id="Color-Theme">Color Theme</h2>
+<p>Download <strong>monokai</strong> color themes from <a href="https://vimcolors.com/" target="_blank" rel="noopener">[vimcolors]</a> <em>(no dependency)</em>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/.vim/colors</span><br><span class="line">wget https://raw.githubusercontent.com/dunckr/vim-monokai-soda/master/colors/monokai-soda.vim -O ~/.vim/colors/monokai-soda.vim</span><br><span class="line">wget https://raw.githubusercontent.com/phanviet/vim-monokai-pro/master/colors/monokai_pro.vim -O ~/.vim/colors/monokai-pro.vim</span><br></pre></td></tr></table></figure>
+<h2 id="vimrc">~/.vimrc</h2>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">number</span>          <span class="comment">" show line number</span></span><br><span class="line"><span class="keyword">set</span> expandtab       <span class="comment">" convert tab to 4 spaces</span></span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">4</span>    <span class="comment">" shift 4 spaces when indenting code blocks</span></span><br><span class="line"><span class="keyword">set</span> autoindent      <span class="comment">" automatically indent for for, if, etc.</span></span><br><span class="line"><span class="keyword">set</span> mouse=<span class="keyword">a</span>         <span class="comment">" allow using mouse to move cursor, control split bars, etc.</span></span><br><span class="line"><span class="keyword">set</span> termguicolors   <span class="comment">" for removing vertical split bar `|` characters</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" pathogen package manager</span></span><br><span class="line"><span class="keyword">execute</span> pathogen#infect()</span><br><span class="line"><span class="keyword">filetype</span> plugin <span class="built_in">indent</span> <span class="keyword">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" Ctrl-T to toggle file sidebar</span></span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;C-t&gt;</span> :NERDTreeToggle<span class="symbol">&lt;cr&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" status line color theme</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:lightline</span> = &#123;</span><br><span class="line">      \ <span class="string">'colorscheme'</span>: <span class="string">'seoul256'</span>,</span><br><span class="line">      \ &#125;</span><br><span class="line"><span class="keyword">set</span> ttymouse=xterm2</span><br><span class="line"></span><br><span class="line"><span class="comment">" main color theme</span></span><br><span class="line"><span class="keyword">colo</span> monokai-soda</span><br><span class="line"></span><br><span class="line"><span class="comment">" vertical split color</span></span><br><span class="line"><span class="keyword">hi</span> VertSplit      guifg=#<span class="number">303030</span> guibg=#<span class="number">303030</span> <span class="keyword">gui</span>=NONE</span><br><span class="line"></span><br><span class="line"><span class="comment">" automatically trim white spaces on save</span></span><br><span class="line">fun! TrimWhitespace()</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">l:save</span> = <span class="built_in">winsaveview</span>()</span><br><span class="line">    keeppatterns %s/\s\+$//<span class="keyword">e</span></span><br><span class="line">    <span class="keyword">call</span> <span class="built_in">winrestview</span>(<span class="variable">l:save</span>)</span><br><span class="line">endfun</span><br><span class="line"></span><br><span class="line">command! TW <span class="keyword">call</span> TrimWhitespace()</span><br><span class="line">:<span class="keyword">noremap</span> <span class="symbol">&lt;F8&gt;</span> :<span class="keyword">call</span> TrimWhitespace()<span class="symbol">&lt;CR&gt;</span></span><br><span class="line"><span class="keyword">autocmd</span> BufWritePre * :<span class="keyword">call</span> TrimWhitespace()</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>tech</category>
       </categories>
       <tags>
-        <tag>docker</tag>
+        <tag>vim</tag>
       </tags>
   </entry>
   <entry>
@@ -131,42 +116,6 @@
       </categories>
       <tags>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo Auto Sync</title>
-    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
-    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Typora Auto Numbering</title>
-    <url>/2020/07/12/2020-07-10-typora-auto-number/</url>
-    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
-<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<h2 id="serif">serif</h2>
-<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710193009823.png" alt="image-20200710193009823"></p>
-<a id="more"></a>
-<h2 id="sans-serif">sans-serif</h2>
-<p>GitHub</p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710203832748.png" alt="image-20200710203832748"></p>
-<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710204004740.png" alt="image-20200710204004740"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
@@ -204,6 +153,33 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker cheatsheet</title>
+    <url>/2020/07/10/2020-07-08-docker/</url>
+    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="Usage">Usage</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Auto Sync</title>
+    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
+    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Inserting images into Hexo posts with Typora</title>
     <url>/2020/07/12/2020-07-10-hexo-image/</url>
     <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
@@ -233,10 +209,19 @@
       </tags>
   </entry>
   <entry>
-    <title>CSS for Customized Fonts</title>
-    <url>/2020/07/11/2020-07-11-fontface-css/</url>
-    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>Typora Auto Numbering</title>
+    <url>/2020/07/12/2020-07-10-typora-auto-number/</url>
+    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
+<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<h2 id="serif">serif</h2>
+<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710193009823.png" alt="image-20200710193009823"></p>
+<a id="more"></a>
+<h2 id="sans-serif">sans-serif</h2>
+<p>GitHub</p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710203832748.png" alt="image-20200710203832748"></p>
+<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710204004740.png" alt="image-20200710204004740"></p>
 ]]></content>
       <categories>
         <category>tech</category>
@@ -244,7 +229,7 @@
       <tags>
         <tag>typora</tag>
         <tag>css</tag>
-        <tag>font</tag>
+        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
@@ -282,22 +267,6 @@
         <tag>css</tag>
         <tag>tampermonkey</tag>
         <tag>google</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Typora Paper Night</title>
-    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
-    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
-<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
@@ -360,6 +329,22 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>lyrics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Typora Paper Night</title>
+    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
+    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
+<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
@@ -484,6 +469,21 @@ Watin’ for you by the telephone…</p>
       <tags>
         <tag>diary</tag>
         <tag>procrastination</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS for Customized Fonts</title>
+    <url>/2020/07/11/2020-07-11-fontface-css/</url>
+    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>font</tag>
       </tags>
   </entry>
   <entry>
