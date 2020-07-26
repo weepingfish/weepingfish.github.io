@@ -30,7 +30,7 @@
   <entry>
     <title>Personal vim configuration</title>
     <url>/2020/07/26/0725-vim-config/</url>
-    <content><![CDATA[<p><img src="/2020/07/26/0725-vim-config/image-20200725212737259.png" alt="image-20200725212737259"></p>
+    <content><![CDATA[<p><img src="/2020/07/26/0725-vim-config/image-20200726005015462.png" alt="image-20200726005015462"></p>
 <h2 id="Auto-Complete">Auto Complete</h2>
 <p>Download <strong>AutoComplPop</strong>: <a href="https://www.vim.org/scripts/script.php?script_id=1879" target="_blank" rel="noopener">[vim-autocomplpop.zip]</a> <em>(no dependency)</em></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/.vim/<span class="built_in">autoload</span></span><br><span class="line">mkdir -p ~/.vim/plugin</span><br><span class="line">unzip vim-autocomplpop.zip</span><br><span class="line">cp <span class="built_in">autoload</span>/* ~/.vim/<span class="built_in">autoload</span>/</span><br><span class="line">cp plugin/* ~/.vim/plugin/</span><br></pre></td></tr></table></figure>
