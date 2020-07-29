@@ -27,8 +27,8 @@
 <meta property="og:site_name" content="weepingfish">
 <meta property="og:description" content="Suppose we have files structured as follows: 1234.└── manifests    ├── abc123.manifest    └── xyz456.manifest We want to define a bash command mytool that can achieve the follows: 12345$ mytool &lt;TA">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-29T05:01:06.035Z">
-<meta property="article:modified_time" content="2020-07-29T05:01:06.035Z">
+<meta property="article:published_time" content="2020-07-29T05:01:30.203Z">
+<meta property="article:modified_time" content="2020-07-29T05:01:30.203Z">
 <meta property="article:author" content="weepingfish">
 <meta property="article:tag" content="os">
 <meta property="article:tag" content="bash">
@@ -214,7 +214,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-07-28 22:01:06" itemprop="dateCreated datePublished" datetime="2020-07-28T22:01:06-07:00">2020-07-28</time>
+              <time title="Created: 2020-07-28 22:01:30" itemprop="dateCreated datePublished" datetime="2020-07-28T22:01:30-07:00">2020-07-28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -241,8 +241,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">└── manifests</span><br><span class="line">    ├── abc123.manifest</span><br><span class="line">    └── xyz456.manifest</span><br></pre></td></tr></table></figure>
 <p>We want to define a bash command <code>mytool</code> that can achieve the follows:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ mytool &lt;TAB&gt;</span><br><span class="line">abc123 xyz456</span><br><span class="line"></span><br><span class="line"><span class="variable">$mytool</span> 12&lt;TAB&gt;</span><br><span class="line">abc123</span><br></pre></td></tr></table></figure>
-<p>If you are an oh-my-zsh user, his can be accomplished by adding the following lines into <code>~/.zshrc</code></p>
+<h2 id="zsh">zsh</h2>
+<p>If you are an oh-my-zsh user, this can be accomplished by adding the following lines into <code>~/.zshrc</code>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">mytool()</span><br><span class="line">&#123;</span><br><span class="line">    python ~/mytool.py <span class="variable">$@</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">_mytool</span></span>() &#123;</span><br><span class="line">  <span class="built_in">local</span> state</span><br><span class="line"></span><br><span class="line">  _arguments \</span><br><span class="line">    <span class="string">'1: :-&gt;exp'</span>\</span><br><span class="line">    <span class="string">'*: :-&gt;others'</span></span><br><span class="line"></span><br><span class="line">  FOLDER=<span class="string">"<span class="variable">$PWD</span>/manifests"</span></span><br><span class="line">  FILEEXT=<span class="string">".manifest"</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Take the basename of files in $FOLDER and ends with $FILEEXT</span></span><br><span class="line">  <span class="built_in">local</span> files=()</span><br><span class="line">  <span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FOLDER</span>/*<span class="variable">$FILEEXT</span>; <span class="keyword">do</span></span><br><span class="line">      files+=(<span class="string">"<span class="variable">$&#123;$&#123;f/$FILEEXT/&#125;</span>/<span class="variable">$FOLDER</span>\/&#125;"</span>);</span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$state</span> <span class="keyword">in</span></span><br><span class="line">      (exp) _arguments <span class="string">'1:profiles:( $files )'</span> ;;</span><br><span class="line">        (*) compadd <span class="string">"<span class="variable">$@</span>"</span> <span class="string">''</span></span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">compdef _mytool mytool</span><br></pre></td></tr></table></figure>
+<h2 id="bash">bash</h2>
 
     </div>
 
@@ -326,6 +328,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#zsh"><span class="nav-number">1.</span> <span class="nav-text">zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bash"><span class="nav-number">2.</span> <span class="nav-text">bash</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
