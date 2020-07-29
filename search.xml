@@ -57,6 +57,24 @@
       </tags>
   </entry>
   <entry>
+    <title>Tab Completion for Bash and Zsh</title>
+    <url>/2020/07/28/0728-tab-completion/</url>
+    <content><![CDATA[<p>Suppose we have files structured as follows:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">└── manifests</span><br><span class="line">    ├── abc123.manifest</span><br><span class="line">    └── xyz456.manifest</span><br></pre></td></tr></table></figure>
+<p>We want to define a bash command <code>mytool</code> that can achieve the follows:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mytool &lt;TAB&gt;</span><br><span class="line">abc123 xyz456</span><br><span class="line"></span><br><span class="line"><span class="variable">$mytool</span> 12&lt;TAB&gt;</span><br><span class="line">abc123</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mytool()</span><br><span class="line">&#123;</span><br><span class="line">    python ~/mytool.py <span class="variable">$@</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">_mytool</span></span>() &#123;</span><br><span class="line">  <span class="built_in">local</span> state</span><br><span class="line"></span><br><span class="line">  _arguments \</span><br><span class="line">    <span class="string">'1: :-&gt;exp'</span>\</span><br><span class="line">    <span class="string">'*: :-&gt;others'</span></span><br><span class="line"></span><br><span class="line">  FOLDER=<span class="string">"<span class="variable">$PWD</span>/manifests"</span></span><br><span class="line">  FILEEXT=<span class="string">".manifest"</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Take the basename of files in $FOLDER and ends with $FILEEXT</span></span><br><span class="line">  <span class="built_in">local</span> files=()</span><br><span class="line">  <span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FOLDER</span>/*<span class="variable">$FILEEXT</span>; <span class="keyword">do</span></span><br><span class="line">      files+=(<span class="string">"<span class="variable">$&#123;$&#123;f/$FILEEXT/&#125;</span>/<span class="variable">$FOLDER</span>\/&#125;"</span>);</span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$state</span> <span class="keyword">in</span></span><br><span class="line">      (exp) _arguments <span class="string">'1:profiles:( $files )'</span> ;;</span><br><span class="line">        (*) compadd <span class="string">"<span class="variable">$@</span>"</span> <span class="string">''</span></span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">compdef _mytool mytool</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>os</tag>
+        <tag>bash</tag>
+        <tag>zsh</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Building a Hexo Blog with GitHub Pages</title>
     <url>/2020/07/12/2020-06-24-hexo-blog/</url>
     <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
@@ -91,24 +109,6 @@
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Tab Completion for Bash and Zsh</title>
-    <url>/2020/07/28/0728-tab-completion/</url>
-    <content><![CDATA[<p>Suppose we have files structured as follows:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">└── manifests</span><br><span class="line">    ├── abc123.manifest</span><br><span class="line">    └── xyz456.manifest</span><br></pre></td></tr></table></figure>
-<p>We want to define a bash command <code>mytool</code> that can achieve the follows:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mytool &lt;TAB&gt;</span><br><span class="line">abc123 xyz456</span><br><span class="line"></span><br><span class="line"><span class="variable">$mytool</span> 12&lt;TAB&gt;</span><br><span class="line">abc123</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mytool()</span><br><span class="line">&#123;</span><br><span class="line">    python ~/mytool.py <span class="variable">$@</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">_mytool</span></span>() &#123;</span><br><span class="line">  <span class="built_in">local</span> state</span><br><span class="line"></span><br><span class="line">  _arguments \</span><br><span class="line">    <span class="string">'1: :-&gt;exp'</span>\</span><br><span class="line">    <span class="string">'*: :-&gt;others'</span></span><br><span class="line"></span><br><span class="line">  FOLDER=<span class="string">"<span class="variable">$PWD</span>/configs"</span></span><br><span class="line">  FILEEXT=<span class="string">".sh"</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Take the basename of files in $FOLDER and ends with $FILEEXT</span></span><br><span class="line">  <span class="built_in">local</span> files=()</span><br><span class="line">  <span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FOLDER</span>/*<span class="variable">$FILEEXT</span>; <span class="keyword">do</span></span><br><span class="line">      files+=(<span class="string">"<span class="variable">$&#123;$&#123;f/$FILEEXT/&#125;</span>/<span class="variable">$FOLDER</span>\/&#125;"</span>);</span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$state</span> <span class="keyword">in</span></span><br><span class="line">      (exp) _arguments <span class="string">'1:profiles:( $files )'</span> ;;</span><br><span class="line">        (*) compadd <span class="string">"<span class="variable">$@</span>"</span> <span class="string">''</span></span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">compdef _mytool mytool</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>os</tag>
-        <tag>bash</tag>
-        <tag>zsh</tag>
       </tags>
   </entry>
   <entry>
