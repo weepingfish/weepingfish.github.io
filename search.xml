@@ -79,20 +79,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Tensorboard configurations</title>
-    <url>/2020/08/02/0802-tensorboard/</url>
-    <content><![CDATA[<p>Tensorboard by default produces a lot of warnings and logs into standard error. This can be annoying and unnecessary.</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>tensorflow</tag>
-        <tag>nn</tag>
-        <tag>tensorboard</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Building a Hexo Blog with GitHub Pages</title>
     <url>/2020/07/12/2020-06-24-hexo-blog/</url>
     <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
@@ -127,6 +113,20 @@
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Tensorboard configurations</title>
+    <url>/2020/08/02/0802-tensorboard/</url>
+    <content><![CDATA[<p>调教一个适合人类使用的tensorboard:</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>tensorflow</tag>
+        <tag>nn</tag>
+        <tag>tensorboard</tag>
       </tags>
   </entry>
   <entry>
