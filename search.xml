@@ -16,18 +16,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Limit the usage of CPUs and GPUs of a process</title>
-    <url>/2020/07/22/0722-taskset/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0,1 taskset --cpu-list 0,1,2,3 python train.py</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>os</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Personal vim configuration</title>
     <url>/2020/07/26/0725-vim-config/</url>
     <content><![CDATA[<p><img src="/2020/07/26/0725-vim-config/image-20200726005015462.png" alt="image-20200726005015462"></p>
@@ -57,40 +45,15 @@
       </tags>
   </entry>
   <entry>
-    <title>Building a Hexo Blog with GitHub Pages</title>
-    <url>/2020/07/12/2020-06-24-hexo-blog/</url>
-    <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="built_in">export</span> PATH=~/.npm-global/lib/node_modules/hexo/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
-<h2 id="Create-root-Hexo-folder">Create root Hexo folder</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir hexo_dir</span><br><span class="line"><span class="built_in">cd</span> hexo_dir</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-<h2 id="Configure-Git-Repo">Configure Git Repo</h2>
-<p>Create a github repo <code>&lt;username&gt;.github.io</code> and edit <code>_config.yml</code>:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">&lt;username&gt;.github.io</span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="Download-a-theme">Download a theme</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2 alternative themes that I find useful</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/cofess/hexo-theme-pure.git themes/pure</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yscoder/hexo-theme-indigo themes/indigo</span><br></pre></td></tr></table></figure>
-<p>Then edit the <code>theme</code> property in <code>_config.yml</code> and setup theme-specific properties in <code>themes/&lt;theme&gt;/_config.yml</code></p>
-<h2 id="Preview-Locally">Preview Locally</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo serve</span><br></pre></td></tr></table></figure>
-<h2 id="Publish">Publish</h2>
-<p>For GitHub Pages, we need to install <code>hexo-deployer-git</code> plugin and config the <code>deploy</code> property in <code>_config.yml</code>. Note that personal pages must be pushed to the <code>master</code> branch (not gh-pages!)</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-<p>Then publish to GitHub:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-<h2 id="Comment">Comment</h2>
-<p>Most themes have built-in support for comment systems. I personally find <code>gitalk</code> to be the most easy-to-use one. You just need to <a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">apply for a new Git OAuth application</a> and fill in necessary info in <code>themes/&lt;theme&gt;/_config.yml</code>:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitalk: </span><br><span class="line">    owner: &lt;username&gt;  </span><br><span class="line">    admin: &lt;username&gt; </span><br><span class="line">    repo: &lt;username&gt;.github.io  </span><br><span class="line">    ClientID: &lt;ClientID&gt;</span><br><span class="line">    ClientSecret: &lt;ClientSecret&gt;</span><br></pre></td></tr></table></figure>
-<p>Note that the comment system should be working even in a local review.</p>
-<h2 id="Tags-Categories-About">Tags, Categories, About</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line">hexo new page categories</span><br><span class="line">hexo new page about</span><br></pre></td></tr></table></figure>
-<p>In the created <code>.md</code> files, edit the <code>type</code> attribute:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Tags</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020</span><span class="number">-06</span><span class="number">-24</span> <span class="number">23</span><span class="string">:10:07</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">tags</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+    <title>Limit the usage of CPUs and GPUs of a process</title>
+    <url>/2020/07/22/0722-taskset/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0,1 taskset --cpu-list 0,1,2,3 python train.py</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>tech</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
+        <tag>os</tag>
       </tags>
   </entry>
   <entry>
@@ -219,6 +182,43 @@
       </tags>
   </entry>
   <entry>
+    <title>Building a Hexo Blog with GitHub Pages</title>
+    <url>/2020/07/12/2020-06-24-hexo-blog/</url>
+    <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="built_in">export</span> PATH=~/.npm-global/lib/node_modules/hexo/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<h2 id="Create-root-Hexo-folder">Create root Hexo folder</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir hexo_dir</span><br><span class="line"><span class="built_in">cd</span> hexo_dir</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<h2 id="Configure-Git-Repo">Configure Git Repo</h2>
+<p>Create a github repo <code>&lt;username&gt;.github.io</code> and edit <code>_config.yml</code>:</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">&lt;username&gt;.github.io</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="Download-a-theme">Download a theme</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2 alternative themes that I find useful</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/cofess/hexo-theme-pure.git themes/pure</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yscoder/hexo-theme-indigo themes/indigo</span><br></pre></td></tr></table></figure>
+<p>Then edit the <code>theme</code> property in <code>_config.yml</code> and setup theme-specific properties in <code>themes/&lt;theme&gt;/_config.yml</code></p>
+<h2 id="Preview-Locally">Preview Locally</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo serve</span><br></pre></td></tr></table></figure>
+<h2 id="Publish">Publish</h2>
+<p>For GitHub Pages, we need to install <code>hexo-deployer-git</code> plugin and config the <code>deploy</code> property in <code>_config.yml</code>. Note that personal pages must be pushed to the <code>master</code> branch (not gh-pages!)</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<p>Then publish to GitHub:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="Comment">Comment</h2>
+<p>Most themes have built-in support for comment systems. I personally find <code>gitalk</code> to be the most easy-to-use one. You just need to <a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">apply for a new Git OAuth application</a> and fill in necessary info in <code>themes/&lt;theme&gt;/_config.yml</code>:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitalk: </span><br><span class="line">    owner: &lt;username&gt;  </span><br><span class="line">    admin: &lt;username&gt; </span><br><span class="line">    repo: &lt;username&gt;.github.io  </span><br><span class="line">    ClientID: &lt;ClientID&gt;</span><br><span class="line">    ClientSecret: &lt;ClientSecret&gt;</span><br></pre></td></tr></table></figure>
+<p>Note that the comment system should be working even in a local review.</p>
+<h2 id="Tags-Categories-About">Tags, Categories, About</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line">hexo new page categories</span><br><span class="line">hexo new page about</span><br></pre></td></tr></table></figure>
+<p>In the created <code>.md</code> files, edit the <code>type</code> attribute:</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Tags</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020</span><span class="number">-06</span><span class="number">-24</span> <span class="number">23</span><span class="string">:10:07</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">tags</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo Auto Sync</title>
     <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
     <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
@@ -252,6 +252,35 @@
         <tag>typora</tag>
         <tag>css</tag>
         <tag>typora-theme</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Inserting images into Hexo posts with Typora</title>
+    <url>/2020/07/12/2020-07-10-hexo-image/</url>
+    <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
+<h2 id="Typora">Typora</h2>
+<p>In Preferences:</p>
+<p><img src="/2020/07/12/2020-07-10-hexo-image/image-20200710205313639.png" alt="image-20200710205313639"></p>
+<p>File structure:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo&#x2F;</span><br><span class="line">  source&#x2F;</span><br><span class="line">    _posts&#x2F;</span><br><span class="line">      some-post.md</span><br><span class="line">      some-post&#x2F;</span><br><span class="line">        image.png</span><br></pre></td></tr></table></figure>
+<p>In <code>some-post.md</code>:</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt</span>](<span class="link">some-post/image.png</span>)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="Hexo">Hexo</h2>
+<p>In <code>hexo/_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>In hexo root folder:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-asset-link</span><br></pre></td></tr></table></figure>
+<p>In <code>node_modules/hexo-asset-link/index.js</code> :</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// strip domain</span></span><br><span class="line">path_html = path_html.replace(path_html.split(<span class="string">"/"</span>)[<span class="number">0</span>], <span class="string">""</span>);</span><br><span class="line"><span class="comment">// image path in rendered HTML:</span></span><br><span class="line"><span class="comment">// /YYYY/MM/DD/some-post/image.png</span></span><br></pre></td></tr></table></figure>
+<p>This will generate absolute paths for the images in rendered HTML (instead of relative path), which is useful when contents of a post are also displayed from the homepage (which lies in a different folder).</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>typora</tag>
       </tags>
   </entry>
   <entry>
@@ -304,35 +333,6 @@
         <tag>css</tag>
         <tag>tampermonkey</tag>
         <tag>google</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Inserting images into Hexo posts with Typora</title>
-    <url>/2020/07/12/2020-07-10-hexo-image/</url>
-    <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
-<h2 id="Typora">Typora</h2>
-<p>In Preferences:</p>
-<p><img src="/2020/07/12/2020-07-10-hexo-image/image-20200710205313639.png" alt="image-20200710205313639"></p>
-<p>File structure:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo&#x2F;</span><br><span class="line">  source&#x2F;</span><br><span class="line">    _posts&#x2F;</span><br><span class="line">      some-post.md</span><br><span class="line">      some-post&#x2F;</span><br><span class="line">        image.png</span><br></pre></td></tr></table></figure>
-<p>In <code>some-post.md</code>:</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt</span>](<span class="link">some-post/image.png</span>)</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="Hexo">Hexo</h2>
-<p>In <code>hexo/_config.yml</code></p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>In hexo root folder:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-asset-link</span><br></pre></td></tr></table></figure>
-<p>In <code>node_modules/hexo-asset-link/index.js</code> :</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// strip domain</span></span><br><span class="line">path_html = path_html.replace(path_html.split(<span class="string">"/"</span>)[<span class="number">0</span>], <span class="string">""</span>);</span><br><span class="line"><span class="comment">// image path in rendered HTML:</span></span><br><span class="line"><span class="comment">// /YYYY/MM/DD/some-post/image.png</span></span><br></pre></td></tr></table></figure>
-<p>This will generate absolute paths for the images in rendered HTML (instead of relative path), which is useful when contents of a post are also displayed from the homepage (which lies in a different folder).</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>typora</tag>
       </tags>
   </entry>
   <entry>
@@ -416,7 +416,7 @@ Watin’ for you by the telephone…</p>
   <entry>
     <title>String Format for C++</title>
     <url>/2020/08/06/2020-08-06-cpp-string-format/</url>
-    <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Example Usage:</span></span><br><span class="line"><span class="comment"> * fmt("\t&#123;\"%s\": [%f, %f, %f]&#125;", name.c_str(), XYZ[0], XYZ[1], XYZ[2]);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">std</span>:</span>:<span class="function"><span class="built_in">string</span> <span class="title">fmt</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;format, Args... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> BUFSIZE = <span class="built_in">std</span>::<span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format.c_str(), args...) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">char</span> *buf = <span class="keyword">new</span> <span class="keyword">char</span>[BUFSIZE];</span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, BUFSIZE * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, BUFSIZE, format.c_str(), args...);</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">str</span><span class="params">(buf)</span></span>;</span><br><span class="line">  <span class="keyword">delete</span>[] buf;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Example Usage:</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * string str = "abc";</span></span><br><span class="line"><span class="comment"> * fmt("%s: %d", str.c_str(), integer);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">std</span>:</span>:<span class="function"><span class="built_in">string</span> <span class="title">fmt</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;format, Args... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> BUFSIZE = <span class="built_in">std</span>::<span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format.c_str(), args...) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">char</span> *buf = <span class="keyword">new</span> <span class="keyword">char</span>[BUFSIZE];</span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, BUFSIZE * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, BUFSIZE, format.c_str(), args...);</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">str</span><span class="params">(buf)</span></span>;</span><br><span class="line">  <span class="keyword">delete</span>[] buf;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>tech</category>
