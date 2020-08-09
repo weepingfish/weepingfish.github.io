@@ -16,6 +16,45 @@
       </tags>
   </entry>
   <entry>
+    <title>Limit the usage of CPUs and GPUs of a process</title>
+    <url>/2020/07/22/0722-taskset/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0,1 taskset --cpu-list 0,1,2,3 python train.py</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>os</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>八月的梦游者 by 北岛</title>
+    <url>/2020/08/03/0802-august-dreamer/</url>
+    <content><![CDATA[<p>海底的石钟敲响<br>
+敲响，掀起了波浪<br>
+敲响的是八月<br>
+八月的正午没有太阳</p>
+<p>涨满乳汁的三角帆<br>
+高耸在漂浮的尸体上<br>
+高耸的是八月<br>
+八月的苹果滚下山冈</p>
+<p>熄灭已久的灯塔<br>
+被水手们的目光照亮<br>
+照亮的是八月<br>
+八月的集市又临霜降</p>
+<p>海底的石钟敲响<br>
+敲响，掀起了波浪<br>
+八月的梦游者<br>
+看见过夜里的太阳</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>poem</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Personal vim configuration</title>
     <url>/2020/07/26/0725-vim-config/</url>
     <content><![CDATA[<p><img src="/2020/07/26/0725-vim-config/image-20200726005015462.png" alt="image-20200726005015462"></p>
@@ -45,18 +84,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Limit the usage of CPUs and GPUs of a process</title>
-    <url>/2020/07/22/0722-taskset/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0,1 taskset --cpu-list 0,1,2,3 python train.py</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>os</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Tab Completion for Bash and Zsh</title>
     <url>/2020/07/28/0728-tab-completion/</url>
     <content><![CDATA[<p>Suppose you have files structured as follows:</p>
@@ -76,33 +103,6 @@
         <tag>os</tag>
         <tag>bash</tag>
         <tag>zsh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>八月的梦游者 by 北岛</title>
-    <url>/2020/08/03/0802-august-dreamer/</url>
-    <content><![CDATA[<p>海底的石钟敲响<br>
-敲响，掀起了波浪<br>
-敲响的是八月<br>
-八月的正午没有太阳</p>
-<p>涨满乳汁的三角帆<br>
-高耸在漂浮的尸体上<br>
-高耸的是八月<br>
-八月的苹果滚下山冈</p>
-<p>熄灭已久的灯塔<br>
-被水手们的目光照亮<br>
-照亮的是八月<br>
-八月的集市又临霜降</p>
-<p>海底的石钟敲响<br>
-敲响，掀起了波浪<br>
-八月的梦游者<br>
-看见过夜里的太阳</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>poem</tag>
       </tags>
   </entry>
   <entry>
@@ -255,6 +255,21 @@
       </tags>
   </entry>
   <entry>
+    <title>CSS for Customized Fonts</title>
+    <url>/2020/07/11/2020-07-11-fontface-css/</url>
+    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>font</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Inserting images into Hexo posts with Typora</title>
     <url>/2020/07/12/2020-07-10-hexo-image/</url>
     <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
@@ -281,21 +296,6 @@
       <tags>
         <tag>hexo</tag>
         <tag>typora</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSS for Customized Fonts</title>
-    <url>/2020/07/11/2020-07-11-fontface-css/</url>
-    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>font</tag>
       </tags>
   </entry>
   <entry>
@@ -607,18 +607,6 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
-    <title>如何愉快地渡过生理期</title>
-    <url>/2020/08/09/period/</url>
-    <content><![CDATA[<p>Inserting a tampon when the vagina is dry can be extremely painful. However, this can sometimes happen after you take a shower. In that case, a sexual arousal might help. For instance, gently massage the clitoris until the vagina relaxes and becomes wet.</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>period</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2020夏</title>
     <url>/2020/08/09/2020-summer/</url>
     <content><![CDATA[<blockquote>
@@ -741,6 +729,18 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何愉快地渡过生理期</title>
+    <url>/2020/08/09/period/</url>
+    <content><![CDATA[<p>Inserting a tampon when the vagina is dry can be extremely painful. However, this can sometimes happen after you take a shower. In that case, sexual arousal might help. For instance, gently massage the clitoris until the vagina relaxes and becomes wet.</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>period</tag>
       </tags>
   </entry>
 </search>
