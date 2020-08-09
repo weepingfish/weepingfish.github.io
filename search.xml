@@ -57,6 +57,92 @@
       </tags>
   </entry>
   <entry>
+    <title>Tab Completion for Bash and Zsh</title>
+    <url>/2020/07/28/0728-tab-completion/</url>
+    <content><![CDATA[<p>Suppose you have files structured as follows:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">└── manifests</span><br><span class="line">    ├── abc123.manifest</span><br><span class="line">    └── xyz456.manifest</span><br></pre></td></tr></table></figure>
+<p>You want to define a bash command <code>mytool</code> that can achieve the follows:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mytool &lt;TAB&gt;</span><br><span class="line">abc123 xyz456</span><br><span class="line"></span><br><span class="line">$ mytool 12&lt;TAB&gt;</span><br><span class="line">abc123</span><br></pre></td></tr></table></figure>
+<h2 id="zsh">zsh</h2>
+<p>If you are an <code>oh-my-zsh</code> user, this can be accomplished by adding the following lines into <code>~/.zshrc</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># The actual tool that passes the argument to a python script</span></span><br><span class="line">mytool()</span><br><span class="line">&#123;</span><br><span class="line">    python ~/mytool.py <span class="variable">$@</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># The completion function that helps user quickly input the arguments</span></span><br><span class="line"><span class="function"><span class="title">_mytool</span></span>() &#123;</span><br><span class="line">  <span class="comment"># zsh completion variable</span></span><br><span class="line">  <span class="built_in">local</span> state</span><br><span class="line"></span><br><span class="line">  <span class="comment"># separate arguments into different groups</span></span><br><span class="line">  _arguments \</span><br><span class="line">    <span class="string">'1: :-&gt;exp'</span>\</span><br><span class="line">    <span class="string">'*: :-&gt;others'</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Take the basename of files in $FOLDER and ends with $FILEEXT</span></span><br><span class="line">  FOLDER=<span class="string">"<span class="variable">$PWD</span>/manifests"</span></span><br><span class="line">  FILEEXT=<span class="string">".manifest"</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">local</span> files=()</span><br><span class="line">  <span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FOLDER</span>/*<span class="variable">$FILEEXT</span>; <span class="keyword">do</span></span><br><span class="line">      files+=(<span class="string">"<span class="variable">$&#123;$&#123;f/$FILEEXT/&#125;</span>/<span class="variable">$FOLDER</span>\/&#125;"</span>);</span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># tab completion only for the first argument</span></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$state</span> <span class="keyword">in</span></span><br><span class="line">      (exp) _arguments <span class="string">'1:profiles:( $files )'</span> ;;</span><br><span class="line">        (*) compadd <span class="string">"<span class="variable">$@</span>"</span> <span class="string">''</span></span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line">compdef _mytool mytool</span><br></pre></td></tr></table></figure>
+<h2 id="bash">bash</h2>
+<p>tbd.</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>os</tag>
+        <tag>bash</tag>
+        <tag>zsh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Building a Hexo Blog with GitHub Pages</title>
+    <url>/2020/07/12/2020-06-24-hexo-blog/</url>
+    <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="built_in">export</span> PATH=~/.npm-global/lib/node_modules/hexo/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<h2 id="Create-root-Hexo-folder">Create root Hexo folder</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir hexo_dir</span><br><span class="line"><span class="built_in">cd</span> hexo_dir</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<h2 id="Configure-Git-Repo">Configure Git Repo</h2>
+<p>Create a github repo <code>&lt;username&gt;.github.io</code> and edit <code>_config.yml</code>:</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">&lt;username&gt;.github.io</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="Download-a-theme">Download a theme</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2 alternative themes that I find useful</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/cofess/hexo-theme-pure.git themes/pure</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yscoder/hexo-theme-indigo themes/indigo</span><br></pre></td></tr></table></figure>
+<p>Then edit the <code>theme</code> property in <code>_config.yml</code> and setup theme-specific properties in <code>themes/&lt;theme&gt;/_config.yml</code></p>
+<h2 id="Preview-Locally">Preview Locally</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo serve</span><br></pre></td></tr></table></figure>
+<h2 id="Publish">Publish</h2>
+<p>For GitHub Pages, we need to install <code>hexo-deployer-git</code> plugin and config the <code>deploy</code> property in <code>_config.yml</code>. Note that personal pages must be pushed to the <code>master</code> branch (not gh-pages!)</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<p>Then publish to GitHub:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="Comment">Comment</h2>
+<p>Most themes have built-in support for comment systems. I personally find <code>gitalk</code> to be the most easy-to-use one. You just need to <a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">apply for a new Git OAuth application</a> and fill in necessary info in <code>themes/&lt;theme&gt;/_config.yml</code>:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitalk: </span><br><span class="line">    owner: &lt;username&gt;  </span><br><span class="line">    admin: &lt;username&gt; </span><br><span class="line">    repo: &lt;username&gt;.github.io  </span><br><span class="line">    ClientID: &lt;ClientID&gt;</span><br><span class="line">    ClientSecret: &lt;ClientSecret&gt;</span><br></pre></td></tr></table></figure>
+<p>Note that the comment system should be working even in a local review.</p>
+<h2 id="Tags-Categories-About">Tags, Categories, About</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line">hexo new page categories</span><br><span class="line">hexo new page about</span><br></pre></td></tr></table></figure>
+<p>In the created <code>.md</code> files, edit the <code>type</code> attribute:</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Tags</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020</span><span class="number">-06</span><span class="number">-24</span> <span class="number">23</span><span class="string">:10:07</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">tags</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Working with multiple GitHub accounts</title>
+    <url>/2020/07/12/2020-06-25-multiple-gits/</url>
+    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
+<h2 id="SSH-setups">SSH setups</h2>
+<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
+<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
+<p>Then, add the generated public keys to github for each account:</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
+<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
+<h2 id="Git-configs">Git configs</h2>
+<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
+<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>八月的梦游者 by 北岛</title>
     <url>/2020/08/03/0802-august-dreamer/</url>
     <content><![CDATA[<p>海底的石钟敲响<br>
@@ -99,55 +185,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Tab Completion for Bash and Zsh</title>
-    <url>/2020/07/28/0728-tab-completion/</url>
-    <content><![CDATA[<p>Suppose you have files structured as follows:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">└── manifests</span><br><span class="line">    ├── abc123.manifest</span><br><span class="line">    └── xyz456.manifest</span><br></pre></td></tr></table></figure>
-<p>You want to define a bash command <code>mytool</code> that can achieve the follows:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mytool &lt;TAB&gt;</span><br><span class="line">abc123 xyz456</span><br><span class="line"></span><br><span class="line">$ mytool 12&lt;TAB&gt;</span><br><span class="line">abc123</span><br></pre></td></tr></table></figure>
-<h2 id="zsh">zsh</h2>
-<p>If you are an <code>oh-my-zsh</code> user, this can be accomplished by adding the following lines into <code>~/.zshrc</code>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># The actual tool that passes the argument to a python script</span></span><br><span class="line">mytool()</span><br><span class="line">&#123;</span><br><span class="line">    python ~/mytool.py <span class="variable">$@</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># The completion function that helps user quickly input the arguments</span></span><br><span class="line"><span class="function"><span class="title">_mytool</span></span>() &#123;</span><br><span class="line">  <span class="comment"># zsh completion variable</span></span><br><span class="line">  <span class="built_in">local</span> state</span><br><span class="line"></span><br><span class="line">  <span class="comment"># separate arguments into different groups</span></span><br><span class="line">  _arguments \</span><br><span class="line">    <span class="string">'1: :-&gt;exp'</span>\</span><br><span class="line">    <span class="string">'*: :-&gt;others'</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Take the basename of files in $FOLDER and ends with $FILEEXT</span></span><br><span class="line">  FOLDER=<span class="string">"<span class="variable">$PWD</span>/manifests"</span></span><br><span class="line">  FILEEXT=<span class="string">".manifest"</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">local</span> files=()</span><br><span class="line">  <span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FOLDER</span>/*<span class="variable">$FILEEXT</span>; <span class="keyword">do</span></span><br><span class="line">      files+=(<span class="string">"<span class="variable">$&#123;$&#123;f/$FILEEXT/&#125;</span>/<span class="variable">$FOLDER</span>\/&#125;"</span>);</span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># tab completion only for the first argument</span></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$state</span> <span class="keyword">in</span></span><br><span class="line">      (exp) _arguments <span class="string">'1:profiles:( $files )'</span> ;;</span><br><span class="line">        (*) compadd <span class="string">"<span class="variable">$@</span>"</span> <span class="string">''</span></span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line">compdef _mytool mytool</span><br></pre></td></tr></table></figure>
-<h2 id="bash">bash</h2>
-<p>tbd.</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>os</tag>
-        <tag>bash</tag>
-        <tag>zsh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Working with multiple GitHub accounts</title>
-    <url>/2020/07/12/2020-06-25-multiple-gits/</url>
-    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
-<h2 id="SSH-setups">SSH setups</h2>
-<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
-<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
-<p>Then, add the generated public keys to github for each account:</p>
-<a id="more"></a>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
-<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
-<h2 id="Git-configs">Git configs</h2>
-<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
-<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>最近怎样？</title>
     <url>/2020/07/10/2020-06-28-how-are-you/</url>
     <content><![CDATA[<blockquote>
@@ -182,43 +219,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Building a Hexo Blog with GitHub Pages</title>
-    <url>/2020/07/12/2020-06-24-hexo-blog/</url>
-    <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="built_in">export</span> PATH=~/.npm-global/lib/node_modules/hexo/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
-<h2 id="Create-root-Hexo-folder">Create root Hexo folder</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir hexo_dir</span><br><span class="line"><span class="built_in">cd</span> hexo_dir</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-<h2 id="Configure-Git-Repo">Configure Git Repo</h2>
-<p>Create a github repo <code>&lt;username&gt;.github.io</code> and edit <code>_config.yml</code>:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">&lt;username&gt;.github.io</span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="Download-a-theme">Download a theme</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2 alternative themes that I find useful</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/cofess/hexo-theme-pure.git themes/pure</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yscoder/hexo-theme-indigo themes/indigo</span><br></pre></td></tr></table></figure>
-<p>Then edit the <code>theme</code> property in <code>_config.yml</code> and setup theme-specific properties in <code>themes/&lt;theme&gt;/_config.yml</code></p>
-<h2 id="Preview-Locally">Preview Locally</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo serve</span><br></pre></td></tr></table></figure>
-<h2 id="Publish">Publish</h2>
-<p>For GitHub Pages, we need to install <code>hexo-deployer-git</code> plugin and config the <code>deploy</code> property in <code>_config.yml</code>. Note that personal pages must be pushed to the <code>master</code> branch (not gh-pages!)</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-<p>Then publish to GitHub:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-<h2 id="Comment">Comment</h2>
-<p>Most themes have built-in support for comment systems. I personally find <code>gitalk</code> to be the most easy-to-use one. You just need to <a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">apply for a new Git OAuth application</a> and fill in necessary info in <code>themes/&lt;theme&gt;/_config.yml</code>:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gitalk: </span><br><span class="line">    owner: &lt;username&gt;  </span><br><span class="line">    admin: &lt;username&gt; </span><br><span class="line">    repo: &lt;username&gt;.github.io  </span><br><span class="line">    ClientID: &lt;ClientID&gt;</span><br><span class="line">    ClientSecret: &lt;ClientSecret&gt;</span><br></pre></td></tr></table></figure>
-<p>Note that the comment system should be working even in a local review.</p>
-<h2 id="Tags-Categories-About">Tags, Categories, About</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line">hexo new page categories</span><br><span class="line">hexo new page about</span><br></pre></td></tr></table></figure>
-<p>In the created <code>.md</code> files, edit the <code>type</code> attribute:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Tags</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020</span><span class="number">-06</span><span class="number">-24</span> <span class="number">23</span><span class="string">:10:07</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">tags</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo Auto Sync</title>
     <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
     <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
@@ -228,30 +228,6 @@
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Typora Auto Numbering</title>
-    <url>/2020/07/12/2020-07-10-typora-auto-number/</url>
-    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
-<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<h2 id="serif">serif</h2>
-<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710193009823.png" alt="image-20200710193009823"></p>
-<a id="more"></a>
-<h2 id="sans-serif">sans-serif</h2>
-<p>GitHub</p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710203832748.png" alt="image-20200710203832748"></p>
-<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710204004740.png" alt="image-20200710204004740"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
@@ -281,6 +257,45 @@
       <tags>
         <tag>hexo</tag>
         <tag>typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS for Customized Fonts</title>
+    <url>/2020/07/11/2020-07-11-fontface-css/</url>
+    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>font</tag>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Typora Auto Numbering</title>
+    <url>/2020/07/12/2020-07-10-typora-auto-number/</url>
+    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
+<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<h2 id="serif">serif</h2>
+<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710193009823.png" alt="image-20200710193009823"></p>
+<a id="more"></a>
+<h2 id="sans-serif">sans-serif</h2>
+<p>GitHub</p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710203832748.png" alt="image-20200710203832748"></p>
+<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710204004740.png" alt="image-20200710204004740"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
@@ -321,21 +336,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CSS for Customized Fonts</title>
-    <url>/2020/07/11/2020-07-11-fontface-css/</url>
-    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>font</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Typora Paper Night</title>
     <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
     <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
@@ -352,15 +352,65 @@
       </tags>
   </entry>
   <entry>
-    <title>String Format for C++</title>
-    <url>/2020/08/06/2020-08-06-cpp-string-format/</url>
-    <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Example Usage:</span></span><br><span class="line"><span class="comment"> * fmt("%s: %d", str.c_str(), integer);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">std</span>:</span>:<span class="function"><span class="built_in">string</span> <span class="title">fmt</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;format, Args... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> BUFSIZE = <span class="built_in">std</span>::<span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format.c_str(), args...) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">char</span> *buf = <span class="keyword">new</span> <span class="keyword">char</span>[BUFSIZE];</span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, BUFSIZE * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, BUFSIZE, format.c_str(), args...);</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">str</span><span class="params">(buf)</span></span>;</span><br><span class="line">  <span class="keyword">delete</span>[] buf;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>Instead -- Madeleine Peyroux</title>
+    <url>/2020/07/12/2020-07-12-instead/</url>
+    <content><![CDATA[<p>&quot;Instead of trying to win something you never understood<br>
+Just play the game you know eventually you will you both look good<br>
+It’s silly to pretend to have something you don’t own</p>
+<p>Instead of acting crazy chasing things that make you mad<br>
+Keep your heart ahead, it’ll lead you back to what you have<br>
+With every step you are closer to the place you need to be&quot;</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KgccdIjocDs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<a id="more"></a>
+<p><a href="https://www.musixmatch.com/lyrics/Madeleine-Peyroux/Instead" target="_blank" rel="noopener">[lyrics source]</a></p>
+<p>Instead of feeling bad<br>
+Be glad you got somewhere to go<br>
+Instead of feeling sad<br>
+Be happy you’re not all alone<br>
+Instead of feeling low<br>
+Get high on everything you love<br>
+Instead of wastin’ time<br>
+Feel good 'bout what you are dreaming of</p>
+<p><strong>Instead of trying to win something you never understood</strong><br>
+<strong>Just play the game you know eventually you will you both look good</strong><br>
+<strong>It’s silly to pretend to have something you don’t own</strong></p>
+<p>Just let her be a woman and you’ll be her man</p>
+<p>Instead of feelin’ broke<br>
+Buck up and get yourself in the black<br>
+Instead of losing hope<br>
+Touch up the things that feel out of whack<br>
+Instead of being old<br>
+Be young because you know you are<br>
+Instead of feeling cold<br>
+Let sunshine into your heart</p>
+<p><strong>Instead of acting crazy chasing things that make you mad</strong><br>
+<strong>Keep your heart ahead, it’ll lead you back to what you have</strong><br>
+<strong>With every step you are closer to the place you need to be</strong></p>
+<p>It’s up to you to let her love you sweetly</p>
+<p>Instead of acting crazy chasing things that make you mad<br>
+Just keep your heart ahead, it’ll lead you back to what you have<br>
+With every step you are closer to the place you need to be<br>
+But it’s up to you to let her love you sweetly</p>
+<p>Instead of feeling bad<br>
+Be glad you got someone to love<br>
+Instead of feeling sad<br>
+Be happy there’s a god above<br>
+Instead of feeling ‘lone<br>
+Remember you are never on your own<br>
+Instead of feeling sad<br>
+Be happy that she’s there at home<br>
+She’s waitin’ for by the phone<br>
+So be glad she all your own</p>
+<p>Get happy…<br>
+Watin’ for you by the telephone…</p>
+<p>Don’t get…</p>
+<p>Back home,</p>
 ]]></content>
       <categories>
-        <category>tech</category>
+        <category>life</category>
       </categories>
       <tags>
-        <tag>c++</tag>
+        <tag>lyrics</tag>
       </tags>
   </entry>
   <entry>
@@ -418,6 +468,18 @@
       <tags>
         <tag>负能量</tag>
         <tag>dairy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>String Format for C++</title>
+    <url>/2020/08/06/2020-08-06-cpp-string-format/</url>
+    <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Example Usage:</span></span><br><span class="line"><span class="comment"> * fmt("%s: %d", str.c_str(), integer);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">std</span>:</span>:<span class="function"><span class="built_in">string</span> <span class="title">fmt</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;format, Args... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> BUFSIZE = <span class="built_in">std</span>::<span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format.c_str(), args...) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">char</span> *buf = <span class="keyword">new</span> <span class="keyword">char</span>[BUFSIZE];</span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, BUFSIZE * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, BUFSIZE, format.c_str(), args...);</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">str</span><span class="params">(buf)</span></span>;</span><br><span class="line">  <span class="keyword">delete</span>[] buf;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
@@ -542,68 +604,6 @@
       <tags>
         <tag>diary</tag>
         <tag>procrastination</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Instead -- Madeleine Peyroux</title>
-    <url>/2020/07/12/2020-07-12-instead/</url>
-    <content><![CDATA[<p>&quot;Instead of trying to win something you never understood<br>
-Just play the game you know eventually you will you both look good<br>
-It’s silly to pretend to have something you don’t own</p>
-<p>Instead of acting crazy chasing things that make you mad<br>
-Keep your heart ahead, it’ll lead you back to what you have<br>
-With every step you are closer to the place you need to be&quot;</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KgccdIjocDs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<a id="more"></a>
-<p><a href="https://www.musixmatch.com/lyrics/Madeleine-Peyroux/Instead" target="_blank" rel="noopener">[lyrics source]</a></p>
-<p>Instead of feeling bad<br>
-Be glad you got somewhere to go<br>
-Instead of feeling sad<br>
-Be happy you’re not all alone<br>
-Instead of feeling low<br>
-Get high on everything you love<br>
-Instead of wastin’ time<br>
-Feel good 'bout what you are dreaming of</p>
-<p><strong>Instead of trying to win something you never understood</strong><br>
-<strong>Just play the game you know eventually you will you both look good</strong><br>
-<strong>It’s silly to pretend to have something you don’t own</strong></p>
-<p>Just let her be a woman and you’ll be her man</p>
-<p>Instead of feelin’ broke<br>
-Buck up and get yourself in the black<br>
-Instead of losing hope<br>
-Touch up the things that feel out of whack<br>
-Instead of being old<br>
-Be young because you know you are<br>
-Instead of feeling cold<br>
-Let sunshine into your heart</p>
-<p><strong>Instead of acting crazy chasing things that make you mad</strong><br>
-<strong>Keep your heart ahead, it’ll lead you back to what you have</strong><br>
-<strong>With every step you are closer to the place you need to be</strong></p>
-<p>It’s up to you to let her love you sweetly</p>
-<p>Instead of acting crazy chasing things that make you mad<br>
-Just keep your heart ahead, it’ll lead you back to what you have<br>
-With every step you are closer to the place you need to be<br>
-But it’s up to you to let her love you sweetly</p>
-<p>Instead of feeling bad<br>
-Be glad you got someone to love<br>
-Instead of feeling sad<br>
-Be happy there’s a god above<br>
-Instead of feeling ‘lone<br>
-Remember you are never on your own<br>
-Instead of feeling sad<br>
-Be happy that she’s there at home<br>
-She’s waitin’ for by the phone<br>
-So be glad she all your own</p>
-<p>Get happy…<br>
-Watin’ for you by the telephone…</p>
-<p>Don’t get…</p>
-<p>Back home,</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>lyrics</tag>
       </tags>
   </entry>
   <entry>
