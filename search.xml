@@ -57,6 +57,55 @@
       </tags>
   </entry>
   <entry>
+    <title>Tab Completion for Bash and Zsh</title>
+    <url>/2020/07/28/0728-tab-completion/</url>
+    <content><![CDATA[<p>Suppose you have files structured as follows:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">└── manifests</span><br><span class="line">    ├── abc123.manifest</span><br><span class="line">    └── xyz456.manifest</span><br></pre></td></tr></table></figure>
+<p>You want to define a bash command <code>mytool</code> that can achieve the follows:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mytool &lt;TAB&gt;</span><br><span class="line">abc123 xyz456</span><br><span class="line"></span><br><span class="line">$ mytool 12&lt;TAB&gt;</span><br><span class="line">abc123</span><br></pre></td></tr></table></figure>
+<h2 id="zsh">zsh</h2>
+<p>If you are an <code>oh-my-zsh</code> user, this can be accomplished by adding the following lines into <code>~/.zshrc</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># The actual tool that passes the argument to a python script</span></span><br><span class="line">mytool()</span><br><span class="line">&#123;</span><br><span class="line">    python ~/mytool.py <span class="variable">$@</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># The completion function that helps user quickly input the arguments</span></span><br><span class="line"><span class="function"><span class="title">_mytool</span></span>() &#123;</span><br><span class="line">  <span class="comment"># zsh completion variable</span></span><br><span class="line">  <span class="built_in">local</span> state</span><br><span class="line"></span><br><span class="line">  <span class="comment"># separate arguments into different groups</span></span><br><span class="line">  _arguments \</span><br><span class="line">    <span class="string">'1: :-&gt;exp'</span>\</span><br><span class="line">    <span class="string">'*: :-&gt;others'</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Take the basename of files in $FOLDER and ends with $FILEEXT</span></span><br><span class="line">  FOLDER=<span class="string">"<span class="variable">$PWD</span>/manifests"</span></span><br><span class="line">  FILEEXT=<span class="string">".manifest"</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">local</span> files=()</span><br><span class="line">  <span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FOLDER</span>/*<span class="variable">$FILEEXT</span>; <span class="keyword">do</span></span><br><span class="line">      files+=(<span class="string">"<span class="variable">$&#123;$&#123;f/$FILEEXT/&#125;</span>/<span class="variable">$FOLDER</span>\/&#125;"</span>);</span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># tab completion only for the first argument</span></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$state</span> <span class="keyword">in</span></span><br><span class="line">      (exp) _arguments <span class="string">'1:profiles:( $files )'</span> ;;</span><br><span class="line">        (*) compadd <span class="string">"<span class="variable">$@</span>"</span> <span class="string">''</span></span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line">compdef _mytool mytool</span><br></pre></td></tr></table></figure>
+<h2 id="bash">bash</h2>
+<p>tbd.</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>os</tag>
+        <tag>bash</tag>
+        <tag>zsh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>八月的梦游者 by 北岛</title>
+    <url>/2020/08/03/0802-august-dreamer/</url>
+    <content><![CDATA[<p>海底的石钟敲响<br>
+敲响，掀起了波浪<br>
+敲响的是八月<br>
+八月的正午没有太阳</p>
+<p>涨满乳汁的三角帆<br>
+高耸在漂浮的尸体上<br>
+高耸的是八月<br>
+八月的苹果滚下山冈</p>
+<p>熄灭已久的灯塔<br>
+被水手们的目光照亮<br>
+照亮的是八月<br>
+八月的集市又临霜降</p>
+<p>海底的石钟敲响<br>
+敲响，掀起了波浪<br>
+八月的梦游者<br>
+看见过夜里的太阳</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>poem</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Building a Hexo Blog with GitHub Pages</title>
     <url>/2020/07/12/2020-06-24-hexo-blog/</url>
     <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
@@ -94,82 +143,6 @@
       </tags>
   </entry>
   <entry>
-    <title>八月的梦游者 by 北岛</title>
-    <url>/2020/08/03/0802-august-dreamer/</url>
-    <content><![CDATA[<p>海底的石钟敲响<br>
-敲响，掀起了波浪<br>
-敲响的是八月<br>
-八月的正午没有太阳</p>
-<p>涨满乳汁的三角帆<br>
-高耸在漂浮的尸体上<br>
-高耸的是八月<br>
-八月的苹果滚下山冈</p>
-<p>熄灭已久的灯塔<br>
-被水手们的目光照亮<br>
-照亮的是八月<br>
-八月的集市又临霜降</p>
-<p>海底的石钟敲响<br>
-敲响，掀起了波浪<br>
-八月的梦游者<br>
-看见过夜里的太阳</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>poem</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Tab Completion for Bash and Zsh</title>
-    <url>/2020/07/28/0728-tab-completion/</url>
-    <content><![CDATA[<p>Suppose you have files structured as follows:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">└── manifests</span><br><span class="line">    ├── abc123.manifest</span><br><span class="line">    └── xyz456.manifest</span><br></pre></td></tr></table></figure>
-<p>You want to define a bash command <code>mytool</code> that can achieve the follows:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mytool &lt;TAB&gt;</span><br><span class="line">abc123 xyz456</span><br><span class="line"></span><br><span class="line">$ mytool 12&lt;TAB&gt;</span><br><span class="line">abc123</span><br></pre></td></tr></table></figure>
-<h2 id="zsh">zsh</h2>
-<p>If you are an <code>oh-my-zsh</code> user, this can be accomplished by adding the following lines into <code>~/.zshrc</code>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># The actual tool that passes the argument to a python script</span></span><br><span class="line">mytool()</span><br><span class="line">&#123;</span><br><span class="line">    python ~/mytool.py <span class="variable">$@</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># The completion function that helps user quickly input the arguments</span></span><br><span class="line"><span class="function"><span class="title">_mytool</span></span>() &#123;</span><br><span class="line">  <span class="comment"># zsh completion variable</span></span><br><span class="line">  <span class="built_in">local</span> state</span><br><span class="line"></span><br><span class="line">  <span class="comment"># separate arguments into different groups</span></span><br><span class="line">  _arguments \</span><br><span class="line">    <span class="string">'1: :-&gt;exp'</span>\</span><br><span class="line">    <span class="string">'*: :-&gt;others'</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Take the basename of files in $FOLDER and ends with $FILEEXT</span></span><br><span class="line">  FOLDER=<span class="string">"<span class="variable">$PWD</span>/manifests"</span></span><br><span class="line">  FILEEXT=<span class="string">".manifest"</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">local</span> files=()</span><br><span class="line">  <span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FOLDER</span>/*<span class="variable">$FILEEXT</span>; <span class="keyword">do</span></span><br><span class="line">      files+=(<span class="string">"<span class="variable">$&#123;$&#123;f/$FILEEXT/&#125;</span>/<span class="variable">$FOLDER</span>\/&#125;"</span>);</span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># tab completion only for the first argument</span></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$state</span> <span class="keyword">in</span></span><br><span class="line">      (exp) _arguments <span class="string">'1:profiles:( $files )'</span> ;;</span><br><span class="line">        (*) compadd <span class="string">"<span class="variable">$@</span>"</span> <span class="string">''</span></span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line">compdef _mytool mytool</span><br></pre></td></tr></table></figure>
-<h2 id="bash">bash</h2>
-<p>tbd.</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>os</tag>
-        <tag>bash</tag>
-        <tag>zsh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Working with multiple GitHub accounts</title>
-    <url>/2020/07/12/2020-06-25-multiple-gits/</url>
-    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
-<h2 id="SSH-setups">SSH setups</h2>
-<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
-<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
-<p>Then, add the generated public keys to github for each account:</p>
-<a id="more"></a>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
-<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
-<h2 id="Git-configs">Git configs</h2>
-<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
-<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>最近怎样？</title>
     <url>/2020/07/10/2020-06-28-how-are-you/</url>
     <content><![CDATA[<blockquote>
@@ -204,18 +177,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo Auto Sync</title>
-    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
-    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker cheatsheet</title>
     <url>/2020/07/10/2020-07-08-docker/</url>
     <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
@@ -228,6 +189,45 @@
       </categories>
       <tags>
         <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Working with multiple GitHub accounts</title>
+    <url>/2020/07/12/2020-06-25-multiple-gits/</url>
+    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
+<h2 id="SSH-setups">SSH setups</h2>
+<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
+<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
+<p>Then, add the generated public keys to github for each account:</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
+<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
+<h2 id="Git-configs">Git configs</h2>
+<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
+<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Auto Sync</title>
+    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
+    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -315,80 +315,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Instead -- Madeleine Peyroux</title>
-    <url>/2020/07/12/2020-07-12-instead/</url>
-    <content><![CDATA[<p>&quot;Instead of trying to win something you never understood<br>
-Just play the game you know eventually you will you both look good<br>
-It’s silly to pretend to have something you don’t own</p>
-<p>Instead of acting crazy chasing things that make you mad<br>
-Keep your heart ahead, it’ll lead you back to what you have<br>
-With every step you are closer to the place you need to be&quot;</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KgccdIjocDs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<a id="more"></a>
-<p><a href="https://www.musixmatch.com/lyrics/Madeleine-Peyroux/Instead" target="_blank" rel="noopener">[lyrics source]</a></p>
-<p>Instead of feeling bad<br>
-Be glad you got somewhere to go<br>
-Instead of feeling sad<br>
-Be happy you’re not all alone<br>
-Instead of feeling low<br>
-Get high on everything you love<br>
-Instead of wastin’ time<br>
-Feel good 'bout what you are dreaming of</p>
-<p><strong>Instead of trying to win something you never understood</strong><br>
-<strong>Just play the game you know eventually you will you both look good</strong><br>
-<strong>It’s silly to pretend to have something you don’t own</strong></p>
-<p>Just let her be a woman and you’ll be her man</p>
-<p>Instead of feelin’ broke<br>
-Buck up and get yourself in the black<br>
-Instead of losing hope<br>
-Touch up the things that feel out of whack<br>
-Instead of being old<br>
-Be young because you know you are<br>
-Instead of feeling cold<br>
-Let sunshine into your heart</p>
-<p><strong>Instead of acting crazy chasing things that make you mad</strong><br>
-<strong>Keep your heart ahead, it’ll lead you back to what you have</strong><br>
-<strong>With every step you are closer to the place you need to be</strong></p>
-<p>It’s up to you to let her love you sweetly</p>
-<p>Instead of acting crazy chasing things that make you mad<br>
-Just keep your heart ahead, it’ll lead you back to what you have<br>
-With every step you are closer to the place you need to be<br>
-But it’s up to you to let her love you sweetly</p>
-<p>Instead of feeling bad<br>
-Be glad you got someone to love<br>
-Instead of feeling sad<br>
-Be happy there’s a god above<br>
-Instead of feeling ‘lone<br>
-Remember you are never on your own<br>
-Instead of feeling sad<br>
-Be happy that she’s there at home<br>
-She’s waitin’ for by the phone<br>
-So be glad she all your own</p>
-<p>Get happy…<br>
-Watin’ for you by the telephone…</p>
-<p>Don’t get…</p>
-<p>Back home,</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>lyrics</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>String Format for C++</title>
-    <url>/2020/08/06/2020-08-06-cpp-string-format/</url>
-    <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Example Usage:</span></span><br><span class="line"><span class="comment"> * fmt("%s: %d", str.c_str(), integer);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">std</span>:</span>:<span class="function"><span class="built_in">string</span> <span class="title">fmt</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;format, Args... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> BUFSIZE = <span class="built_in">std</span>::<span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format.c_str(), args...) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">char</span> *buf = <span class="keyword">new</span> <span class="keyword">char</span>[BUFSIZE];</span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, BUFSIZE * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, BUFSIZE, format.c_str(), args...);</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">str</span><span class="params">(buf)</span></span>;</span><br><span class="line">  <span class="keyword">delete</span>[] buf;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>c++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Centering Google Search and Google Scholar</title>
     <url>/2020/07/12/2020-07-11-google-search-centering/</url>
     <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
@@ -426,60 +352,15 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
-    <title>我的焦虑</title>
-    <url>/2020/08/08/2020-08-08-anxiety/</url>
-    <content><![CDATA[<p>最近很丧<br>
-事情永远做不完<br>
-丧失了对科研的动力<br>
-晨会之前无一例外的强迫性熬夜<br>
-头晕 想吐 不想好好吃饭</p>
-<p>不知道自己喜欢什么<br>
-不知道将来要做什么<br>
-不知道要怎样向实习mentor交代<br>
-不知道美国这摊子烂事什么时候是个头<br>
-不知道毕业之后该去做什么<br>
-身为中国人会不会受到歧视或暴力</p>
-<p>前些天导师问我 秋季有什么打算<br>
-我下意识地说 我不知道<br>
-他说 你不能不知道 你难道不想早点找到导师吗<br>
-他说 我们非常困惑 你一方面对于找到导师显得很迫切<br>
-另一方面又提出要秋季继续实习<br>
-你到底想干什么？是想直接硕士毕业？还是想持两端以观望？</p>
-<p>话全都噎在嗓子眼儿里出不来了<br>
-我不知道<br>
-坚持继续读博是不是一个正确的选择<br>
-继续读博吗 ６年毕不了业怎么办<br>
-按我现在的进度也丝毫看不到毕业的希望<br>
-拿硕走人吗 就算我拿得出一学期20W人民币的学费＋生活费<br>
-毕业之后看现在的形势怕是也找不到工作<br>
-抽不抽得到H1B另说</p>
-<p>今年我22岁 往后再看10年<br>
-留在美国吗 我爸爸的病怎么办<br>
-美国的天价医药费我一辈子都挣不出来<br>
-回国吗 程序员行业的内卷越来越严重 996各种福报<br>
-美刀和人民币之间的购买力不可同日而语<br>
-消费主义 性别歧视 年龄焦虑 荡妇羞辱 处女情结 各种judge<br>
-将来生孩子吗 生出来谁带 长大了谁管教</p>
-<p>“你说你不想让实习的项目烂尾，<br>
-那你对现在我们现在这个项目的责任感在哪里？”<br>
-断片的大脑被拉回近在眼前的现实世界<br>
-从本质上讲 我现在一切的尴尬处境都始于迷茫<br>
-什么都想尝试 什么都不愿放下 什么都想做好 结果什么都辜负了</p>
-<p>我哭了<br>
-我自欺欺人的一切幻想 选择性忽视的那些真相<br>
-被挑破 拖出来 放在太阳下暴晒 流出难看的脓液<br>
-其实蛮讨厌当众流泪的<br>
-哭 应该发生在无人的地方 大声地 无所顾忌<br>
-人类的悲欢并不相通 突如其来的泪水只会让对方尴尬</p>
-<p>导师没有再说什么重话<br>
-我关闭视频 倒在床上 天旋地转</p>
+    <title>String Format for C++</title>
+    <url>/2020/08/06/2020-08-06-cpp-string-format/</url>
+    <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Example Usage:</span></span><br><span class="line"><span class="comment"> * fmt("%s: %d", str.c_str(), integer);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">std</span>:</span>:<span class="function"><span class="built_in">string</span> <span class="title">fmt</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;format, Args... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> BUFSIZE = <span class="built_in">std</span>::<span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format.c_str(), args...) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">char</span> *buf = <span class="keyword">new</span> <span class="keyword">char</span>[BUFSIZE];</span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, BUFSIZE * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, BUFSIZE, format.c_str(), args...);</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">str</span><span class="params">(buf)</span></span>;</span><br><span class="line">  <span class="keyword">delete</span>[] buf;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>life</category>
+        <category>tech</category>
       </categories>
       <tags>
-        <tag>负能量</tag>
-        <tag>dairy</tag>
+        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
@@ -607,15 +488,122 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
-    <title>如何愉快地渡过生理期</title>
-    <url>/2020/08/09/period/</url>
-    <content><![CDATA[<p>Inserting a tampon when the vagina is dry can be extremely painful. This can sometimes happen right after a shower. In that case, sexual arousal might help. For instance, gently massage the clitoris until the vagina relaxes and becomes wet.</p>
+    <title>我的焦虑</title>
+    <url>/2020/08/08/2020-08-08-anxiety/</url>
+    <content><![CDATA[<p>最近很丧<br>
+事情永远做不完<br>
+丧失了对科研的动力<br>
+晨会之前无一例外的强迫性熬夜<br>
+头晕 想吐 不想好好吃饭</p>
+<p>不知道自己喜欢什么<br>
+不知道将来要做什么<br>
+不知道要怎样向实习mentor交代<br>
+不知道美国这摊子烂事什么时候是个头<br>
+不知道毕业之后该去做什么<br>
+身为中国人会不会受到歧视或暴力</p>
+<p>前些天导师问我 秋季有什么打算<br>
+我下意识地说 我不知道<br>
+他说 你不能不知道 你难道不想早点找到导师吗<br>
+他说 我们非常困惑 你一方面对于找到导师显得很迫切<br>
+另一方面又提出要秋季继续实习<br>
+你到底想干什么？是想直接硕士毕业？还是想持两端以观望？</p>
+<p>话全都噎在嗓子眼儿里出不来了<br>
+我不知道<br>
+坚持继续读博是不是一个正确的选择<br>
+继续读博吗 ６年毕不了业怎么办<br>
+按我现在的进度也丝毫看不到毕业的希望<br>
+拿硕走人吗 就算我拿得出一学期20W人民币的学费＋生活费<br>
+毕业之后看现在的形势怕是也找不到工作<br>
+抽不抽得到H1B另说</p>
+<p>今年我22岁 往后再看10年<br>
+留在美国吗 我爸爸的病怎么办<br>
+美国的天价医药费我一辈子都挣不出来<br>
+回国吗 程序员行业的内卷越来越严重 996各种福报<br>
+美刀和人民币之间的购买力不可同日而语<br>
+消费主义 性别歧视 年龄焦虑 荡妇羞辱 处女情结 各种judge<br>
+将来生孩子吗 生出来谁带 长大了谁管教</p>
+<p>“你说你不想让实习的项目烂尾，<br>
+那你对现在我们现在这个项目的责任感在哪里？”<br>
+断片的大脑被拉回近在眼前的现实世界<br>
+从本质上讲 我现在一切的尴尬处境都始于迷茫<br>
+什么都想尝试 什么都不愿放下 什么都想做好 结果什么都辜负了</p>
+<p>我哭了<br>
+我自欺欺人的一切幻想 选择性忽视的那些真相<br>
+被挑破 拖出来 放在太阳下暴晒 流出难看的脓液<br>
+其实蛮讨厌当众流泪的<br>
+哭 应该发生在无人的地方 大声地 无所顾忌<br>
+人类的悲欢并不相通 突如其来的泪水只会让对方尴尬</p>
+<p>导师没有再说什么重话<br>
+我关闭视频 倒在床上 天旋地转</p>
 ]]></content>
       <categories>
         <category>life</category>
       </categories>
       <tags>
-        <tag>period</tag>
+        <tag>负能量</tag>
+        <tag>dairy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Instead -- Madeleine Peyroux</title>
+    <url>/2020/07/12/2020-07-12-instead/</url>
+    <content><![CDATA[<p>&quot;Instead of trying to win something you never understood<br>
+Just play the game you know eventually you will you both look good<br>
+It’s silly to pretend to have something you don’t own</p>
+<p>Instead of acting crazy chasing things that make you mad<br>
+Keep your heart ahead, it’ll lead you back to what you have<br>
+With every step you are closer to the place you need to be&quot;</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KgccdIjocDs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<a id="more"></a>
+<p><a href="https://www.musixmatch.com/lyrics/Madeleine-Peyroux/Instead" target="_blank" rel="noopener">[lyrics source]</a></p>
+<p>Instead of feeling bad<br>
+Be glad you got somewhere to go<br>
+Instead of feeling sad<br>
+Be happy you’re not all alone<br>
+Instead of feeling low<br>
+Get high on everything you love<br>
+Instead of wastin’ time<br>
+Feel good 'bout what you are dreaming of</p>
+<p><strong>Instead of trying to win something you never understood</strong><br>
+<strong>Just play the game you know eventually you will you both look good</strong><br>
+<strong>It’s silly to pretend to have something you don’t own</strong></p>
+<p>Just let her be a woman and you’ll be her man</p>
+<p>Instead of feelin’ broke<br>
+Buck up and get yourself in the black<br>
+Instead of losing hope<br>
+Touch up the things that feel out of whack<br>
+Instead of being old<br>
+Be young because you know you are<br>
+Instead of feeling cold<br>
+Let sunshine into your heart</p>
+<p><strong>Instead of acting crazy chasing things that make you mad</strong><br>
+<strong>Keep your heart ahead, it’ll lead you back to what you have</strong><br>
+<strong>With every step you are closer to the place you need to be</strong></p>
+<p>It’s up to you to let her love you sweetly</p>
+<p>Instead of acting crazy chasing things that make you mad<br>
+Just keep your heart ahead, it’ll lead you back to what you have<br>
+With every step you are closer to the place you need to be<br>
+But it’s up to you to let her love you sweetly</p>
+<p>Instead of feeling bad<br>
+Be glad you got someone to love<br>
+Instead of feeling sad<br>
+Be happy there’s a god above<br>
+Instead of feeling ‘lone<br>
+Remember you are never on your own<br>
+Instead of feeling sad<br>
+Be happy that she’s there at home<br>
+She’s waitin’ for by the phone<br>
+So be glad she all your own</p>
+<p>Get happy…<br>
+Watin’ for you by the telephone…</p>
+<p>Don’t get…</p>
+<p>Back home,</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>lyrics</tag>
       </tags>
   </entry>
   <entry>
@@ -741,6 +729,18 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何愉快地渡过生理期</title>
+    <url>/2020/08/09/period/</url>
+    <content><![CDATA[<p>Inserting a tampon when the vagina is dry can be extremely painful. Sometimes this happens right after a shower. In that case, sexual arousal might help. For instance, gently massage the clitoris until the vagina relaxes and becomes wet.</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>period</tag>
       </tags>
   </entry>
 </search>
