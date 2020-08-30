@@ -28,35 +28,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Personal vim configuration</title>
-    <url>/2020/07/26/0725-vim-config/</url>
-    <content><![CDATA[<p><img src="/2020/07/26/0725-vim-config/image-20200726005015462.png" alt="image-20200726005015462"></p>
-<h2 id="Auto-Complete">Auto Complete</h2>
-<p>Download <strong>AutoComplPop</strong>: <a href="https://www.vim.org/scripts/script.php?script_id=1879" target="_blank" rel="noopener">[vim-autocomplpop.zip]</a> <em>(no dependency)</em></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/.vim/<span class="built_in">autoload</span></span><br><span class="line">mkdir -p ~/.vim/plugin</span><br><span class="line">unzip vim-autocomplpop.zip</span><br><span class="line">cp <span class="built_in">autoload</span>/* ~/.vim/<span class="built_in">autoload</span>/</span><br><span class="line">cp plugin/* ~/.vim/plugin/</span><br></pre></td></tr></table></figure>
-<h2 id="File-Sidebar">File Sidebar</h2>
-<p>First, install the <strong>pathogen</strong> package manager following instructions <a href="https://github.com/tpope/vim-pathogen" target="_blank" rel="noopener">[here]</a> (very easy to setup).</p>
-<p>Then install the <strong>NERDTree</strong> plugin <em>(depends on pathogen)</em>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree</span><br></pre></td></tr></table></figure>
-<h2 id="Statusline-Customization">Statusline Customization</h2>
-<p>Install <strong>Lightline</strong> <em>(depends on pathogen)</em>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/itchyny/lightline.vim ~/.vim/bundle/lightline.vim</span><br></pre></td></tr></table></figure>
-<h2 id="Color-Theme">Color Theme</h2>
-<p>Download <strong>monokai</strong> color themes from <a href="https://vimcolors.com/" target="_blank" rel="noopener">[vimcolors]</a> <em>(no dependency)</em>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/.vim/colors</span><br><span class="line">wget https://raw.githubusercontent.com/dunckr/vim-monokai-soda/master/colors/monokai-soda.vim -O ~/.vim/colors/monokai-soda.vim</span><br><span class="line">wget https://raw.githubusercontent.com/phanviet/vim-monokai-pro/master/colors/monokai_pro.vim -O ~/.vim/colors/monokai-pro.vim</span><br></pre></td></tr></table></figure>
-<p>Optional: Install <strong>vim-polyglot</strong> for improved syntax highlighting <em>(depends on pathogen)</em>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/sheerun/vim-polyglot ~/.vim/bundle/vim-polyglot</span><br></pre></td></tr></table></figure>
-<h2 id="vimrc">~/.vimrc</h2>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">number</span>          <span class="comment">" show line number</span></span><br><span class="line"><span class="keyword">set</span> expandtab       <span class="comment">" convert tab to 4 spaces</span></span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">4</span>    <span class="comment">" shift 4 spaces when indenting code blocks</span></span><br><span class="line"><span class="keyword">set</span> autoindent      <span class="comment">" automatically indent for for, if, etc.</span></span><br><span class="line"><span class="keyword">set</span> mouse=<span class="keyword">a</span>         <span class="comment">" allow using mouse to move cursor, control split bars, etc.</span></span><br><span class="line"><span class="keyword">set</span> termguicolors   <span class="comment">" for removing vertical split bar `|` characters</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" pathogen package manager</span></span><br><span class="line"><span class="keyword">execute</span> pathogen#infect()</span><br><span class="line"><span class="keyword">filetype</span> plugin <span class="built_in">indent</span> <span class="keyword">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" Ctrl-T to toggle file sidebar</span></span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;C-t&gt;</span> :NERDTreeToggle<span class="symbol">&lt;cr&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" file exclude pattern</span></span><br><span class="line"><span class="keyword">let</span> NERDTreeIgnore = [<span class="string">'\.swp$'</span>, <span class="string">'\.pyc$'</span>, <span class="string">'\.ipynb_checkpoints$'</span>, <span class="string">'^__pycache__$'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">" status line color theme</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:lightline</span> = &#123;</span><br><span class="line">      \ <span class="string">'colorscheme'</span>: <span class="string">'seoul256'</span>,</span><br><span class="line">      \ &#125;</span><br><span class="line"><span class="keyword">set</span> ttymouse=xterm2</span><br><span class="line"></span><br><span class="line"><span class="comment">" main color theme</span></span><br><span class="line"><span class="keyword">colo</span> monokai-soda</span><br><span class="line"></span><br><span class="line"><span class="comment">" automatically trim white spaces on save</span></span><br><span class="line">fun! TrimWhitespace()</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">l:save</span> = <span class="built_in">winsaveview</span>()</span><br><span class="line">    keeppatterns %s/\s\+$//<span class="keyword">e</span></span><br><span class="line">    <span class="keyword">call</span> <span class="built_in">winrestview</span>(<span class="variable">l:save</span>)</span><br><span class="line">endfun</span><br><span class="line"></span><br><span class="line">command! TW <span class="keyword">call</span> TrimWhitespace()</span><br><span class="line"><span class="keyword">autocmd</span> BufWritePre * :<span class="keyword">call</span> TrimWhitespace()</span><br><span class="line"></span><br><span class="line"><span class="comment">" Highlight CamelCase symbols</span></span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">match</span>   myClassName <span class="string">'\v(&lt;\u\i*&gt;)+'</span></span><br><span class="line"><span class="keyword">highlight</span> link myClassName Type</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>vim</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Tab Completion for Bash and Zsh</title>
     <url>/2020/07/28/0728-tab-completion/</url>
     <content><![CDATA[<p>Suppose you have files structured as follows:</p>
@@ -118,20 +89,32 @@
       </tags>
   </entry>
   <entry>
-    <title>夏天就要结束了，而我依旧一无所有</title>
-    <url>/2020/08/29/0829-end-of-summer/</url>
-    <content><![CDATA[<p>这些天陆陆续续地和一些人通了电话。把自己摆在绝对弱者的位置，乞求着或同情或鄙夷的关心。</p>
-<p><strong>“除非你真正解决问题，任何自我催眠都毫无用处。只有问题解决的那一天，痛苦才会消失，你才会真正舒服。”</strong></p>
-<p>“如果当务之急只是保住你的PhD学位的话，任何其他的事情都不重要。你必须用100%的努力去冲击11月的CVPR。我瞅着，这也没几天了吧。如果冲不上的话，实在不行就quit了得了。我还有很多PhD好朋友最后也都quit了，现在一个个都活得挺开心的，我和他们也是挺好的朋友。别觉得PhD拿不到你的人生就怎么怎么样了。没那么严重。”</p>
-<p>“不就是实习没做出来吗，这有什么了不得的。我和xx也没做出来。也别觉得愧疚，我对我之前那个导师也挺愧疚的。但是从另一个角度讲，我走了，我解脱了，他也解脱了。”</p>
-<p>“你的coding和做题实力绝对没问题。不用想找不到工作这种可能性。所以别有太大压力。”</p>
-<p>好像又回到两年前的夏天，后退一步就是足以让人粉身碎骨的悬崖。偏偏又看不清前方的路，不知道自己当前的决定是否是local minima。要背水一战，又好像不再是“没有什么可以失去”。我还年轻健康，</p>
+    <title>Personal vim configuration</title>
+    <url>/2020/07/26/0725-vim-config/</url>
+    <content><![CDATA[<p><img src="/2020/07/26/0725-vim-config/image-20200726005015462.png" alt="image-20200726005015462"></p>
+<h2 id="Auto-Complete">Auto Complete</h2>
+<p>Download <strong>AutoComplPop</strong>: <a href="https://www.vim.org/scripts/script.php?script_id=1879" target="_blank" rel="noopener">[vim-autocomplpop.zip]</a> <em>(no dependency)</em></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/.vim/<span class="built_in">autoload</span></span><br><span class="line">mkdir -p ~/.vim/plugin</span><br><span class="line">unzip vim-autocomplpop.zip</span><br><span class="line">cp <span class="built_in">autoload</span>/* ~/.vim/<span class="built_in">autoload</span>/</span><br><span class="line">cp plugin/* ~/.vim/plugin/</span><br></pre></td></tr></table></figure>
+<h2 id="File-Sidebar">File Sidebar</h2>
+<p>First, install the <strong>pathogen</strong> package manager following instructions <a href="https://github.com/tpope/vim-pathogen" target="_blank" rel="noopener">[here]</a> (very easy to setup).</p>
+<p>Then install the <strong>NERDTree</strong> plugin <em>(depends on pathogen)</em>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree</span><br></pre></td></tr></table></figure>
+<h2 id="Statusline-Customization">Statusline Customization</h2>
+<p>Install <strong>Lightline</strong> <em>(depends on pathogen)</em>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/itchyny/lightline.vim ~/.vim/bundle/lightline.vim</span><br></pre></td></tr></table></figure>
+<h2 id="Color-Theme">Color Theme</h2>
+<p>Download <strong>monokai</strong> color themes from <a href="https://vimcolors.com/" target="_blank" rel="noopener">[vimcolors]</a> <em>(no dependency)</em>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/.vim/colors</span><br><span class="line">wget https://raw.githubusercontent.com/dunckr/vim-monokai-soda/master/colors/monokai-soda.vim -O ~/.vim/colors/monokai-soda.vim</span><br><span class="line">wget https://raw.githubusercontent.com/phanviet/vim-monokai-pro/master/colors/monokai_pro.vim -O ~/.vim/colors/monokai-pro.vim</span><br></pre></td></tr></table></figure>
+<p>Optional: Install <strong>vim-polyglot</strong> for improved syntax highlighting <em>(depends on pathogen)</em>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/sheerun/vim-polyglot ~/.vim/bundle/vim-polyglot</span><br></pre></td></tr></table></figure>
+<h2 id="vimrc">~/.vimrc</h2>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">number</span>          <span class="comment">" show line number</span></span><br><span class="line"><span class="keyword">set</span> expandtab       <span class="comment">" convert tab to 4 spaces</span></span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">4</span>    <span class="comment">" shift 4 spaces when indenting code blocks</span></span><br><span class="line"><span class="keyword">set</span> autoindent      <span class="comment">" automatically indent for for, if, etc.</span></span><br><span class="line"><span class="keyword">set</span> mouse=<span class="keyword">a</span>         <span class="comment">" allow using mouse to move cursor, control split bars, etc.</span></span><br><span class="line"><span class="keyword">set</span> termguicolors   <span class="comment">" for removing vertical split bar `|` characters</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" pathogen package manager</span></span><br><span class="line"><span class="keyword">execute</span> pathogen#infect()</span><br><span class="line"><span class="keyword">filetype</span> plugin <span class="built_in">indent</span> <span class="keyword">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" Ctrl-T to toggle file sidebar</span></span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;C-t&gt;</span> :NERDTreeToggle<span class="symbol">&lt;cr&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" file exclude pattern</span></span><br><span class="line"><span class="keyword">let</span> NERDTreeIgnore = [<span class="string">'\.swp$'</span>, <span class="string">'\.pyc$'</span>, <span class="string">'\.ipynb_checkpoints$'</span>, <span class="string">'^__pycache__$'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">" status line color theme</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:lightline</span> = &#123;</span><br><span class="line">      \ <span class="string">'colorscheme'</span>: <span class="string">'seoul256'</span>,</span><br><span class="line">      \ &#125;</span><br><span class="line"><span class="keyword">set</span> ttymouse=xterm2</span><br><span class="line"></span><br><span class="line"><span class="comment">" main color theme</span></span><br><span class="line"><span class="keyword">colo</span> monokai-soda</span><br><span class="line"></span><br><span class="line"><span class="comment">" automatically trim white spaces on save</span></span><br><span class="line">fun! TrimWhitespace()</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">l:save</span> = <span class="built_in">winsaveview</span>()</span><br><span class="line">    keeppatterns %s/\s\+$//<span class="keyword">e</span></span><br><span class="line">    <span class="keyword">call</span> <span class="built_in">winrestview</span>(<span class="variable">l:save</span>)</span><br><span class="line">endfun</span><br><span class="line"></span><br><span class="line">command! TW <span class="keyword">call</span> TrimWhitespace()</span><br><span class="line"><span class="keyword">autocmd</span> BufWritePre * :<span class="keyword">call</span> TrimWhitespace()</span><br><span class="line"></span><br><span class="line"><span class="comment">" Highlight CamelCase symbols</span></span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">match</span>   myClassName <span class="string">'\v(&lt;\u\i*&gt;)+'</span></span><br><span class="line"><span class="keyword">highlight</span> link myClassName Type</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>life</category>
+        <category>tech</category>
       </categories>
       <tags>
-        <tag>diary</tag>
+        <tag>vim</tag>
       </tags>
   </entry>
   <entry>
@@ -172,6 +155,50 @@
       </tags>
   </entry>
   <entry>
+    <title>Working with multiple GitHub accounts</title>
+    <url>/2020/07/12/2020-06-25-multiple-gits/</url>
+    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
+<h2 id="SSH-setups">SSH setups</h2>
+<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
+<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
+<p>Then, add the generated public keys to github for each account:</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
+<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
+<h2 id="Git-configs">Git configs</h2>
+<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
+<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>夏天就要结束了，而我依旧一无所有</title>
+    <url>/2020/08/29/0829-end-of-summer/</url>
+    <content><![CDATA[<p>这些天陆陆续续地和一些人通了电话。把自己摆在绝对弱者的位置，乞求着或同情或鄙夷的关心。</p>
+<p><strong>“除非你真正解决问题，任何自我催眠都毫无用处。只有问题解决的那一天，痛苦才会消失，你才会真正舒服。”</strong></p>
+<p>“如果当务之急只是保住你的PhD学位的话，任何其他的事情都不重要。你必须用100%的努力去冲击11月的CVPR。我瞅着，这也没几天了吧。如果冲不上的话，实在不行就quit了得了。我还有很多PhD好朋友最后也都quit了，现在一个个都活得挺开心的，我和他们也是挺好的朋友。别觉得PhD拿不到你的人生就怎么怎么样了。没那么严重。”</p>
+<p>“不就是实习没做出来吗，这有什么了不得的。我和xx也没做出来。也别觉得愧疚，我对我之前那个导师也挺愧疚的。但是从另一个角度讲，我走了，我解脱了，他也解脱了。”</p>
+<p>“你的coding和做题实力绝对没问题。不用想找不到工作这种可能性。所以别有太大压力。”</p>
+<p>好像又回到两年前的夏天，后退一步就是足以让人粉身碎骨的悬崖。偏偏又看不清前方的路，不知道自己当前的决定是否是local minima。要背水一战，又好像不再是“没有什么可以失去”。我还年轻健康，22岁的年纪就是我最宝贵的财富。未来想</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>最近怎样？</title>
     <url>/2020/07/10/2020-06-28-how-are-you/</url>
     <content><![CDATA[<blockquote>
@@ -203,33 +230,6 @@
       </categories>
       <tags>
         <tag>misc</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Working with multiple GitHub accounts</title>
-    <url>/2020/07/12/2020-06-25-multiple-gits/</url>
-    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
-<h2 id="SSH-setups">SSH setups</h2>
-<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
-<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
-<p>Then, add the generated public keys to github for each account:</p>
-<a id="more"></a>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
-<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
-<h2 id="Git-configs">Git configs</h2>
-<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
-<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -365,6 +365,22 @@
       </tags>
   </entry>
   <entry>
+    <title>Typora Paper Night</title>
+    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
+    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
+<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>typora-theme</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Instead -- Madeleine Peyroux</title>
     <url>/2020/07/12/2020-07-12-instead/</url>
     <content><![CDATA[<p>&quot;Instead of trying to win something you never understood<br>
@@ -424,22 +440,6 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>lyrics</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Typora Paper Night</title>
-    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
-    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
-<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
