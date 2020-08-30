@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Suppress TensorFlow Warnings</title>
-    <url>/2020/07/22/0722-suppress-tensorflow-warnings/</url>
-    <content><![CDATA[<p>To suppress TensorFlow warnings (in a single python file, or in the <code>__init__.py</code> of a package that depends on tensorflow):<br>
-<a href="https://github.com/hill-a/stable-baselines/issues/298#issuecomment-637613817" target="_blank" rel="noopener">[credit]</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># replace `import tensorflow as tf` with this line</span></span><br><span class="line"><span class="comment"># or insert this line at the beginning of the `__init__.py` of a package that depends on tensorflow</span></span><br><span class="line">tf = import_tensorflow()    </span><br><span class="line"></span><br><span class="line"><span class="comment"># may put this function in another utility file</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">import_tensorflow</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># Filter tensorflow version warnings</span></span><br><span class="line">    <span class="keyword">import</span> os</span><br><span class="line">    <span class="comment"># https://stackoverflow.com/questions/40426502/is-there-a-way-to-suppress-the-messages-tensorflow-prints/40426709</span></span><br><span class="line">    os.environ[<span class="string">'TF_CPP_MIN_LOG_LEVEL'</span>] = <span class="string">'3'</span>  <span class="comment"># or any &#123;'0', '1', '2'&#125;</span></span><br><span class="line">    <span class="keyword">import</span> warnings</span><br><span class="line">    <span class="comment"># https://stackoverflow.com/questions/15777951/how-to-suppress-pandas-future-warning</span></span><br><span class="line">    warnings.simplefilter(action=<span class="string">'ignore'</span>, category=FutureWarning)</span><br><span class="line">    warnings.simplefilter(action=<span class="string">'ignore'</span>, category=Warning)</span><br><span class="line">    <span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">    tf.get_logger().setLevel(<span class="string">'INFO'</span>)</span><br><span class="line">    tf.autograph.set_verbosity(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">import</span> logging</span><br><span class="line">    tf.get_logger().setLevel(logging.ERROR)</span><br><span class="line">    <span class="keyword">return</span> tf</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>tensorflow</tag>
-        <tag>nn</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Limit the usage of CPUs and GPUs of a process</title>
     <url>/2020/07/22/0722-taskset/</url>
     <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0,1 taskset --cpu-list 0,1,2,3 python train.py</span><br></pre></td></tr></table></figure>
@@ -54,6 +39,21 @@
       </categories>
       <tags>
         <tag>vim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Suppress TensorFlow Warnings</title>
+    <url>/2020/07/22/0722-suppress-tensorflow-warnings/</url>
+    <content><![CDATA[<p>To suppress TensorFlow warnings (in a single python file, or in the <code>__init__.py</code> of a package that depends on tensorflow):<br>
+<a href="https://github.com/hill-a/stable-baselines/issues/298#issuecomment-637613817" target="_blank" rel="noopener">[credit]</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># replace `import tensorflow as tf` with this line</span></span><br><span class="line"><span class="comment"># or insert this line at the beginning of the `__init__.py` of a package that depends on tensorflow</span></span><br><span class="line">tf = import_tensorflow()    </span><br><span class="line"></span><br><span class="line"><span class="comment"># may put this function in another utility file</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">import_tensorflow</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># Filter tensorflow version warnings</span></span><br><span class="line">    <span class="keyword">import</span> os</span><br><span class="line">    <span class="comment"># https://stackoverflow.com/questions/40426502/is-there-a-way-to-suppress-the-messages-tensorflow-prints/40426709</span></span><br><span class="line">    os.environ[<span class="string">'TF_CPP_MIN_LOG_LEVEL'</span>] = <span class="string">'3'</span>  <span class="comment"># or any &#123;'0', '1', '2'&#125;</span></span><br><span class="line">    <span class="keyword">import</span> warnings</span><br><span class="line">    <span class="comment"># https://stackoverflow.com/questions/15777951/how-to-suppress-pandas-future-warning</span></span><br><span class="line">    warnings.simplefilter(action=<span class="string">'ignore'</span>, category=FutureWarning)</span><br><span class="line">    warnings.simplefilter(action=<span class="string">'ignore'</span>, category=Warning)</span><br><span class="line">    <span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">    tf.get_logger().setLevel(<span class="string">'INFO'</span>)</span><br><span class="line">    tf.autograph.set_verbosity(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">import</span> logging</span><br><span class="line">    tf.get_logger().setLevel(logging.ERROR)</span><br><span class="line">    <span class="keyword">return</span> tf</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>tensorflow</tag>
+        <tag>nn</tag>
       </tags>
   </entry>
   <entry>
@@ -118,6 +118,20 @@
       </tags>
   </entry>
   <entry>
+    <title>夏天就要结束了，而我依旧一无所有</title>
+    <url>/2020/08/29/0829-end-of-summer/</url>
+    <content><![CDATA[<p>这些天陆陆续续地和一些人通了电话。把自己摆在绝对弱者的位置，感受着或同情或鄙夷的问候。</p>
+<p>“除非你真正解决问题，任何自我催眠都毫无用处。只有问题解决的那一天，痛苦才会消失，你才会真正舒服。”</p>
+<p>“如果当务之急只是保住你的PhD学位的话，任何其他的事情都不重要。你必须用100%的努力去冲击11月的CVPR。我瞅着，这也没几天了吧。如果冲不上的话，实在不行就quit了得了。我还有很多PhD好朋友最后也都quit了，现在一个个都活得挺开心的，我和他们也是挺好的朋友。别觉得PhD拿不到你的人生就怎么怎么样了。没那么严重。”</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Building a Hexo Blog with GitHub Pages</title>
     <url>/2020/07/12/2020-06-24-hexo-blog/</url>
     <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
@@ -179,20 +193,6 @@
       </categories>
       <tags>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>夏天就要结束了，而我依旧一无所有</title>
-    <url>/2020/08/29/0829-end-of-summer/</url>
-    <content><![CDATA[<p>这些天陆陆续续地和一些人通了电话。把自己摆在绝对弱者的位置，感受着或同情或鄙夷的问候。</p>
-<p>“除非你真正解决问题，任何自我催眠都毫无用处。只有问题解决的那一天，痛苦才会消失，你才会真正舒服。”</p>
-<p>“如果当务之急只是保住你的PhD学位的话，任何其他的事情都不重要。你必须用100%的努力去冲击11月的CVPR。我瞅着，这也没几天了吧。如果冲不上的话，实在不行就quit了得了。我还有很多PhD好朋友最后也都quit了，现在一个个都活得挺开心的，我和他们也是挺好的朋友”</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>diary</tag>
       </tags>
   </entry>
   <entry>
@@ -378,18 +378,6 @@
       </tags>
   </entry>
   <entry>
-    <title>String Format for C++</title>
-    <url>/2020/08/06/2020-08-06-cpp-string-format/</url>
-    <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Example Usage:</span></span><br><span class="line"><span class="comment"> * fmt("%s: %d", str.c_str(), integer);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">std</span>:</span>:<span class="function"><span class="built_in">string</span> <span class="title">fmt</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;format, Args... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> BUFSIZE = <span class="built_in">std</span>::<span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format.c_str(), args...) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">char</span> *buf = <span class="keyword">new</span> <span class="keyword">char</span>[BUFSIZE];</span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, BUFSIZE * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, BUFSIZE, format.c_str(), args...);</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">str</span><span class="params">(buf)</span></span>;</span><br><span class="line">  <span class="keyword">delete</span>[] buf;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>c++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Instead -- Madeleine Peyroux</title>
     <url>/2020/07/12/2020-07-12-instead/</url>
     <content><![CDATA[<p>&quot;Instead of trying to win something you never understood<br>
@@ -449,6 +437,18 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>lyrics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>String Format for C++</title>
+    <url>/2020/08/06/2020-08-06-cpp-string-format/</url>
+    <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Example Usage:</span></span><br><span class="line"><span class="comment"> * fmt("%s: %d", str.c_str(), integer);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">std</span>:</span>:<span class="function"><span class="built_in">string</span> <span class="title">fmt</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;format, Args... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> BUFSIZE = <span class="built_in">std</span>::<span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format.c_str(), args...) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">char</span> *buf = <span class="keyword">new</span> <span class="keyword">char</span>[BUFSIZE];</span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, BUFSIZE * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, BUFSIZE, format.c_str(), args...);</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">str</span><span class="params">(buf)</span></span>;</span><br><span class="line">  <span class="keyword">delete</span>[] buf;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
@@ -633,18 +633,6 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
-    <title>如何愉快地渡过生理期</title>
-    <url>/2020/08/09/period/</url>
-    <content><![CDATA[<p>Inserting a tampon when the vagina is dry can be extremely painful. Sometimes this happens right after a shower. In that case, sexual arousal might help. For instance, gently massage the clitoris until the vagina relaxes and becomes wet.</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>period</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2020夏</title>
     <url>/2020/08/09/2020-summer/</url>
     <content><![CDATA[<blockquote>
@@ -767,6 +755,18 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何愉快地渡过生理期</title>
+    <url>/2020/08/09/period/</url>
+    <content><![CDATA[<p>Inserting a tampon when the vagina is dry can be extremely painful. Sometimes this happens right after a shower. In that case, sexual arousal might help. For instance, gently massage the clitoris until the vagina relaxes and becomes wet.</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>period</tag>
       </tags>
   </entry>
 </search>
