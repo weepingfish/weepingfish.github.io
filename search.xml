@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Limit the usage of CPUs and GPUs of a process</title>
+    <url>/2020/07/22/0722-taskset/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0,1 taskset --cpu-list 0,1,2,3 python train.py</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>os</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>梦该醒了。</title>
+    <url>/2020/08/12/0812-end-of-dream/</url>
+    <content><![CDATA[<p>得到一切却背负许多愧疚，比一无所有更可怕。</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rtOvBOTyX00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>dairy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Tab Completion for Bash and Zsh</title>
+    <url>/2020/07/28/0728-tab-completion/</url>
+    <content><![CDATA[<p>Suppose you have files structured as follows:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">└── manifests</span><br><span class="line">    ├── abc123.manifest</span><br><span class="line">    └── xyz456.manifest</span><br></pre></td></tr></table></figure>
+<p>You want to define a bash command <code>mytool</code> that can achieve the follows:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mytool &lt;TAB&gt;</span><br><span class="line">abc123 xyz456</span><br><span class="line"></span><br><span class="line">$ mytool 12&lt;TAB&gt;</span><br><span class="line">abc123</span><br></pre></td></tr></table></figure>
+<h2 id="zsh">zsh</h2>
+<p>If you are an <code>oh-my-zsh</code> user, this can be accomplished by adding the following lines into <code>~/.zshrc</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># The actual tool that passes the argument to a python script</span></span><br><span class="line">mytool()</span><br><span class="line">&#123;</span><br><span class="line">    python ~/mytool.py <span class="variable">$@</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># The completion function that helps user quickly input the arguments</span></span><br><span class="line"><span class="function"><span class="title">_mytool</span></span>() &#123;</span><br><span class="line">  <span class="comment"># zsh completion variable</span></span><br><span class="line">  <span class="built_in">local</span> state</span><br><span class="line"></span><br><span class="line">  <span class="comment"># separate arguments into different groups</span></span><br><span class="line">  _arguments \</span><br><span class="line">    <span class="string">'1: :-&gt;exp'</span>\</span><br><span class="line">    <span class="string">'*: :-&gt;others'</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Take the basename of files in $FOLDER and ends with $FILEEXT</span></span><br><span class="line">  FOLDER=<span class="string">"<span class="variable">$PWD</span>/manifests"</span></span><br><span class="line">  FILEEXT=<span class="string">".manifest"</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">local</span> files=()</span><br><span class="line">  <span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FOLDER</span>/*<span class="variable">$FILEEXT</span>; <span class="keyword">do</span></span><br><span class="line">      files+=(<span class="string">"<span class="variable">$&#123;$&#123;f/$FILEEXT/&#125;</span>/<span class="variable">$FOLDER</span>\/&#125;"</span>);</span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># tab completion only for the first argument</span></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$state</span> <span class="keyword">in</span></span><br><span class="line">      (exp) _arguments <span class="string">'1:profiles:( $files )'</span> ;;</span><br><span class="line">        (*) compadd <span class="string">"<span class="variable">$@</span>"</span> <span class="string">''</span></span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line">compdef _mytool mytool</span><br></pre></td></tr></table></figure>
+<h2 id="bash">bash</h2>
+<p>tbd.</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>os</tag>
+        <tag>bash</tag>
+        <tag>zsh</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Suppress TensorFlow Warnings</title>
     <url>/2020/07/22/0722-suppress-tensorflow-warnings/</url>
     <content><![CDATA[<p>To suppress TensorFlow warnings (in a single python file, or in the <code>__init__.py</code> of a package that depends on tensorflow):<br>
@@ -16,15 +62,86 @@
       </tags>
   </entry>
   <entry>
-    <title>梦该醒了。</title>
-    <url>/2020/08/12/0812-end-of-dream/</url>
-    <content><![CDATA[<p>得到一切却背负许多愧疚，比一无所有更可怕。</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/rtOvBOTyX00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]]></content>
+    <title>Personal vim configuration</title>
+    <url>/2020/07/26/0725-vim-config/</url>
+    <content><![CDATA[<p><img src="/2020/07/26/0725-vim-config/image-20200726005015462.png" alt="image-20200726005015462"></p>
+<h2 id="Auto-Complete">Auto Complete</h2>
+<p>Download <strong>AutoComplPop</strong>: <a href="https://www.vim.org/scripts/script.php?script_id=1879" target="_blank" rel="noopener">[vim-autocomplpop.zip]</a> <em>(no dependency)</em></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/.vim/<span class="built_in">autoload</span></span><br><span class="line">mkdir -p ~/.vim/plugin</span><br><span class="line">unzip vim-autocomplpop.zip</span><br><span class="line">cp <span class="built_in">autoload</span>/* ~/.vim/<span class="built_in">autoload</span>/</span><br><span class="line">cp plugin/* ~/.vim/plugin/</span><br></pre></td></tr></table></figure>
+<h2 id="File-Sidebar">File Sidebar</h2>
+<p>First, install the <strong>pathogen</strong> package manager following instructions <a href="https://github.com/tpope/vim-pathogen" target="_blank" rel="noopener">[here]</a> (very easy to setup).</p>
+<p>Then install the <strong>NERDTree</strong> plugin <em>(depends on pathogen)</em>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree</span><br></pre></td></tr></table></figure>
+<h2 id="Statusline-Customization">Statusline Customization</h2>
+<p>Install <strong>Lightline</strong> <em>(depends on pathogen)</em>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/itchyny/lightline.vim ~/.vim/bundle/lightline.vim</span><br></pre></td></tr></table></figure>
+<h2 id="Color-Theme">Color Theme</h2>
+<p>Download <strong>monokai</strong> color themes from <a href="https://vimcolors.com/" target="_blank" rel="noopener">[vimcolors]</a> <em>(no dependency)</em>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/.vim/colors</span><br><span class="line">wget https://raw.githubusercontent.com/dunckr/vim-monokai-soda/master/colors/monokai-soda.vim -O ~/.vim/colors/monokai-soda.vim</span><br><span class="line">wget https://raw.githubusercontent.com/phanviet/vim-monokai-pro/master/colors/monokai_pro.vim -O ~/.vim/colors/monokai-pro.vim</span><br></pre></td></tr></table></figure>
+<p>Optional: Install <strong>vim-polyglot</strong> for improved syntax highlighting <em>(depends on pathogen)</em>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/sheerun/vim-polyglot ~/.vim/bundle/vim-polyglot</span><br></pre></td></tr></table></figure>
+<h2 id="vimrc">~/.vimrc</h2>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">number</span>          <span class="comment">" show line number</span></span><br><span class="line"><span class="keyword">set</span> expandtab       <span class="comment">" convert tab to 4 spaces</span></span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">4</span>    <span class="comment">" shift 4 spaces when indenting code blocks</span></span><br><span class="line"><span class="keyword">set</span> autoindent      <span class="comment">" automatically indent for for, if, etc.</span></span><br><span class="line"><span class="keyword">set</span> mouse=<span class="keyword">a</span>         <span class="comment">" allow using mouse to move cursor, control split bars, etc.</span></span><br><span class="line"><span class="keyword">set</span> termguicolors   <span class="comment">" for removing vertical split bar `|` characters</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" pathogen package manager</span></span><br><span class="line"><span class="keyword">execute</span> pathogen#infect()</span><br><span class="line"><span class="keyword">filetype</span> plugin <span class="built_in">indent</span> <span class="keyword">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" Ctrl-T to toggle file sidebar</span></span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;C-t&gt;</span> :NERDTreeToggle<span class="symbol">&lt;cr&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" file exclude pattern</span></span><br><span class="line"><span class="keyword">let</span> NERDTreeIgnore = [<span class="string">'\.swp$'</span>, <span class="string">'\.pyc$'</span>, <span class="string">'\.ipynb_checkpoints$'</span>, <span class="string">'^__pycache__$'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">" status line color theme</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:lightline</span> = &#123;</span><br><span class="line">      \ <span class="string">'colorscheme'</span>: <span class="string">'seoul256'</span>,</span><br><span class="line">      \ &#125;</span><br><span class="line"><span class="keyword">set</span> ttymouse=xterm2</span><br><span class="line"></span><br><span class="line"><span class="comment">" main color theme</span></span><br><span class="line"><span class="keyword">colo</span> monokai-soda</span><br><span class="line"></span><br><span class="line"><span class="comment">" automatically trim white spaces on save</span></span><br><span class="line">fun! TrimWhitespace()</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">l:save</span> = <span class="built_in">winsaveview</span>()</span><br><span class="line">    keeppatterns %s/\s\+$//<span class="keyword">e</span></span><br><span class="line">    <span class="keyword">call</span> <span class="built_in">winrestview</span>(<span class="variable">l:save</span>)</span><br><span class="line">endfun</span><br><span class="line"></span><br><span class="line">command! TW <span class="keyword">call</span> TrimWhitespace()</span><br><span class="line"><span class="keyword">autocmd</span> BufWritePre * :<span class="keyword">call</span> TrimWhitespace()</span><br><span class="line"></span><br><span class="line"><span class="comment">" Highlight CamelCase symbols</span></span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">match</span>   myClassName <span class="string">'\v(&lt;\u\i*&gt;)+'</span></span><br><span class="line"><span class="keyword">highlight</span> link myClassName Type</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>vim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>八月的梦游者 by 北岛</title>
+    <url>/2020/08/03/0802-august-dreamer/</url>
+    <content><![CDATA[<p>海底的石钟敲响<br>
+敲响，掀起了波浪<br>
+敲响的是八月<br>
+八月的正午没有太阳</p>
+<p>涨满乳汁的三角帆<br>
+高耸在漂浮的尸体上<br>
+高耸的是八月<br>
+八月的苹果滚下山冈</p>
+<p>熄灭已久的灯塔<br>
+被水手们的目光照亮<br>
+照亮的是八月<br>
+八月的集市又临霜降</p>
+<p>海底的石钟敲响<br>
+敲响，掀起了波浪<br>
+八月的梦游者<br>
+看见过夜里的太阳</p>
+]]></content>
       <categories>
         <category>life</category>
       </categories>
       <tags>
-        <tag>dairy</tag>
+        <tag>poem</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Working with multiple GitHub accounts</title>
+    <url>/2020/07/12/2020-06-25-multiple-gits/</url>
+    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
+<h2 id="SSH-setups">SSH setups</h2>
+<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
+<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
+<p>Then, add the generated public keys to github for each account:</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
+<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
+<h2 id="Git-configs">Git configs</h2>
+<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
+<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -65,89 +182,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Personal vim configuration</title>
-    <url>/2020/07/26/0725-vim-config/</url>
-    <content><![CDATA[<p><img src="/2020/07/26/0725-vim-config/image-20200726005015462.png" alt="image-20200726005015462"></p>
-<h2 id="Auto-Complete">Auto Complete</h2>
-<p>Download <strong>AutoComplPop</strong>: <a href="https://www.vim.org/scripts/script.php?script_id=1879" target="_blank" rel="noopener">[vim-autocomplpop.zip]</a> <em>(no dependency)</em></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/.vim/<span class="built_in">autoload</span></span><br><span class="line">mkdir -p ~/.vim/plugin</span><br><span class="line">unzip vim-autocomplpop.zip</span><br><span class="line">cp <span class="built_in">autoload</span>/* ~/.vim/<span class="built_in">autoload</span>/</span><br><span class="line">cp plugin/* ~/.vim/plugin/</span><br></pre></td></tr></table></figure>
-<h2 id="File-Sidebar">File Sidebar</h2>
-<p>First, install the <strong>pathogen</strong> package manager following instructions <a href="https://github.com/tpope/vim-pathogen" target="_blank" rel="noopener">[here]</a> (very easy to setup).</p>
-<p>Then install the <strong>NERDTree</strong> plugin <em>(depends on pathogen)</em>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree</span><br></pre></td></tr></table></figure>
-<h2 id="Statusline-Customization">Statusline Customization</h2>
-<p>Install <strong>Lightline</strong> <em>(depends on pathogen)</em>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/itchyny/lightline.vim ~/.vim/bundle/lightline.vim</span><br></pre></td></tr></table></figure>
-<h2 id="Color-Theme">Color Theme</h2>
-<p>Download <strong>monokai</strong> color themes from <a href="https://vimcolors.com/" target="_blank" rel="noopener">[vimcolors]</a> <em>(no dependency)</em>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/.vim/colors</span><br><span class="line">wget https://raw.githubusercontent.com/dunckr/vim-monokai-soda/master/colors/monokai-soda.vim -O ~/.vim/colors/monokai-soda.vim</span><br><span class="line">wget https://raw.githubusercontent.com/phanviet/vim-monokai-pro/master/colors/monokai_pro.vim -O ~/.vim/colors/monokai-pro.vim</span><br></pre></td></tr></table></figure>
-<p>Optional: Install <strong>vim-polyglot</strong> for improved syntax highlighting <em>(depends on pathogen)</em>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/sheerun/vim-polyglot ~/.vim/bundle/vim-polyglot</span><br></pre></td></tr></table></figure>
-<h2 id="vimrc">~/.vimrc</h2>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">number</span>          <span class="comment">" show line number</span></span><br><span class="line"><span class="keyword">set</span> expandtab       <span class="comment">" convert tab to 4 spaces</span></span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">4</span>    <span class="comment">" shift 4 spaces when indenting code blocks</span></span><br><span class="line"><span class="keyword">set</span> autoindent      <span class="comment">" automatically indent for for, if, etc.</span></span><br><span class="line"><span class="keyword">set</span> mouse=<span class="keyword">a</span>         <span class="comment">" allow using mouse to move cursor, control split bars, etc.</span></span><br><span class="line"><span class="keyword">set</span> termguicolors   <span class="comment">" for removing vertical split bar `|` characters</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" pathogen package manager</span></span><br><span class="line"><span class="keyword">execute</span> pathogen#infect()</span><br><span class="line"><span class="keyword">filetype</span> plugin <span class="built_in">indent</span> <span class="keyword">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" Ctrl-T to toggle file sidebar</span></span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;C-t&gt;</span> :NERDTreeToggle<span class="symbol">&lt;cr&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">" file exclude pattern</span></span><br><span class="line"><span class="keyword">let</span> NERDTreeIgnore = [<span class="string">'\.swp$'</span>, <span class="string">'\.pyc$'</span>, <span class="string">'\.ipynb_checkpoints$'</span>, <span class="string">'^__pycache__$'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">" status line color theme</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:lightline</span> = &#123;</span><br><span class="line">      \ <span class="string">'colorscheme'</span>: <span class="string">'seoul256'</span>,</span><br><span class="line">      \ &#125;</span><br><span class="line"><span class="keyword">set</span> ttymouse=xterm2</span><br><span class="line"></span><br><span class="line"><span class="comment">" main color theme</span></span><br><span class="line"><span class="keyword">colo</span> monokai-soda</span><br><span class="line"></span><br><span class="line"><span class="comment">" automatically trim white spaces on save</span></span><br><span class="line">fun! TrimWhitespace()</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">l:save</span> = <span class="built_in">winsaveview</span>()</span><br><span class="line">    keeppatterns %s/\s\+$//<span class="keyword">e</span></span><br><span class="line">    <span class="keyword">call</span> <span class="built_in">winrestview</span>(<span class="variable">l:save</span>)</span><br><span class="line">endfun</span><br><span class="line"></span><br><span class="line">command! TW <span class="keyword">call</span> TrimWhitespace()</span><br><span class="line"><span class="keyword">autocmd</span> BufWritePre * :<span class="keyword">call</span> TrimWhitespace()</span><br><span class="line"></span><br><span class="line"><span class="comment">" Highlight CamelCase symbols</span></span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">match</span>   myClassName <span class="string">'\v(&lt;\u\i*&gt;)+'</span></span><br><span class="line"><span class="keyword">highlight</span> link myClassName Type</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>vim</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Limit the usage of CPUs and GPUs of a process</title>
-    <url>/2020/07/22/0722-taskset/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0,1 taskset --cpu-list 0,1,2,3 python train.py</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>os</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker cheatsheet</title>
-    <url>/2020/07/10/2020-07-08-docker/</url>
-    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
-<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="Usage">Usage</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>八月的梦游者 by 北岛</title>
-    <url>/2020/08/03/0802-august-dreamer/</url>
-    <content><![CDATA[<p>海底的石钟敲响<br>
-敲响，掀起了波浪<br>
-敲响的是八月<br>
-八月的正午没有太阳</p>
-<p>涨满乳汁的三角帆<br>
-高耸在漂浮的尸体上<br>
-高耸的是八月<br>
-八月的苹果滚下山冈</p>
-<p>熄灭已久的灯塔<br>
-被水手们的目光照亮<br>
-照亮的是八月<br>
-八月的集市又临霜降</p>
-<p>海底的石钟敲响<br>
-敲响，掀起了波浪<br>
-八月的梦游者<br>
-看见过夜里的太阳</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>poem</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>最近怎样？</title>
     <url>/2020/07/10/2020-06-28-how-are-you/</url>
     <content><![CDATA[<blockquote>
@@ -182,6 +216,57 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker cheatsheet</title>
+    <url>/2020/07/10/2020-07-08-docker/</url>
+    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="Usage">Usage</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Auto Sync</title>
+    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
+    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Typora Auto Numbering</title>
+    <url>/2020/07/12/2020-07-10-typora-auto-number/</url>
+    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
+<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<h2 id="serif">serif</h2>
+<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710193009823.png" alt="image-20200710193009823"></p>
+<a id="more"></a>
+<h2 id="sans-serif">sans-serif</h2>
+<p>GitHub</p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710203832748.png" alt="image-20200710203832748"></p>
+<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710204004740.png" alt="image-20200710204004740"></p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>typora-theme</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Inserting images into Hexo posts with Typora</title>
     <url>/2020/07/12/2020-07-10-hexo-image/</url>
     <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
@@ -211,19 +296,11 @@
       </tags>
   </entry>
   <entry>
-    <title>Typora Auto Numbering</title>
-    <url>/2020/07/12/2020-07-10-typora-auto-number/</url>
-    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
-<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<h2 id="serif">serif</h2>
-<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710193009823.png" alt="image-20200710193009823"></p>
-<a id="more"></a>
-<h2 id="sans-serif">sans-serif</h2>
-<p>GitHub</p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710203832748.png" alt="image-20200710203832748"></p>
-<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710204004740.png" alt="image-20200710204004740"></p>
+    <title>Typora Paper Night</title>
+    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
+    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
+<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
 ]]></content>
       <categories>
         <category>tech</category>
@@ -235,15 +312,40 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo Auto Sync</title>
-    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
-    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+    <title>Centering Google Search and Google Scholar</title>
+    <url>/2020/07/12/2020-07-11-google-search-centering/</url>
+    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
+<table>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
+</tr>
+<tr>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<p>Centering Google Scholar:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
         <category>tech</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
+        <tag>css</tag>
+        <tag>tampermonkey</tag>
+        <tag>google</tag>
       </tags>
   </entry>
   <entry>
@@ -324,56 +426,15 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
-    <title>Centering Google Search and Google Scholar</title>
-    <url>/2020/07/12/2020-07-11-google-search-centering/</url>
-    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
-<table>
-<thead>
-<tr>
-<th>Before</th>
-<th>After</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
-</tr>
-<tr>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
-</tr>
-</tbody>
-</table>
-<a id="more"></a>
-<p>Centering Google Scholar:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+    <title>String Format for C++</title>
+    <url>/2020/08/06/2020-08-06-cpp-string-format/</url>
+    <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Example Usage:</span></span><br><span class="line"><span class="comment"> * fmt("%s: %d", str.c_str(), integer);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">std</span>:</span>:<span class="function"><span class="built_in">string</span> <span class="title">fmt</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;format, Args... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> BUFSIZE = <span class="built_in">std</span>::<span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format.c_str(), args...) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">char</span> *buf = <span class="keyword">new</span> <span class="keyword">char</span>[BUFSIZE];</span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, BUFSIZE * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, BUFSIZE, format.c_str(), args...);</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">str</span><span class="params">(buf)</span></span>;</span><br><span class="line">  <span class="keyword">delete</span>[] buf;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>tech</category>
       </categories>
       <tags>
-        <tag>css</tag>
-        <tag>tampermonkey</tag>
-        <tag>google</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Typora Paper Night</title>
-    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
-    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
-<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>typora-theme</tag>
+        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
@@ -501,18 +562,6 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
-    <title>String Format for C++</title>
-    <url>/2020/08/06/2020-08-06-cpp-string-format/</url>
-    <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Example Usage:</span></span><br><span class="line"><span class="comment"> * fmt("%s: %d", str.c_str(), integer);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">std</span>:</span>:<span class="function"><span class="built_in">string</span> <span class="title">fmt</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;format, Args... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> BUFSIZE = <span class="built_in">std</span>::<span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format.c_str(), args...) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">char</span> *buf = <span class="keyword">new</span> <span class="keyword">char</span>[BUFSIZE];</span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, BUFSIZE * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, BUFSIZE, format.c_str(), args...);</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">str</span><span class="params">(buf)</span></span>;</span><br><span class="line">  <span class="keyword">delete</span>[] buf;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>c++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>我的焦虑</title>
     <url>/2020/08/08/2020-08-08-anxiety/</url>
     <content><![CDATA[<p>最近很丧<br>
@@ -567,33 +616,6 @@ Watin’ for you by the telephone…</p>
       <tags>
         <tag>dairy</tag>
         <tag>负能量</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Working with multiple GitHub accounts</title>
-    <url>/2020/07/12/2020-06-25-multiple-gits/</url>
-    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
-<h2 id="SSH-setups">SSH setups</h2>
-<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
-<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
-<p>Then, add the generated public keys to github for each account:</p>
-<a id="more"></a>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
-<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
-<h2 id="Git-configs">Git configs</h2>
-<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
-<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -731,28 +753,6 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>diary</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Tab Completion for Bash and Zsh</title>
-    <url>/2020/07/28/0728-tab-completion/</url>
-    <content><![CDATA[<p>Suppose you have files structured as follows:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">└── manifests</span><br><span class="line">    ├── abc123.manifest</span><br><span class="line">    └── xyz456.manifest</span><br></pre></td></tr></table></figure>
-<p>You want to define a bash command <code>mytool</code> that can achieve the follows:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mytool &lt;TAB&gt;</span><br><span class="line">abc123 xyz456</span><br><span class="line"></span><br><span class="line">$ mytool 12&lt;TAB&gt;</span><br><span class="line">abc123</span><br></pre></td></tr></table></figure>
-<h2 id="zsh">zsh</h2>
-<p>If you are an <code>oh-my-zsh</code> user, this can be accomplished by adding the following lines into <code>~/.zshrc</code>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># The actual tool that passes the argument to a python script</span></span><br><span class="line">mytool()</span><br><span class="line">&#123;</span><br><span class="line">    python ~/mytool.py <span class="variable">$@</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># The completion function that helps user quickly input the arguments</span></span><br><span class="line"><span class="function"><span class="title">_mytool</span></span>() &#123;</span><br><span class="line">  <span class="comment"># zsh completion variable</span></span><br><span class="line">  <span class="built_in">local</span> state</span><br><span class="line"></span><br><span class="line">  <span class="comment"># separate arguments into different groups</span></span><br><span class="line">  _arguments \</span><br><span class="line">    <span class="string">'1: :-&gt;exp'</span>\</span><br><span class="line">    <span class="string">'*: :-&gt;others'</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Take the basename of files in $FOLDER and ends with $FILEEXT</span></span><br><span class="line">  FOLDER=<span class="string">"<span class="variable">$PWD</span>/manifests"</span></span><br><span class="line">  FILEEXT=<span class="string">".manifest"</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">local</span> files=()</span><br><span class="line">  <span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FOLDER</span>/*<span class="variable">$FILEEXT</span>; <span class="keyword">do</span></span><br><span class="line">      files+=(<span class="string">"<span class="variable">$&#123;$&#123;f/$FILEEXT/&#125;</span>/<span class="variable">$FOLDER</span>\/&#125;"</span>);</span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># tab completion only for the first argument</span></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$state</span> <span class="keyword">in</span></span><br><span class="line">      (exp) _arguments <span class="string">'1:profiles:( $files )'</span> ;;</span><br><span class="line">        (*) compadd <span class="string">"<span class="variable">$@</span>"</span> <span class="string">''</span></span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line">compdef _mytool mytool</span><br></pre></td></tr></table></figure>
-<h2 id="bash">bash</h2>
-<p>tbd.</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>os</tag>
-        <tag>bash</tag>
-        <tag>zsh</tag>
       </tags>
   </entry>
 </search>
