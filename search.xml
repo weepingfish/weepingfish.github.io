@@ -79,18 +79,6 @@
       </tags>
   </entry>
   <entry>
-    <title>梦该醒了。</title>
-    <url>/2020/08/29/0812-end-of-dream/</url>
-    <content><![CDATA[<p>得到一切却背负许多愧疚，比一无所有更可怕。</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/rtOvBOTyX00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>dairy</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>八月的梦游者 by 北岛</title>
     <url>/2020/08/03/0802-august-dreamer/</url>
     <content><![CDATA[<p>海底的石钟敲响<br>
@@ -118,6 +106,18 @@
       </tags>
   </entry>
   <entry>
+    <title>梦该醒了。</title>
+    <url>/2020/08/29/0812-end-of-dream/</url>
+    <content><![CDATA[<p>得到一切却背负许多愧疚，比一无所有更可怕。</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rtOvBOTyX00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>dairy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>夏天就要结束了，而我依旧一无所有</title>
     <url>/2020/08/29/0829-end-of-summer/</url>
     <content><![CDATA[<p>这些天陆陆续续地和一些人通了电话。把自己摆在绝对弱者的位置，乞求着或同情或鄙夷的关心。</p>
@@ -125,7 +125,7 @@
 <p>“如果当务之急只是保住你的PhD学位的话，任何其他的事情都不重要。你必须用100%的努力去冲击11月的CVPR。我瞅着，这也没几天了吧。如果冲不上的话，实在不行就quit了得了。我还有很多PhD好朋友最后也都quit了，现在一个个都活得挺开心的，我和他们也是挺好的朋友。别觉得PhD拿不到你的人生就怎么怎么样了。没那么严重。”</p>
 <p>“不就是实习没做出来吗，这有什么了不得的。我和xx也没做出来。也别觉得愧疚，我对我之前那个导师也挺愧疚的。但是从另一个角度讲，我走了，我解脱了，他也解脱了。”</p>
 <p>“你的coding和做题实力绝对没问题。不用想找不到工作这种可能性。所以别有太大压力。”</p>
-<p>好像又回到两年前的夏天，后退一步就是足以让人粉身碎骨的悬崖。偏偏又看不清前方的路，不知道自己当前的决定是否是local minima。要背水一战，又好像不再是“没有什么可以失去”。我才22岁，我贫穷又富有：贫穷的是物质，富有的是身体和时间。</p>
+<p>好像又回到两年前的夏天，后退一步就是足以让人粉身碎骨的悬崖。偏偏又看不清前方的路，不知道自己当前的决定是否是local minima。要背水一战，又好像不再是“没有什么可以失去”。我才22岁，我贫穷又富有：贫穷的是物质，富有的是身体和时间。再拼一场，超出身体的符合，</p>
 ]]></content>
       <categories>
         <category>life</category>
@@ -199,21 +199,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker cheatsheet</title>
-    <url>/2020/07/10/2020-07-08-docker/</url>
-    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
-<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="Usage">Usage</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>最近怎样？</title>
     <url>/2020/07/10/2020-06-28-how-are-you/</url>
     <content><![CDATA[<blockquote>
@@ -257,6 +242,21 @@
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker cheatsheet</title>
+    <url>/2020/07/10/2020-07-08-docker/</url>
+    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="Usage">Usage</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -455,63 +455,6 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
-    <title>我的焦虑</title>
-    <url>/2020/08/08/2020-08-08-anxiety/</url>
-    <content><![CDATA[<p>最近很丧<br>
-事情永远做不完<br>
-丧失了对科研的动力<br>
-晨会之前无一例外的强迫性熬夜<br>
-头晕 想吐 不想好好吃饭</p>
-<p>不知道自己喜欢什么<br>
-不知道将来要做什么<br>
-不知道要怎样向实习mentor交代<br>
-不知道美国这摊子烂事什么时候是个头<br>
-不知道毕业之后该去做什么<br>
-身为中国人会不会受到歧视或暴力</p>
-<p>前些天导师问我 秋季有什么打算<br>
-我下意识地说 我不知道<br>
-他说 你不能不知道 你难道不想早点找到导师吗<br>
-他说 我们非常困惑 你一方面对于找到导师显得很迫切<br>
-另一方面又提出要秋季继续实习<br>
-你到底想干什么？是想直接硕士毕业？还是想持两端以观望？</p>
-<p>话全都噎在嗓子眼儿里出不来了<br>
-我不知道<br>
-坚持继续读博是不是一个正确的选择<br>
-继续读博吗 ６年毕不了业怎么办<br>
-按我现在的进度也丝毫看不到毕业的希望<br>
-拿硕走人吗 就算我拿得出一学期20W人民币的学费＋生活费<br>
-毕业之后看现在的形势怕是也找不到工作<br>
-抽不抽得到H1B另说</p>
-<p>今年我22岁 往后再看10年<br>
-留在美国吗 我爸爸的病怎么办<br>
-美国的天价医药费我一辈子都挣不出来<br>
-回国吗 程序员行业的内卷越来越严重 996各种福报<br>
-美刀和人民币之间的购买力不可同日而语<br>
-消费主义 性别歧视 年龄焦虑 荡妇羞辱 处女情结 各种judge<br>
-将来生孩子吗 生出来谁带 长大了谁管教</p>
-<p>“你说你不想让实习的项目烂尾，<br>
-那你对现在我们现在这个项目的责任感在哪里？”<br>
-断片的大脑被拉回近在眼前的现实世界<br>
-从本质上讲 我现在一切的尴尬处境都始于迷茫<br>
-什么都想尝试 什么都不愿放下 什么都想做好 结果什么都辜负了</p>
-<p>我哭了<br>
-我自欺欺人的一切幻想 选择性忽视的那些真相<br>
-被挑破 拖出来 放在太阳下暴晒 流出难看的脓液<br>
-其实蛮讨厌当众流泪的<br>
-哭 应该发生在无人的地方 大声地 无所顾忌<br>
-人类的悲欢并不相通 突如其来的泪水只会让对方尴尬</p>
-<p>导师没有再说什么重话<br>
-我关闭视频 倒在床上 天旋地转</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>dairy</tag>
-        <tag>负能量</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2020夏 | 战拖打卡</title>
     <url>/2020/07/14/2020-summer-no-procrastination/</url>
     <content><![CDATA[<p><img src="/2020/07/14/2020-summer-no-procrastination/is_it_worth_the_time.png" alt="img"></p>
@@ -636,15 +579,60 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
-    <title>如何愉快地渡过生理期</title>
-    <url>/2020/08/09/period/</url>
-    <content><![CDATA[<p>Inserting a tampon when the vagina is dry can be extremely painful. Sometimes this happens right after a shower. In that case, sexual arousal might help. For instance, gently massage the clitoris until the vagina relaxes and becomes wet.</p>
+    <title>我的焦虑</title>
+    <url>/2020/08/08/2020-08-08-anxiety/</url>
+    <content><![CDATA[<p>最近很丧<br>
+事情永远做不完<br>
+丧失了对科研的动力<br>
+晨会之前无一例外的强迫性熬夜<br>
+头晕 想吐 不想好好吃饭</p>
+<p>不知道自己喜欢什么<br>
+不知道将来要做什么<br>
+不知道要怎样向实习mentor交代<br>
+不知道美国这摊子烂事什么时候是个头<br>
+不知道毕业之后该去做什么<br>
+身为中国人会不会受到歧视或暴力</p>
+<p>前些天导师问我 秋季有什么打算<br>
+我下意识地说 我不知道<br>
+他说 你不能不知道 你难道不想早点找到导师吗<br>
+他说 我们非常困惑 你一方面对于找到导师显得很迫切<br>
+另一方面又提出要秋季继续实习<br>
+你到底想干什么？是想直接硕士毕业？还是想持两端以观望？</p>
+<p>话全都噎在嗓子眼儿里出不来了<br>
+我不知道<br>
+坚持继续读博是不是一个正确的选择<br>
+继续读博吗 ６年毕不了业怎么办<br>
+按我现在的进度也丝毫看不到毕业的希望<br>
+拿硕走人吗 就算我拿得出一学期20W人民币的学费＋生活费<br>
+毕业之后看现在的形势怕是也找不到工作<br>
+抽不抽得到H1B另说</p>
+<p>今年我22岁 往后再看10年<br>
+留在美国吗 我爸爸的病怎么办<br>
+美国的天价医药费我一辈子都挣不出来<br>
+回国吗 程序员行业的内卷越来越严重 996各种福报<br>
+美刀和人民币之间的购买力不可同日而语<br>
+消费主义 性别歧视 年龄焦虑 荡妇羞辱 处女情结 各种judge<br>
+将来生孩子吗 生出来谁带 长大了谁管教</p>
+<p>“你说你不想让实习的项目烂尾，<br>
+那你对现在我们现在这个项目的责任感在哪里？”<br>
+断片的大脑被拉回近在眼前的现实世界<br>
+从本质上讲 我现在一切的尴尬处境都始于迷茫<br>
+什么都想尝试 什么都不愿放下 什么都想做好 结果什么都辜负了</p>
+<p>我哭了<br>
+我自欺欺人的一切幻想 选择性忽视的那些真相<br>
+被挑破 拖出来 放在太阳下暴晒 流出难看的脓液<br>
+其实蛮讨厌当众流泪的<br>
+哭 应该发生在无人的地方 大声地 无所顾忌<br>
+人类的悲欢并不相通 突如其来的泪水只会让对方尴尬</p>
+<p>导师没有再说什么重话<br>
+我关闭视频 倒在床上 天旋地转</p>
 ]]></content>
       <categories>
         <category>life</category>
       </categories>
       <tags>
-        <tag>period</tag>
+        <tag>dairy</tag>
+        <tag>负能量</tag>
       </tags>
   </entry>
   <entry>
@@ -770,6 +758,18 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何愉快地渡过生理期</title>
+    <url>/2020/08/09/period/</url>
+    <content><![CDATA[<p>Inserting a tampon when the vagina is dry can be extremely painful. Sometimes this happens right after a shower. In that case, sexual arousal might help. For instance, gently massage the clitoris until the vagina relaxes and becomes wet.</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>period</tag>
       </tags>
   </entry>
 </search>
