@@ -118,22 +118,6 @@
       </tags>
   </entry>
   <entry>
-    <title>夏天就要结束了，而我依旧一无所有</title>
-    <url>/2020/08/29/0829-end-of-summer/</url>
-    <content><![CDATA[<p>这些天陆陆续续地和一些人通了电话。把自己摆在绝对弱者的位置，感受着或同情或鄙夷的问候。</p>
-<p>“除非你真正解决问题，任何自我催眠都毫无用处。只有问题解决的那一天，痛苦才会消失，你才会真正舒服。”</p>
-<p>“如果当务之急只是保住你的PhD学位的话，任何其他的事情都不重要。你必须用100%的努力去冲击11月的CVPR。我瞅着，这也没几天了吧。如果冲不上的话，实在不行就quit了得了。我还有很多PhD好朋友最后也都quit了，现在一个个都活得挺开心的，我和他们也是挺好的朋友。别觉得PhD拿不到你的人生就怎么怎么样了。没那么严重。”</p>
-<p>“不就是实习没做出来吗，这有什么了不得的。我和xx也没做出来。也别觉得愧疚，我对我之前那个导师也挺愧疚的。但是从另一个角度讲，我走了，我解脱了，他也解脱了。”</p>
-<p>“你的coding和做题实力绝对没问题。不用想找不到工作这种可能性。”</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>diary</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Building a Hexo Blog with GitHub Pages</title>
     <url>/2020/07/12/2020-06-24-hexo-blog/</url>
     <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
@@ -259,27 +243,19 @@
       </tags>
   </entry>
   <entry>
-    <title>Typora Auto Numbering</title>
-    <url>/2020/07/12/2020-07-10-typora-auto-number/</url>
-    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
-<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<h2 id="serif">serif</h2>
-<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710193009823.png" alt="image-20200710193009823"></p>
-<a id="more"></a>
-<h2 id="sans-serif">sans-serif</h2>
-<p>GitHub</p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710203832748.png" alt="image-20200710203832748"></p>
-<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
-<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710204004740.png" alt="image-20200710204004740"></p>
+    <title>夏天就要结束了，而我依旧一无所有</title>
+    <url>/2020/08/29/0829-end-of-summer/</url>
+    <content><![CDATA[<p>这些天陆陆续续地和一些人通了电话。把自己摆在绝对弱者的位置，感受着或同情或鄙夷的问候。</p>
+<p>“除非你真正解决问题，任何自我催眠都毫无用处。只有问题解决的那一天，痛苦才会消失，你才会真正舒服。”</p>
+<p>“如果当务之急只是保住你的PhD学位的话，任何其他的事情都不重要。你必须用100%的努力去冲击11月的CVPR。我瞅着，这也没几天了吧。如果冲不上的话，实在不行就quit了得了。我还有很多PhD好朋友最后也都quit了，现在一个个都活得挺开心的，我和他们也是挺好的朋友。别觉得PhD拿不到你的人生就怎么怎么样了。没那么严重。”</p>
+<p>“不就是实习没做出来吗，这有什么了不得的。我和xx也没做出来。也别觉得愧疚，我对我之前那个导师也挺愧疚的。但是从另一个角度讲，我走了，我解脱了，他也解脱了。”</p>
+<p>“你的coding和做题实力绝对没问题。不用想找不到工作这种可能性。所以别有太大压力。”</p>
 ]]></content>
       <categories>
-        <category>tech</category>
+        <category>life</category>
       </categories>
       <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>typora-theme</tag>
+        <tag>diary</tag>
       </tags>
   </entry>
   <entry>
@@ -312,10 +288,19 @@
       </tags>
   </entry>
   <entry>
-    <title>CSS for Customized Fonts</title>
-    <url>/2020/07/11/2020-07-11-fontface-css/</url>
-    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>Typora Auto Numbering</title>
+    <url>/2020/07/12/2020-07-10-typora-auto-number/</url>
+    <content><![CDATA[<p>A beautiful LaTeX-like feature for MarkDown! (auto-numbering for body, toc, sidebar)<br>
+<a href="https://github.com/weepingfish/typora-autonumber" target="_blank" rel="noopener">[theme css]</a> <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<h2 id="serif">serif</h2>
+<p><a href="https://theme.typora.io/theme/paper/" target="_blank" rel="noopener">Paper</a></p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710193009823.png" alt="image-20200710193009823"></p>
+<a id="more"></a>
+<h2 id="sans-serif">sans-serif</h2>
+<p>GitHub</p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710203832748.png" alt="image-20200710203832748"></p>
+<p><a href="https://theme.typora.io/theme/Ursine/" target="_blank" rel="noopener">Ursine Polar</a></p>
+<p><img src="/2020/07/12/2020-07-10-typora-auto-number/image-20200710204004740.png" alt="image-20200710204004740"></p>
 ]]></content>
       <categories>
         <category>tech</category>
@@ -323,7 +308,7 @@
       <tags>
         <tag>typora</tag>
         <tag>css</tag>
-        <tag>font</tag>
+        <tag>typora-theme</tag>
       </tags>
   </entry>
   <entry>
@@ -361,6 +346,21 @@
         <tag>css</tag>
         <tag>tampermonkey</tag>
         <tag>google</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS for Customized Fonts</title>
+    <url>/2020/07/11/2020-07-11-fontface-css/</url>
+    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>typora</tag>
+        <tag>css</tag>
+        <tag>font</tag>
       </tags>
   </entry>
   <entry>
@@ -511,142 +511,6 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
-    <title>2020夏 | 战拖打卡</title>
-    <url>/2020/07/14/2020-summer-no-procrastination/</url>
-    <content><![CDATA[<p><img src="/2020/07/14/2020-summer-no-procrastination/is_it_worth_the_time.png" alt="img"></p>
-<h2 id="Scrum-Log">Scrum Log</h2>
-<p>实验室</p>
-<ul>
-<li>手画轨迹实验（100）+50+10</li>
-<li>真人图像渲染器（150）+100</li>
-<li><strong>周报</strong>（100）</li>
-<li>文档（200）</li>
-<li>起始点实验降噪（100）</li>
-<li>全身动态模型（500）</li>
-<li>读论文（100）</li>
-<li><strong>找秋季老板</strong>（500）</li>
-<li><strong>报税</strong>（100，by 7.15）</li>
-</ul>
-<p>实习</p>
-<ul>
-<li><strong>给fedex打电话1.800.463.3339取快递</strong>（10）</li>
-<li><s><strong>改PPT</strong>（100）</s></li>
-<li>树实验（150）</li>
-<li>带边的树实验（200）</li>
-<li>读论文（100）</li>
-</ul>
-<p>General</p>
-<ul>
-<li><strong>连续7天12:30am前睡觉</strong>（500）</li>
-<li>连续7天每天有效工作时长&gt;=8h（200）+1+1+0</li>
-<li>连续7天每天productivity得分超过200（500）+1+1+0</li>
-<li>连续7天日均读论文数&gt;=1（300）</li>
-<li>体重下降到125斤（200）</li>
-<li>体重下降到120斤（400）</li>
-<li>连续7天每天看手机不超过2h（200）</li>
-<li>连续7天每隔一天跑一次步（200）</li>
-<li>连续4个周日给爸爸打电话（500）</li>
-<li>洗衣服（10）</li>
-</ul>
-<hr>
-<h2 id="7-13-Mon">7.13 (Mon)</h2>
-<ul>
-<li>11:00-12:30 HTML bigtable visualization</li>
-<li>12:30-13:30 处理Layout节点</li>
-<li>13:30-14:40 午饭+休息</li>
-<li>14:40-16:30 处理Layout节点（接下来：处理List和Image两种情况，分别统计number, consistency）</li>
-<li>20:30-23:30 处理List的数据</li>
-</ul>
-<h2 id="7-11-Sat">7.11 (Sat)</h2>
-<ul>
-<li>12:30-14:00 Typora Paper Night</li>
-<li>14:00-19:00 吃饭，洗澡，休息（wtf！）</li>
-</ul>
-<h2 id="7-10-Fri">7.10 (Fri)</h2>
-<p>3h total （<strong>+150</strong>），sleep: 2am</p>
-<ul>
-<li>9:15-10:30 实验室meet（<strong>+50</strong>）</li>
-<li>10:30-11:00 跟FedEx电话撕逼</li>
-<li>11:00-16:00 补觉</li>
-<li>16:00-18:30 起床吃饭，餐后休息</li>
-<li>19:00-22:00 typora theme；修复hexo图片链接；加入auto sync</li>
-<li>22:30-23:30 休息</li>
-<li>23:30-1:00 本日meeting总结（<strong>+100</strong>）</li>
-</ul>
-<h2 id="7-9-Thu">7.9 (Thu)</h2>
-<p>8h total（<strong>+330</strong>），sleep：4-5am</p>
-<ul>
-<li>12:30-13:00 检查了昨天手画轨迹的结果。2个waving的work的还行，其他的image render有问题（<strong>+10</strong>）</li>
-<li>13:00-14:00 午餐，给SSN office打电话，给Fedex打电话，等候international center的zoom meet</li>
-<li>15:00-16:00 练习intro talk</li>
-<li>16:00-16:30 intro talk</li>
-<li>16:30-17:00 处理报税（垃圾IRS系统）</li>
-<li>17:00-18:30 晚饭，取weee</li>
-<li>18:30-19:30 添加博客搜索功能</li>
-<li>19:30-20:30 crop images and extract 2D keypoints with openpose</li>
-<li>20:30-21:00 download and install pix2pix</li>
-<li>21:00-21:30 休息</li>
-<li>21:30-24:00 检查是否可以使用一个affine transform映射真人姿态和模拟姿态（发现不行，+20），学习使用pix2pix</li>
-<li>24:00-1:00 休息</li>
-<li>1:00-2:00 用pix2pix训从colorstick到人的映射（<strong>+100</strong>，效果一般）</li>
-<li>2:00-3:00 思考如何对齐两个相机空间中的姿态，提出一个也许可行的解决方案（<strong>+100</strong>）</li>
-<li>6:00-9:00 周报（<strong>+100</strong>）</li>
-</ul>
-<h2 id="7-8-Wed">7.8 (Wed)</h2>
-<p>10.5h total（<strong>+200</strong>）, sleep: 2am</p>
-<ul>
-<li>22:30-1:30 补全intro talk PPT的配图并加入speaker notes（<strong>+100</strong>）</li>
-<li>20:30-22:00 采集5组手画轨迹并运行（还需检查质量）（<strong>+50</strong>）</li>
-<li>19:00-20:30 饭后休息+洗澡</li>
-<li>18:20-19:00 晚饭（炒饭）</li>
-<li>17:00-18:20 建立打卡目标scrum log</li>
-<li>16:00-17:00 逛一亩三分地、豆瓣战拖组</li>
-<li>15:00-16:00 和朋友去星爸爸买咖啡</li>
-<li>9:30-14:30 补觉</li>
-<li>8:00-9:00 internship weekly meeting（<strong>+50</strong>）</li>
-<li>2:00-7:00 draft slides（效率太低，不算分）</li>
-</ul>
-<hr>
-<h2 id="延迟愿望清单">延迟愿望清单</h2>
-<ul>
-<li><s>建立战拖打卡贴</s></li>
-<li>build personal academic blog（200）</li>
-<li>Research Notes (200)</li>
-<li>write a blog for RL/PPO/GAE（500）</li>
-<li>write a blog for internship related works（500）</li>
-<li>WorkingCopy for linux?（20）</li>
-<li>新鞋子（200）</li>
-<li>手写输入 for iPad（50）</li>
-<li>秘密花园涂色 for iPad（200）</li>
-<li>Reader’s Digest / Teen books in English (200)</li>
-<li>make a github repo for Dockerfile (50)</li>
-<li>解决paper theme导出成html的字体问题（100）</li>
-<li>学唱《斑马，斑马》（100）</li>
-<li>耳夹（100）</li>
-<li><em>Excellent Sheep</em>（100）</li>
-</ul>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>diary</tag>
-        <tag>procrastination</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何愉快地渡过生理期</title>
-    <url>/2020/08/09/period/</url>
-    <content><![CDATA[<p>Inserting a tampon when the vagina is dry can be extremely painful. Sometimes this happens right after a shower. In that case, sexual arousal might help. For instance, gently massage the clitoris until the vagina relaxes and becomes wet.</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>period</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2020夏</title>
     <url>/2020/08/09/2020-summer/</url>
     <content><![CDATA[<blockquote>
@@ -769,6 +633,142 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何愉快地渡过生理期</title>
+    <url>/2020/08/09/period/</url>
+    <content><![CDATA[<p>Inserting a tampon when the vagina is dry can be extremely painful. Sometimes this happens right after a shower. In that case, sexual arousal might help. For instance, gently massage the clitoris until the vagina relaxes and becomes wet.</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>period</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2020夏 | 战拖打卡</title>
+    <url>/2020/07/14/2020-summer-no-procrastination/</url>
+    <content><![CDATA[<p><img src="/2020/07/14/2020-summer-no-procrastination/is_it_worth_the_time.png" alt="img"></p>
+<h2 id="Scrum-Log">Scrum Log</h2>
+<p>实验室</p>
+<ul>
+<li>手画轨迹实验（100）+50+10</li>
+<li>真人图像渲染器（150）+100</li>
+<li><strong>周报</strong>（100）</li>
+<li>文档（200）</li>
+<li>起始点实验降噪（100）</li>
+<li>全身动态模型（500）</li>
+<li>读论文（100）</li>
+<li><strong>找秋季老板</strong>（500）</li>
+<li><strong>报税</strong>（100，by 7.15）</li>
+</ul>
+<p>实习</p>
+<ul>
+<li><strong>给fedex打电话1.800.463.3339取快递</strong>（10）</li>
+<li><s><strong>改PPT</strong>（100）</s></li>
+<li>树实验（150）</li>
+<li>带边的树实验（200）</li>
+<li>读论文（100）</li>
+</ul>
+<p>General</p>
+<ul>
+<li><strong>连续7天12:30am前睡觉</strong>（500）</li>
+<li>连续7天每天有效工作时长&gt;=8h（200）+1+1+0</li>
+<li>连续7天每天productivity得分超过200（500）+1+1+0</li>
+<li>连续7天日均读论文数&gt;=1（300）</li>
+<li>体重下降到125斤（200）</li>
+<li>体重下降到120斤（400）</li>
+<li>连续7天每天看手机不超过2h（200）</li>
+<li>连续7天每隔一天跑一次步（200）</li>
+<li>连续4个周日给爸爸打电话（500）</li>
+<li>洗衣服（10）</li>
+</ul>
+<hr>
+<h2 id="7-13-Mon">7.13 (Mon)</h2>
+<ul>
+<li>11:00-12:30 HTML bigtable visualization</li>
+<li>12:30-13:30 处理Layout节点</li>
+<li>13:30-14:40 午饭+休息</li>
+<li>14:40-16:30 处理Layout节点（接下来：处理List和Image两种情况，分别统计number, consistency）</li>
+<li>20:30-23:30 处理List的数据</li>
+</ul>
+<h2 id="7-11-Sat">7.11 (Sat)</h2>
+<ul>
+<li>12:30-14:00 Typora Paper Night</li>
+<li>14:00-19:00 吃饭，洗澡，休息（wtf！）</li>
+</ul>
+<h2 id="7-10-Fri">7.10 (Fri)</h2>
+<p>3h total （<strong>+150</strong>），sleep: 2am</p>
+<ul>
+<li>9:15-10:30 实验室meet（<strong>+50</strong>）</li>
+<li>10:30-11:00 跟FedEx电话撕逼</li>
+<li>11:00-16:00 补觉</li>
+<li>16:00-18:30 起床吃饭，餐后休息</li>
+<li>19:00-22:00 typora theme；修复hexo图片链接；加入auto sync</li>
+<li>22:30-23:30 休息</li>
+<li>23:30-1:00 本日meeting总结（<strong>+100</strong>）</li>
+</ul>
+<h2 id="7-9-Thu">7.9 (Thu)</h2>
+<p>8h total（<strong>+330</strong>），sleep：4-5am</p>
+<ul>
+<li>12:30-13:00 检查了昨天手画轨迹的结果。2个waving的work的还行，其他的image render有问题（<strong>+10</strong>）</li>
+<li>13:00-14:00 午餐，给SSN office打电话，给Fedex打电话，等候international center的zoom meet</li>
+<li>15:00-16:00 练习intro talk</li>
+<li>16:00-16:30 intro talk</li>
+<li>16:30-17:00 处理报税（垃圾IRS系统）</li>
+<li>17:00-18:30 晚饭，取weee</li>
+<li>18:30-19:30 添加博客搜索功能</li>
+<li>19:30-20:30 crop images and extract 2D keypoints with openpose</li>
+<li>20:30-21:00 download and install pix2pix</li>
+<li>21:00-21:30 休息</li>
+<li>21:30-24:00 检查是否可以使用一个affine transform映射真人姿态和模拟姿态（发现不行，+20），学习使用pix2pix</li>
+<li>24:00-1:00 休息</li>
+<li>1:00-2:00 用pix2pix训从colorstick到人的映射（<strong>+100</strong>，效果一般）</li>
+<li>2:00-3:00 思考如何对齐两个相机空间中的姿态，提出一个也许可行的解决方案（<strong>+100</strong>）</li>
+<li>6:00-9:00 周报（<strong>+100</strong>）</li>
+</ul>
+<h2 id="7-8-Wed">7.8 (Wed)</h2>
+<p>10.5h total（<strong>+200</strong>）, sleep: 2am</p>
+<ul>
+<li>22:30-1:30 补全intro talk PPT的配图并加入speaker notes（<strong>+100</strong>）</li>
+<li>20:30-22:00 采集5组手画轨迹并运行（还需检查质量）（<strong>+50</strong>）</li>
+<li>19:00-20:30 饭后休息+洗澡</li>
+<li>18:20-19:00 晚饭（炒饭）</li>
+<li>17:00-18:20 建立打卡目标scrum log</li>
+<li>16:00-17:00 逛一亩三分地、豆瓣战拖组</li>
+<li>15:00-16:00 和朋友去星爸爸买咖啡</li>
+<li>9:30-14:30 补觉</li>
+<li>8:00-9:00 internship weekly meeting（<strong>+50</strong>）</li>
+<li>2:00-7:00 draft slides（效率太低，不算分）</li>
+</ul>
+<hr>
+<h2 id="延迟愿望清单">延迟愿望清单</h2>
+<ul>
+<li><s>建立战拖打卡贴</s></li>
+<li>build personal academic blog（200）</li>
+<li>Research Notes (200)</li>
+<li>write a blog for RL/PPO/GAE（500）</li>
+<li>write a blog for internship related works（500）</li>
+<li>WorkingCopy for linux?（20）</li>
+<li>新鞋子（200）</li>
+<li>手写输入 for iPad（50）</li>
+<li>秘密花园涂色 for iPad（200）</li>
+<li>Reader’s Digest / Teen books in English (200)</li>
+<li>make a github repo for Dockerfile (50)</li>
+<li>解决paper theme导出成html的字体问题（100）</li>
+<li>学唱《斑马，斑马》（100）</li>
+<li>耳夹（100）</li>
+<li><em>Excellent Sheep</em>（100）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>diary</tag>
+        <tag>procrastination</tag>
       </tags>
   </entry>
 </search>
