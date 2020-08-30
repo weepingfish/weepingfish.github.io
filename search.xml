@@ -28,28 +28,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Tab Completion for Bash and Zsh</title>
-    <url>/2020/07/28/0728-tab-completion/</url>
-    <content><![CDATA[<p>Suppose you have files structured as follows:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">└── manifests</span><br><span class="line">    ├── abc123.manifest</span><br><span class="line">    └── xyz456.manifest</span><br></pre></td></tr></table></figure>
-<p>You want to define a bash command <code>mytool</code> that can achieve the follows:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mytool &lt;TAB&gt;</span><br><span class="line">abc123 xyz456</span><br><span class="line"></span><br><span class="line">$ mytool 12&lt;TAB&gt;</span><br><span class="line">abc123</span><br></pre></td></tr></table></figure>
-<h2 id="zsh">zsh</h2>
-<p>If you are an <code>oh-my-zsh</code> user, this can be accomplished by adding the following lines into <code>~/.zshrc</code>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># The actual tool that passes the argument to a python script</span></span><br><span class="line">mytool()</span><br><span class="line">&#123;</span><br><span class="line">    python ~/mytool.py <span class="variable">$@</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># The completion function that helps user quickly input the arguments</span></span><br><span class="line"><span class="function"><span class="title">_mytool</span></span>() &#123;</span><br><span class="line">  <span class="comment"># zsh completion variable</span></span><br><span class="line">  <span class="built_in">local</span> state</span><br><span class="line"></span><br><span class="line">  <span class="comment"># separate arguments into different groups</span></span><br><span class="line">  _arguments \</span><br><span class="line">    <span class="string">'1: :-&gt;exp'</span>\</span><br><span class="line">    <span class="string">'*: :-&gt;others'</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Take the basename of files in $FOLDER and ends with $FILEEXT</span></span><br><span class="line">  FOLDER=<span class="string">"<span class="variable">$PWD</span>/manifests"</span></span><br><span class="line">  FILEEXT=<span class="string">".manifest"</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">local</span> files=()</span><br><span class="line">  <span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FOLDER</span>/*<span class="variable">$FILEEXT</span>; <span class="keyword">do</span></span><br><span class="line">      files+=(<span class="string">"<span class="variable">$&#123;$&#123;f/$FILEEXT/&#125;</span>/<span class="variable">$FOLDER</span>\/&#125;"</span>);</span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># tab completion only for the first argument</span></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$state</span> <span class="keyword">in</span></span><br><span class="line">      (exp) _arguments <span class="string">'1:profiles:( $files )'</span> ;;</span><br><span class="line">        (*) compadd <span class="string">"<span class="variable">$@</span>"</span> <span class="string">''</span></span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line">compdef _mytool mytool</span><br></pre></td></tr></table></figure>
-<h2 id="bash">bash</h2>
-<p>tbd.</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>os</tag>
-        <tag>bash</tag>
-        <tag>zsh</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Personal vim configuration</title>
     <url>/2020/07/26/0725-vim-config/</url>
     <content><![CDATA[<p><img src="/2020/07/26/0725-vim-config/image-20200726005015462.png" alt="image-20200726005015462"></p>
@@ -79,6 +57,57 @@
       </tags>
   </entry>
   <entry>
+    <title>Tab Completion for Bash and Zsh</title>
+    <url>/2020/07/28/0728-tab-completion/</url>
+    <content><![CDATA[<p>Suppose you have files structured as follows:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">└── manifests</span><br><span class="line">    ├── abc123.manifest</span><br><span class="line">    └── xyz456.manifest</span><br></pre></td></tr></table></figure>
+<p>You want to define a bash command <code>mytool</code> that can achieve the follows:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mytool &lt;TAB&gt;</span><br><span class="line">abc123 xyz456</span><br><span class="line"></span><br><span class="line">$ mytool 12&lt;TAB&gt;</span><br><span class="line">abc123</span><br></pre></td></tr></table></figure>
+<h2 id="zsh">zsh</h2>
+<p>If you are an <code>oh-my-zsh</code> user, this can be accomplished by adding the following lines into <code>~/.zshrc</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># The actual tool that passes the argument to a python script</span></span><br><span class="line">mytool()</span><br><span class="line">&#123;</span><br><span class="line">    python ~/mytool.py <span class="variable">$@</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># The completion function that helps user quickly input the arguments</span></span><br><span class="line"><span class="function"><span class="title">_mytool</span></span>() &#123;</span><br><span class="line">  <span class="comment"># zsh completion variable</span></span><br><span class="line">  <span class="built_in">local</span> state</span><br><span class="line"></span><br><span class="line">  <span class="comment"># separate arguments into different groups</span></span><br><span class="line">  _arguments \</span><br><span class="line">    <span class="string">'1: :-&gt;exp'</span>\</span><br><span class="line">    <span class="string">'*: :-&gt;others'</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Take the basename of files in $FOLDER and ends with $FILEEXT</span></span><br><span class="line">  FOLDER=<span class="string">"<span class="variable">$PWD</span>/manifests"</span></span><br><span class="line">  FILEEXT=<span class="string">".manifest"</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">local</span> files=()</span><br><span class="line">  <span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FOLDER</span>/*<span class="variable">$FILEEXT</span>; <span class="keyword">do</span></span><br><span class="line">      files+=(<span class="string">"<span class="variable">$&#123;$&#123;f/$FILEEXT/&#125;</span>/<span class="variable">$FOLDER</span>\/&#125;"</span>);</span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># tab completion only for the first argument</span></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$state</span> <span class="keyword">in</span></span><br><span class="line">      (exp) _arguments <span class="string">'1:profiles:( $files )'</span> ;;</span><br><span class="line">        (*) compadd <span class="string">"<span class="variable">$@</span>"</span> <span class="string">''</span></span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line">compdef _mytool mytool</span><br></pre></td></tr></table></figure>
+<h2 id="bash">bash</h2>
+<p>tbd.</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>os</tag>
+        <tag>bash</tag>
+        <tag>zsh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>梦该醒了。</title>
+    <url>/2020/08/29/0812-end-of-dream/</url>
+    <content><![CDATA[<p>得到一切却背负许多愧疚，比一无所有更可怕。</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rtOvBOTyX00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>dairy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>夏天就要结束了，而我依旧一无所有</title>
+    <url>/2020/08/29/0829-end-of-summer/</url>
+    <content><![CDATA[<p>这些天陆陆续续地和一些人通了电话。把自己摆在绝对弱者的位置，乞求着或同情或鄙夷的关心。</p>
+<p><strong>“除非你真正解决问题，任何自我催眠都毫无用处。只有问题解决的那一天，痛苦才会消失，你才会真正舒服。”</strong></p>
+<p>“如果当务之急只是保住你的PhD学位的话，任何其他的事情都不重要。你必须用100%的努力去冲击11月的CVPR。我瞅着，这也没几天了吧。如果冲不上的话，实在不行就quit了得了。我还有很多PhD好朋友最后也都quit了，现在一个个都活得挺开心的，我和他们也是挺好的朋友。别觉得PhD拿不到你的人生就怎么怎么样了。没那么严重。”</p>
+<p>“不就是实习没做出来吗，这有什么了不得的。我和xx也没做出来。也别觉得愧疚，我对我之前那个导师也挺愧疚的。但是从另一个角度讲，我走了，我解脱了，他也解脱了。”</p>
+<p>“你的coding和做题实力绝对没问题。不用想找不到工作这种可能性。所以别有太大压力。”</p>
+<p>好像又回到两年前的夏天，后退一步就是足以让人粉身碎骨的悬崖。偏偏又看不清前方的路，不知道自己当前的决定是否是local minima。要背水一战，又好像不再是“没有什么可以失去”：自从两周前从一场可怕的偏头痛中康复，我变得异常贪生怕死。要像两年前一样熬夜，是再做不到了。</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>八月的梦游者 by 北岛</title>
     <url>/2020/08/03/0802-august-dreamer/</url>
     <content><![CDATA[<p>海底的石钟敲响<br>
@@ -103,35 +132,6 @@
       </categories>
       <tags>
         <tag>poem</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>梦该醒了。</title>
-    <url>/2020/08/29/0812-end-of-dream/</url>
-    <content><![CDATA[<p>得到一切却背负许多愧疚，比一无所有更可怕。</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/rtOvBOTyX00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>dairy</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>夏天就要结束了，而我依旧一无所有</title>
-    <url>/2020/08/29/0829-end-of-summer/</url>
-    <content><![CDATA[<p>这些天陆陆续续地和一些人通了电话。把自己摆在绝对弱者的位置，乞求着或同情或鄙夷的关心。</p>
-<p><strong>“除非你真正解决问题，任何自我催眠都毫无用处。只有问题解决的那一天，痛苦才会消失，你才会真正舒服。”</strong></p>
-<p>“如果当务之急只是保住你的PhD学位的话，任何其他的事情都不重要。你必须用100%的努力去冲击11月的CVPR。我瞅着，这也没几天了吧。如果冲不上的话，实在不行就quit了得了。我还有很多PhD好朋友最后也都quit了，现在一个个都活得挺开心的，我和他们也是挺好的朋友。别觉得PhD拿不到你的人生就怎么怎么样了。没那么严重。”</p>
-<p>“不就是实习没做出来吗，这有什么了不得的。我和xx也没做出来。也别觉得愧疚，我对我之前那个导师也挺愧疚的。但是从另一个角度讲，我走了，我解脱了，他也解脱了。”</p>
-<p>“你的coding和做题实力绝对没问题。不用想找不到工作这种可能性。所以别有太大压力。”</p>
-<p>好像又回到两年前的夏天，后退一步就是足以让人粉身碎骨的悬崖。偏偏又看不清前方的路，不知道自己当前的决定是否是local minima。要背水一战，又好像不再是“没有什么可以失去”：自从两周前从一场可怕的偏头痛中康复，我变得异常贪生怕死。要像两年前一样熬夜，是再做不到了。失去健康乃至</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>diary</tag>
       </tags>
   </entry>
   <entry>
@@ -164,60 +164,6 @@
 <p>In the created <code>.md</code> files, edit the <code>type</code> attribute:</p>
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Tags</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020</span><span class="number">-06</span><span class="number">-24</span> <span class="number">23</span><span class="string">:10:07</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">tags</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
 ]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Working with multiple GitHub accounts</title>
-    <url>/2020/07/12/2020-06-25-multiple-gits/</url>
-    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
-<h2 id="SSH-setups">SSH setups</h2>
-<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
-<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
-<p>Then, add the generated public keys to github for each account:</p>
-<a id="more"></a>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
-<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
-<h2 id="Git-configs">Git configs</h2>
-<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
-<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker cheatsheet</title>
-    <url>/2020/07/10/2020-07-08-docker/</url>
-    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
-<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="Usage">Usage</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo Auto Sync</title>
-    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
-    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>tech</category>
       </categories>
@@ -260,31 +206,71 @@
       </tags>
   </entry>
   <entry>
-    <title>Inserting images into Hexo posts with Typora</title>
-    <url>/2020/07/12/2020-07-10-hexo-image/</url>
-    <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
-<h2 id="Typora">Typora</h2>
-<p>In Preferences:</p>
-<p><img src="/2020/07/12/2020-07-10-hexo-image/image-20200710205313639.png" alt="image-20200710205313639"></p>
-<p>File structure:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo&#x2F;</span><br><span class="line">  source&#x2F;</span><br><span class="line">    _posts&#x2F;</span><br><span class="line">      some-post.md</span><br><span class="line">      some-post&#x2F;</span><br><span class="line">        image.png</span><br></pre></td></tr></table></figure>
-<p>In <code>some-post.md</code>:</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt</span>](<span class="link">some-post/image.png</span>)</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="Hexo">Hexo</h2>
-<p>In <code>hexo/_config.yml</code></p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>In hexo root folder:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-asset-link</span><br></pre></td></tr></table></figure>
-<p>In <code>node_modules/hexo-asset-link/index.js</code> :</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// strip domain</span></span><br><span class="line">path_html = path_html.replace(path_html.split(<span class="string">"/"</span>)[<span class="number">0</span>], <span class="string">""</span>);</span><br><span class="line"><span class="comment">// image path in rendered HTML:</span></span><br><span class="line"><span class="comment">// /YYYY/MM/DD/some-post/image.png</span></span><br></pre></td></tr></table></figure>
-<p>This will generate absolute paths for the images in rendered HTML (instead of relative path), which is useful when contents of a post are also displayed from the homepage (which lies in a different folder).</p>
+    <title>Docker cheatsheet</title>
+    <url>/2020/07/10/2020-07-08-docker/</url>
+    <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># install necessary packages</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; \</span></span><br><span class="line"><span class="bash">      apt-get -y install sudo vim zsh curl git build-essential openssh-server python-tk python3-tk x11-apps net-tools iputils-ping software-properties-common</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for X11 forwarding</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"X11UseLocalhost no"</span> &gt;&gt; /etc/ssh/sshd_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># duplicate the current user; UID, GID can be input via command line</span></span><br><span class="line"><span class="keyword">ARG</span> UNAME=weepingfish</span><br><span class="line"><span class="keyword">ARG</span> UID=<span class="number">1000</span>	</span><br><span class="line"><span class="keyword">ARG</span> GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> useradd -m -u <span class="variable">$UID</span> -g <span class="variable">$GID</span> -o -s /bin/bash <span class="variable">$UNAME</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set default password</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"weepingfish:password"</span> | chpasswd &amp;&amp; adduser weepingfish sudo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setup custom $HOME </span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod --home /newhome/weepingfish weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set the default user and default login directory</span></span><br><span class="line"><span class="keyword">USER</span> weepingfish</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /newhome/weepingfish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install zsh</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="Usage">Usage</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># build an image (in /path/to/Dockerfile)</span></span><br><span class="line">docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=<span class="variable">$USER</span> -t ubuntu:16.04 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># run a deamon container with nvidia support (need to install nvidia-docker first)</span></span><br><span class="line">nvidia-docker run -dit --name vm1 -e DISPLAY=<span class="variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v /newhome:/newhome -p 8040-8049:8040-8049 --hostname vm1 --gpus all ubuntu:16.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># start an interactive docker session </span></span><br><span class="line">docker <span class="built_in">exec</span> -it vm1 zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop and delete the container</span></span><br><span class="line">docker container stop vm1 &amp;&amp; docker container rm vm1</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>tech</category>
       </categories>
       <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Working with multiple GitHub accounts</title>
+    <url>/2020/07/12/2020-06-25-multiple-gits/</url>
+    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
+<h2 id="SSH-setups">SSH setups</h2>
+<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
+<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
+<p>Then, add the generated public keys to github for each account:</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
+<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
+<h2 id="Git-configs">Git configs</h2>
+<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
+<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Auto Sync</title>
+    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
+    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS for Customized Fonts</title>
+    <url>/2020/07/11/2020-07-11-fontface-css/</url>
+    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>font</tag>
+        <tag>css</tag>
         <tag>typora</tag>
       </tags>
   </entry>
@@ -307,8 +293,8 @@
         <category>tech</category>
       </categories>
       <tags>
-        <tag>typora</tag>
         <tag>css</tag>
+        <tag>typora</tag>
         <tag>typora-theme</tag>
       </tags>
   </entry>
@@ -350,18 +336,48 @@
       </tags>
   </entry>
   <entry>
-    <title>CSS for Customized Fonts</title>
-    <url>/2020/07/11/2020-07-11-fontface-css/</url>
-    <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Regular.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Bold"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Bold.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: black;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Black"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Black.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@font-face</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: <span class="string">"Noto Serif CJK SC"</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: medium;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">local</span>(<span class="string">"Noto Serif CJK SC Medium"</span>), <span class="built_in">url</span>(<span class="string">"./paper/NotoSerifCJKsc-Medium.otf"</span>) <span class="built_in">format</span>(<span class="string">"otf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>Typora Paper Night</title>
+    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
+    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
+<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
+<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
 ]]></content>
       <categories>
         <category>tech</category>
       </categories>
       <tags>
-        <tag>typora</tag>
         <tag>css</tag>
-        <tag>font</tag>
+        <tag>typora</tag>
+        <tag>typora-theme</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Inserting images into Hexo posts with Typora</title>
+    <url>/2020/07/12/2020-07-10-hexo-image/</url>
+    <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
+<h2 id="Typora">Typora</h2>
+<p>In Preferences:</p>
+<p><img src="/2020/07/12/2020-07-10-hexo-image/image-20200710205313639.png" alt="image-20200710205313639"></p>
+<p>File structure:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo&#x2F;</span><br><span class="line">  source&#x2F;</span><br><span class="line">    _posts&#x2F;</span><br><span class="line">      some-post.md</span><br><span class="line">      some-post&#x2F;</span><br><span class="line">        image.png</span><br></pre></td></tr></table></figure>
+<p>In <code>some-post.md</code>:</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt</span>](<span class="link">some-post/image.png</span>)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="Hexo">Hexo</h2>
+<p>In <code>hexo/_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>In hexo root folder:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-asset-link</span><br></pre></td></tr></table></figure>
+<p>In <code>node_modules/hexo-asset-link/index.js</code> :</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// strip domain</span></span><br><span class="line">path_html = path_html.replace(path_html.split(<span class="string">"/"</span>)[<span class="number">0</span>], <span class="string">""</span>);</span><br><span class="line"><span class="comment">// image path in rendered HTML:</span></span><br><span class="line"><span class="comment">// /YYYY/MM/DD/some-post/image.png</span></span><br></pre></td></tr></table></figure>
+<p>This will generate absolute paths for the images in rendered HTML (instead of relative path), which is useful when contents of a post are also displayed from the homepage (which lies in a different folder).</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>typora</tag>
       </tags>
   </entry>
   <entry>
@@ -427,22 +443,6 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
-    <title>Typora Paper Night</title>
-    <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
-    <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
-<p>使用Noto Serif CJK SC字体进行中文渲染。</p>
-<p><img src="/2020/07/11/2020-07-11-typora-paper-night/image-20200711134309436.png" alt="image-20200711134309436"></p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>typora</tag>
-        <tag>css</tag>
-        <tag>typora-theme</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>String Format for C++</title>
     <url>/2020/08/06/2020-08-06-cpp-string-format/</url>
     <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Example Usage:</span></span><br><span class="line"><span class="comment"> * fmt("%s: %d", str.c_str(), integer);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">std</span>:</span>:<span class="function"><span class="built_in">string</span> <span class="title">fmt</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;format, Args... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> BUFSIZE = <span class="built_in">std</span>::<span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format.c_str(), args...) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">char</span> *buf = <span class="keyword">new</span> <span class="keyword">char</span>[BUFSIZE];</span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, BUFSIZE * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, BUFSIZE, format.c_str(), args...);</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">str</span><span class="params">(buf)</span></span>;</span><br><span class="line">  <span class="keyword">delete</span>[] buf;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -452,6 +452,63 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>c++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我的焦虑</title>
+    <url>/2020/08/08/2020-08-08-anxiety/</url>
+    <content><![CDATA[<p>最近很丧<br>
+事情永远做不完<br>
+丧失了对科研的动力<br>
+晨会之前无一例外的强迫性熬夜<br>
+头晕 想吐 不想好好吃饭</p>
+<p>不知道自己喜欢什么<br>
+不知道将来要做什么<br>
+不知道要怎样向实习mentor交代<br>
+不知道美国这摊子烂事什么时候是个头<br>
+不知道毕业之后该去做什么<br>
+身为中国人会不会受到歧视或暴力</p>
+<p>前些天导师问我 秋季有什么打算<br>
+我下意识地说 我不知道<br>
+他说 你不能不知道 你难道不想早点找到导师吗<br>
+他说 我们非常困惑 你一方面对于找到导师显得很迫切<br>
+另一方面又提出要秋季继续实习<br>
+你到底想干什么？是想直接硕士毕业？还是想持两端以观望？</p>
+<p>话全都噎在嗓子眼儿里出不来了<br>
+我不知道<br>
+坚持继续读博是不是一个正确的选择<br>
+继续读博吗 ６年毕不了业怎么办<br>
+按我现在的进度也丝毫看不到毕业的希望<br>
+拿硕走人吗 就算我拿得出一学期20W人民币的学费＋生活费<br>
+毕业之后看现在的形势怕是也找不到工作<br>
+抽不抽得到H1B另说</p>
+<p>今年我22岁 往后再看10年<br>
+留在美国吗 我爸爸的病怎么办<br>
+美国的天价医药费我一辈子都挣不出来<br>
+回国吗 程序员行业的内卷越来越严重 996各种福报<br>
+美刀和人民币之间的购买力不可同日而语<br>
+消费主义 性别歧视 年龄焦虑 荡妇羞辱 处女情结 各种judge<br>
+将来生孩子吗 生出来谁带 长大了谁管教</p>
+<p>“你说你不想让实习的项目烂尾，<br>
+那你对现在我们现在这个项目的责任感在哪里？”<br>
+断片的大脑被拉回近在眼前的现实世界<br>
+从本质上讲 我现在一切的尴尬处境都始于迷茫<br>
+什么都想尝试 什么都不愿放下 什么都想做好 结果什么都辜负了</p>
+<p>我哭了<br>
+我自欺欺人的一切幻想 选择性忽视的那些真相<br>
+被挑破 拖出来 放在太阳下暴晒 流出难看的脓液<br>
+其实蛮讨厌当众流泪的<br>
+哭 应该发生在无人的地方 大声地 无所顾忌<br>
+人类的悲欢并不相通 突如其来的泪水只会让对方尴尬</p>
+<p>导师没有再说什么重话<br>
+我关闭视频 倒在床上 天旋地转</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>dairy</tag>
+        <tag>负能量</tag>
       </tags>
   </entry>
   <entry>
@@ -576,63 +633,6 @@ Watin’ for you by the telephone…</p>
       <tags>
         <tag>diary</tag>
         <tag>procrastination</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我的焦虑</title>
-    <url>/2020/08/08/2020-08-08-anxiety/</url>
-    <content><![CDATA[<p>最近很丧<br>
-事情永远做不完<br>
-丧失了对科研的动力<br>
-晨会之前无一例外的强迫性熬夜<br>
-头晕 想吐 不想好好吃饭</p>
-<p>不知道自己喜欢什么<br>
-不知道将来要做什么<br>
-不知道要怎样向实习mentor交代<br>
-不知道美国这摊子烂事什么时候是个头<br>
-不知道毕业之后该去做什么<br>
-身为中国人会不会受到歧视或暴力</p>
-<p>前些天导师问我 秋季有什么打算<br>
-我下意识地说 我不知道<br>
-他说 你不能不知道 你难道不想早点找到导师吗<br>
-他说 我们非常困惑 你一方面对于找到导师显得很迫切<br>
-另一方面又提出要秋季继续实习<br>
-你到底想干什么？是想直接硕士毕业？还是想持两端以观望？</p>
-<p>话全都噎在嗓子眼儿里出不来了<br>
-我不知道<br>
-坚持继续读博是不是一个正确的选择<br>
-继续读博吗 ６年毕不了业怎么办<br>
-按我现在的进度也丝毫看不到毕业的希望<br>
-拿硕走人吗 就算我拿得出一学期20W人民币的学费＋生活费<br>
-毕业之后看现在的形势怕是也找不到工作<br>
-抽不抽得到H1B另说</p>
-<p>今年我22岁 往后再看10年<br>
-留在美国吗 我爸爸的病怎么办<br>
-美国的天价医药费我一辈子都挣不出来<br>
-回国吗 程序员行业的内卷越来越严重 996各种福报<br>
-美刀和人民币之间的购买力不可同日而语<br>
-消费主义 性别歧视 年龄焦虑 荡妇羞辱 处女情结 各种judge<br>
-将来生孩子吗 生出来谁带 长大了谁管教</p>
-<p>“你说你不想让实习的项目烂尾，<br>
-那你对现在我们现在这个项目的责任感在哪里？”<br>
-断片的大脑被拉回近在眼前的现实世界<br>
-从本质上讲 我现在一切的尴尬处境都始于迷茫<br>
-什么都想尝试 什么都不愿放下 什么都想做好 结果什么都辜负了</p>
-<p>我哭了<br>
-我自欺欺人的一切幻想 选择性忽视的那些真相<br>
-被挑破 拖出来 放在太阳下暴晒 流出难看的脓液<br>
-其实蛮讨厌当众流泪的<br>
-哭 应该发生在无人的地方 大声地 无所顾忌<br>
-人类的悲欢并不相通 突如其来的泪水只会让对方尴尬</p>
-<p>导师没有再说什么重话<br>
-我关闭视频 倒在床上 天旋地转</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>dairy</tag>
-        <tag>负能量</tag>
       </tags>
   </entry>
   <entry>
