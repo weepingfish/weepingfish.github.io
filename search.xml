@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Limit the usage of CPUs and GPUs of a process</title>
+    <url>/2020/07/22/0722-taskset/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0,1 taskset --cpu-list 0,1,2,3 python train.py</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>os</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Suppress TensorFlow Warnings</title>
     <url>/2020/07/22/0722-suppress-tensorflow-warnings/</url>
     <content><![CDATA[<p>To suppress TensorFlow warnings (in a single python file, or in the <code>__init__.py</code> of a package that depends on tensorflow):<br>
@@ -13,18 +25,6 @@
       <tags>
         <tag>tensorflow</tag>
         <tag>nn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Limit the usage of CPUs and GPUs of a process</title>
-    <url>/2020/07/22/0722-taskset/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0,1 taskset --cpu-list 0,1,2,3 python train.py</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>os</tag>
       </tags>
   </entry>
   <entry>
@@ -336,43 +336,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Centering Google Search and Google Scholar</title>
-    <url>/2020/07/12/2020-07-11-google-search-centering/</url>
-    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
-<table>
-<thead>
-<tr>
-<th>Before</th>
-<th>After</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
-</tr>
-<tr>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
-<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
-</tr>
-</tbody>
-</table>
-<a id="more"></a>
-<p>Centering Google Scholar:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-        <tag>tampermonkey</tag>
-        <tag>google</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Typora Paper Night</title>
     <url>/2020/07/11/2020-07-11-typora-paper-night/</url>
     <content><![CDATA[<p>A dark theme for academic writing! [<a href="https://github.com/weepingfish/typora-paper-night" target="_blank" rel="noopener">theme css</a>] <a href="https://github.com/openai/baselines/blob/master/README.md" target="_blank" rel="noopener">[demo document]</a></p>
@@ -448,6 +411,100 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>lyrics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Centering Google Search and Google Scholar</title>
+    <url>/2020/07/12/2020-07-11-google-search-centering/</url>
+    <content><![CDATA[<p>Google’s search results are left aligned by default, which becomes a pain point when browsing with wide screens. After looking around for a while, I was finally able to center the webpage of <a href="">google.com</a> or <a href="">scholar.google.com</a> using the attached TamperMonkey scripts.</p>
+<table>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711114949742.png" alt="image-20200711114949742"></td>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115005556.png" alt="image-20200711115005556"></td>
+</tr>
+<tr>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115203450.png" alt="image-20200711115203450"></td>
+<td><img src="/2020/07/12/2020-07-11-google-search-centering/image-20200711115126206.png" alt="image-20200711115126206"></td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<p>Centering Google Scholar:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Scholar Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google Scholar search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://scholar.google.com/*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'#gs_res_ccl &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line"></span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>Centering Google Search (<a href="https://my.oschina.net/ioslighter/blog/3075094" target="_blank" rel="noopener">credit to: @yoyoso</a>):</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         Google Search Centering</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version 1.3</span></span><br><span class="line"><span class="comment">// @description  Center the Google search results.</span></span><br><span class="line"><span class="comment">// @author       GDUFXRT</span></span><br><span class="line"><span class="comment">// @match        https://www.google.com/search*</span></span><br><span class="line"><span class="comment">// @run-at       document-start</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    <span class="keyword">var</span> cssStyle = <span class="string">'.mw &#123;margin: auto !important;&#125; html, body, p, a &#123;font-family: Calibri !important;&#125;'</span>;</span><br><span class="line">    style.innerText = cssStyle;</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+        <tag>tampermonkey</tag>
+        <tag>google</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我的焦虑</title>
+    <url>/2020/08/08/2020-08-08-anxiety/</url>
+    <content><![CDATA[<p>最近很丧<br>
+事情永远做不完<br>
+丧失了对科研的动力<br>
+晨会之前无一例外的强迫性熬夜<br>
+头晕 想吐 不想好好吃饭</p>
+<p>不知道自己喜欢什么<br>
+不知道将来要做什么<br>
+不知道要怎样向实习mentor交代<br>
+不知道美国这摊子烂事什么时候是个头<br>
+不知道毕业之后该去做什么<br>
+身为中国人会不会受到歧视或暴力</p>
+<p>前些天导师问我 秋季有什么打算<br>
+我下意识地说 我不知道<br>
+他说 你不能不知道 你难道不想早点找到导师吗<br>
+他说 我们非常困惑 你一方面对于找到导师显得很迫切<br>
+另一方面又提出要秋季继续实习<br>
+你到底想干什么？是想直接硕士毕业？还是想持两端以观望？</p>
+<p>话全都噎在嗓子眼儿里出不来了<br>
+我不知道<br>
+坚持继续读博是不是一个正确的选择<br>
+继续读博吗 ６年毕不了业怎么办<br>
+按我现在的进度也丝毫看不到毕业的希望<br>
+拿硕走人吗 就算我拿得出一学期20W人民币的学费＋生活费<br>
+毕业之后看现在的形势怕是也找不到工作<br>
+抽不抽得到H1B另说</p>
+<p>今年我22岁 往后再看10年<br>
+留在美国吗 我爸爸的病怎么办<br>
+美国的天价医药费我一辈子都挣不出来<br>
+回国吗 程序员行业的内卷越来越严重 996各种福报<br>
+美刀和人民币之间的购买力不可同日而语<br>
+消费主义 性别歧视 年龄焦虑 荡妇羞辱 处女情结 各种judge<br>
+将来生孩子吗 生出来谁带 长大了谁管教</p>
+<p>“你说你不想让实习的项目烂尾，<br>
+那你对现在我们现在这个项目的责任感在哪里？”<br>
+断片的大脑被拉回近在眼前的现实世界<br>
+从本质上讲 我现在一切的尴尬处境都始于迷茫<br>
+什么都想尝试 什么都不愿放下 什么都想做好 结果什么都辜负了</p>
+<p>我哭了<br>
+我自欺欺人的一切幻想 选择性忽视的那些真相<br>
+被挑破 拖出来 放在太阳下暴晒 流出难看的脓液<br>
+其实蛮讨厌当众流泪的<br>
+哭 应该发生在无人的地方 大声地 无所顾忌<br>
+人类的悲欢并不相通 突如其来的泪水只会让对方尴尬</p>
+<p>导师没有再说什么重话<br>
+我关闭视频 倒在床上 天旋地转</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>dairy</tag>
+        <tag>负能量</tag>
       </tags>
   </entry>
   <entry>
@@ -596,63 +653,6 @@ Watin’ for you by the telephone…</p>
       <tags>
         <tag>diary</tag>
         <tag>procrastination</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我的焦虑</title>
-    <url>/2020/08/08/2020-08-08-anxiety/</url>
-    <content><![CDATA[<p>最近很丧<br>
-事情永远做不完<br>
-丧失了对科研的动力<br>
-晨会之前无一例外的强迫性熬夜<br>
-头晕 想吐 不想好好吃饭</p>
-<p>不知道自己喜欢什么<br>
-不知道将来要做什么<br>
-不知道要怎样向实习mentor交代<br>
-不知道美国这摊子烂事什么时候是个头<br>
-不知道毕业之后该去做什么<br>
-身为中国人会不会受到歧视或暴力</p>
-<p>前些天导师问我 秋季有什么打算<br>
-我下意识地说 我不知道<br>
-他说 你不能不知道 你难道不想早点找到导师吗<br>
-他说 我们非常困惑 你一方面对于找到导师显得很迫切<br>
-另一方面又提出要秋季继续实习<br>
-你到底想干什么？是想直接硕士毕业？还是想持两端以观望？</p>
-<p>话全都噎在嗓子眼儿里出不来了<br>
-我不知道<br>
-坚持继续读博是不是一个正确的选择<br>
-继续读博吗 ６年毕不了业怎么办<br>
-按我现在的进度也丝毫看不到毕业的希望<br>
-拿硕走人吗 就算我拿得出一学期20W人民币的学费＋生活费<br>
-毕业之后看现在的形势怕是也找不到工作<br>
-抽不抽得到H1B另说</p>
-<p>今年我22岁 往后再看10年<br>
-留在美国吗 我爸爸的病怎么办<br>
-美国的天价医药费我一辈子都挣不出来<br>
-回国吗 程序员行业的内卷越来越严重 996各种福报<br>
-美刀和人民币之间的购买力不可同日而语<br>
-消费主义 性别歧视 年龄焦虑 荡妇羞辱 处女情结 各种judge<br>
-将来生孩子吗 生出来谁带 长大了谁管教</p>
-<p>“你说你不想让实习的项目烂尾，<br>
-那你对现在我们现在这个项目的责任感在哪里？”<br>
-断片的大脑被拉回近在眼前的现实世界<br>
-从本质上讲 我现在一切的尴尬处境都始于迷茫<br>
-什么都想尝试 什么都不愿放下 什么都想做好 结果什么都辜负了</p>
-<p>我哭了<br>
-我自欺欺人的一切幻想 选择性忽视的那些真相<br>
-被挑破 拖出来 放在太阳下暴晒 流出难看的脓液<br>
-其实蛮讨厌当众流泪的<br>
-哭 应该发生在无人的地方 大声地 无所顾忌<br>
-人类的悲欢并不相通 突如其来的泪水只会让对方尴尬</p>
-<p>导师没有再说什么重话<br>
-我关闭视频 倒在床上 天旋地转</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>dairy</tag>
-        <tag>负能量</tag>
       </tags>
   </entry>
   <entry>
