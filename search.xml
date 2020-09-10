@@ -143,6 +143,33 @@
       </tags>
   </entry>
   <entry>
+    <title>Working with multiple GitHub accounts</title>
+    <url>/2020/07/12/2020-06-25-multiple-gits/</url>
+    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
+<h2 id="SSH-setups">SSH setups</h2>
+<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
+<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
+<p>Then, add the generated public keys to github for each account:</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
+<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
+<h2 id="Git-configs">Git configs</h2>
+<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
+<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Building a Hexo Blog with GitHub Pages</title>
     <url>/2020/07/12/2020-06-24-hexo-blog/</url>
     <content><![CDATA[<h2 id="Install-Hexo">Install Hexo</h2>
@@ -180,67 +207,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Working with multiple GitHub accounts</title>
-    <url>/2020/07/12/2020-06-25-multiple-gits/</url>
-    <content><![CDATA[<p>Suppose we have 2 github IDs, working account userA and personal account userB. This blog shows how to setup a git repo to commit &amp; push with the proper identity.</p>
-<h2 id="SSH-setups">SSH setups</h2>
-<p>For password-free github access, we use SSH (Secure Shell, basically a protocol for remote communication) to push to / pull from github repos. For identity verification, you will have a public key stored in github, and a private key stored locally. Some algorithm (RSA) will check if these two keys agree with each other.</p>
-<p>For multiple github accounts, we need to generate the public/private key pair for each account:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userA, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userA</span><br><span class="line"></span><br><span class="line">ssh-keygen				<span class="comment"># enter ~/.ssh/id_rsa_userB, &lt;empty&gt;, &lt;empty&gt;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">ssh-add ~/.ssh/id_rsa_userB</span><br></pre></td></tr></table></figure>
-<p>Then, add the generated public keys to github for each account:</p>
-<a id="more"></a>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa_userA.pub		<span class="comment"># login to userA and add to the SSH key of userA</span></span><br><span class="line">cat ~/.ssh/id_rsa_userB.pub		<span class="comment"># login to userA and add to the SSH key of userB</span></span><br></pre></td></tr></table></figure>
-<p>Finally, configure 2 target remote hosts in <code>~/.ssh/config</code>. This is for specifying the identity file to use when pushing to / pulling from github with SSH:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github-userA</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userA</span><br><span class="line">	</span><br><span class="line">Host github-userB</span><br><span class="line">	Hostname github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~&#x2F;.ssh&#x2F;id_rsa_userB</span><br></pre></td></tr></table></figure>
-<h2 id="Git-configs">Git configs</h2>
-<p>In your git repo, first setup the identity that will be displayed in commit messages:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name <span class="string">"userA"</span> </span><br><span class="line">git config user.email <span class="string">"userA@example.com"</span></span><br></pre></td></tr></table></figure>
-<p>Then configure the identity for account verification when pushing to / pulling from github:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># suppose we have created somerepo under userA at github</span></span><br><span class="line">git remote add origin github-userA:userA/&lt;somerepo&gt;.git		</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>You are all set! Next time for this repo you can simply do <code>git pull</code> / <code>git push</code>. Have fun!</p>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>最近怎样？</title>
-    <url>/2020/07/10/2020-06-28-how-are-you/</url>
-    <content><![CDATA[<blockquote>
-<p>近期对话。</p>
-</blockquote>
-<h2 id="实验室学长">实验室学长</h2>
-<p>“最近怎样？”</p>
-<p>“啊，我最近在忙xxx课题，输入###输出%%%，可以看作是yyy和zzz方向的结合。我最近刚开始在小数据上做一些实验，结果遇到一堆问题…主要是对zzz方向不太熟，最近几周都没什么进展。我下周打算开始和实习那边meet，看看实习还能不能抢救一下…”</p>
-<h2 id="父母">父母</h2>
-<p>“最近怎样？”</p>
-<p>“最近挺好的，学校里的人都挺友善的，附近很安全。食堂能拿饭，门口草坪一堆人铺个毯子晒太阳。我常常穿过一条街去星爸爸买咖啡，路边开满了鲜花，建筑物也很美。另外，我最近研制出来一种炒饭，饭+鸡蛋+葱花+西兰花/玉米粒/虾仁/蘑菇片，加糖和味极鲜一炒就行，10分钟以内出锅，香到不行……什么，你说科研嘛。嗨，没啥新鲜事，每天都差不多。实在没有老板肯要我的话还有硕士这条退路嘛（笑）。”</p>
-<h2 id="对象">对象</h2>
-<p>“在干嘛？”（好像没问过最近怎样）</p>
-<p>“代码写不出来，等死中 /<br>
-靠为什么我写的全是bug /<br>
-又被老板骂了一顿，人生无望 /<br>
-实验又不work，心态崩了 /<br>
-昨天没咋睡觉，现在整个人飘在天上 /<br>
-…”</p>
-<h2 id="朋友">朋友</h2>
-<p>“最近怎样？”</p>
-<p>“混吃等死中…最近在弄xxx。等我弄完了就和你一起yyyy（大概率空头支票）。（内心OS：其实我特别想和你一直聊一通宵只是最近我浑身负能量怕传染给你而且我也不知道什么时候能好起来对不起我这个朋友真是一点用都没有希望不要因此失去一个朋友啊啊啊啊啊）</p>
-<h2 id="导师-路人">导师/路人</h2>
-<p>“How are you?”</p>
-<p>“Oh I’m pretty good（浮夸语气+尴尬而不失礼貌的商业假笑）. How are you?”</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>misc</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker cheatsheet</title>
     <url>/2020/07/10/2020-07-08-docker/</url>
     <content><![CDATA[<h2 id="Dockerfile">Dockerfile</h2>
@@ -253,6 +219,18 @@
       </categories>
       <tags>
         <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Auto Sync</title>
+    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
+    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -309,6 +287,40 @@
       </tags>
   </entry>
   <entry>
+    <title>最近怎样？</title>
+    <url>/2020/07/10/2020-06-28-how-are-you/</url>
+    <content><![CDATA[<blockquote>
+<p>近期对话。</p>
+</blockquote>
+<h2 id="实验室学长">实验室学长</h2>
+<p>“最近怎样？”</p>
+<p>“啊，我最近在忙xxx课题，输入###输出%%%，可以看作是yyy和zzz方向的结合。我最近刚开始在小数据上做一些实验，结果遇到一堆问题…主要是对zzz方向不太熟，最近几周都没什么进展。我下周打算开始和实习那边meet，看看实习还能不能抢救一下…”</p>
+<h2 id="父母">父母</h2>
+<p>“最近怎样？”</p>
+<p>“最近挺好的，学校里的人都挺友善的，附近很安全。食堂能拿饭，门口草坪一堆人铺个毯子晒太阳。我常常穿过一条街去星爸爸买咖啡，路边开满了鲜花，建筑物也很美。另外，我最近研制出来一种炒饭，饭+鸡蛋+葱花+西兰花/玉米粒/虾仁/蘑菇片，加糖和味极鲜一炒就行，10分钟以内出锅，香到不行……什么，你说科研嘛。嗨，没啥新鲜事，每天都差不多。实在没有老板肯要我的话还有硕士这条退路嘛（笑）。”</p>
+<h2 id="对象">对象</h2>
+<p>“在干嘛？”（好像没问过最近怎样）</p>
+<p>“代码写不出来，等死中 /<br>
+靠为什么我写的全是bug /<br>
+又被老板骂了一顿，人生无望 /<br>
+实验又不work，心态崩了 /<br>
+昨天没咋睡觉，现在整个人飘在天上 /<br>
+…”</p>
+<h2 id="朋友">朋友</h2>
+<p>“最近怎样？”</p>
+<p>“混吃等死中…最近在弄xxx。等我弄完了就和你一起yyyy（大概率空头支票）。（内心OS：其实我特别想和你一直聊一通宵只是最近我浑身负能量怕传染给你而且我也不知道什么时候能好起来对不起我这个朋友真是一点用都没有希望不要因此失去一个朋友啊啊啊啊啊）</p>
+<h2 id="导师-路人">导师/路人</h2>
+<p>“How are you?”</p>
+<p>“Oh I’m pretty good（浮夸语气+尴尬而不失礼貌的商业假笑）. How are you?”</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>misc</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CSS for Customized Fonts</title>
     <url>/2020/07/11/2020-07-11-fontface-css/</url>
     <content><![CDATA[<p>This is an example of introducing the font “Noto Serif CJK SC” into Typora Paper theme. Then <code>font-family: &quot;Noto Serif CJK SC&quot;</code> can be used in later CSS codes.</p>
@@ -321,18 +333,6 @@
         <tag>typora</tag>
         <tag>css</tag>
         <tag>font</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo Auto Sync</title>
-    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
-    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -463,22 +463,6 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
-    <title>Do the Right Thing</title>
-    <url>/2020/09/09/2020-09-09-do-the-right-thing/</url>
-    <content><![CDATA[<p>许一个新学期愿望吧<br>
-希望再也不要为自己开脱了</p>
-<p>如果真的作恶了 那就是作了<br>
-很多事论迹不论心<br>
-借口</p>
-]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>dairy</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>我的焦虑</title>
     <url>/2020/08/08/2020-08-08-anxiety/</url>
     <content><![CDATA[<p>最近很丧<br>
@@ -533,6 +517,22 @@ Watin’ for you by the telephone…</p>
       <tags>
         <tag>dairy</tag>
         <tag>负能量</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Do the Right Thing</title>
+    <url>/2020/09/09/2020-09-09-do-the-right-thing/</url>
+    <content><![CDATA[<p>许一个新学期愿望吧<br>
+希望再也不要为自己开脱了</p>
+<p>如果真的作恶了 那就是作了<br>
+很多事论迹不论心<br>
+借口</p>
+]]></content>
+      <categories>
+        <category>life</category>
+      </categories>
+      <tags>
+        <tag>dairy</tag>
       </tags>
   </entry>
   <entry>
