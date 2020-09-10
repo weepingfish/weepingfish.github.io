@@ -256,6 +256,18 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo Auto Sync</title>
+    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
+    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Inserting images into Hexo posts with Typora</title>
     <url>/2020/07/12/2020-07-10-hexo-image/</url>
     <content><![CDATA[<p>Hexo’s built-in asset mechanism is hard to use. This post shows how to painlessly insert images when editing Hexo posts with Typora.</p>
@@ -321,18 +333,6 @@
         <tag>typora</tag>
         <tag>css</tag>
         <tag>font</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo Auto Sync</title>
-    <url>/2020/07/10/2020-07-10-hexo-auto-sync/</url>
-    <content><![CDATA[<p>This script automatically deploys the blog whenever a change is made locally or remotely:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    git add -A &amp;&amp; git commit -m -</span><br><span class="line">    git fetch</span><br><span class="line">    DIFF=$(git rev-list HEAD...origin/master —count)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$DIFF</span> -gt 0 ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> “Need to sync”</span><br><span class="line">        git pull</span><br><span class="line">        git push</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo g</span><br><span class="line">        hexo d</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> “Up-to-date”</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    sleep 10</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -451,6 +451,18 @@ Watin’ for you by the telephone…</p>
       </tags>
   </entry>
   <entry>
+    <title>String Format for C++</title>
+    <url>/2020/08/06/2020-08-06-cpp-string-format/</url>
+    <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Example Usage:</span></span><br><span class="line"><span class="comment"> * fmt("%s: %d", str.c_str(), integer);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">std</span>:</span>:<span class="function"><span class="built_in">string</span> <span class="title">fmt</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;format, Args... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> BUFSIZE = <span class="built_in">std</span>::<span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format.c_str(), args...) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">char</span> *buf = <span class="keyword">new</span> <span class="keyword">char</span>[BUFSIZE];</span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, BUFSIZE * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, BUFSIZE, format.c_str(), args...);</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">str</span><span class="params">(buf)</span></span>;</span><br><span class="line">  <span class="keyword">delete</span>[] buf;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tech</category>
+      </categories>
+      <tags>
+        <tag>c++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>我的焦虑</title>
     <url>/2020/08/08/2020-08-08-anxiety/</url>
     <content><![CDATA[<p>最近很丧<br>
@@ -511,7 +523,7 @@ Watin’ for you by the telephone…</p>
     <title>Do the Right Thing</title>
     <url>/2020/09/09/2020-09-09-do-the-right-thing/</url>
     <content><![CDATA[<p>许一个新学期愿望吧<br>
-希望再也不要为自己开脱了</p>
+再也不要找借口为自己开脱了</p>
 <p>如果真的作恶了 那就是作了<br>
 很多事论迹不论心</p>
 <p>作恶显得坏 辩解显得蠢<br>
@@ -529,18 +541,6 @@ Watin’ for you by the telephone…</p>
       </categories>
       <tags>
         <tag>dairy</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>String Format for C++</title>
-    <url>/2020/08/06/2020-08-06-cpp-string-format/</url>
-    <content><![CDATA[<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Example Usage:</span></span><br><span class="line"><span class="comment"> * fmt("%s: %d", str.c_str(), integer);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> ...<span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">const</span> <span class="title">std</span>:</span>:<span class="function"><span class="built_in">string</span> <span class="title">fmt</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;format, Args... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> BUFSIZE = <span class="built_in">std</span>::<span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format.c_str(), args...) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">char</span> *buf = <span class="keyword">new</span> <span class="keyword">char</span>[BUFSIZE];</span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, BUFSIZE * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, BUFSIZE, format.c_str(), args...);</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">str</span><span class="params">(buf)</span></span>;</span><br><span class="line">  <span class="keyword">delete</span>[] buf;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tech</category>
-      </categories>
-      <tags>
-        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
